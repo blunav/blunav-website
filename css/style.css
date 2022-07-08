@@ -1580,11 +1580,24 @@ hr {
 .card {
   background-color: white;
   border-radius: 8px;
-  margin-right: 12px;
+  margin-bottom: 12px;
   padding: 24px;
-  width: calc(33.33% - 24px);
 }
-
+@media (min-width: 992px) {
+.card{
+  width: calc(33.33% - 24px);
+  margin-right: 12px;
+}
+}
+@media (max-width: 768px) {
+  .project-content {
+    padding-bottom: 0;
+  }
+  .card {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}
 .embed-responsive {
   min-height: 300px;
 }
