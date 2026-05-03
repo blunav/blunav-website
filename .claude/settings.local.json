@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m http.server 8765)",
+      "Bash(node --check assets/js/shared.js)",
+      "Bash(node --check assets/js/home.js)",
+      "Bash(node --check assets/js/contact.js)",
+      "Bash(node --check assets/js/demo.js)",
+      "Bash(node --check assets/js/login.js)"
+    ]
+  }
+}
