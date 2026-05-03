@@ -31,7 +31,7 @@
 .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; }
 .hero::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 75% 30%, rgba(59,111,212,0.25) 0%, transparent 55%), radial-gradient(circle at 20% 80%, rgba(239,72,71,0.07) 0%, transparent 45%); pointer-events: none; }
 .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 96px 0 88px; }
-.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); background: rgba(239,72,71,0.12); border: 1px solid rgba(239,72,71,0.25); padding: 6px 13px; border-radius: 20px; margin-bottom: 24px; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: white; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); padding: 6px 13px; border-radius: 20px; margin-bottom: 24px; }
 .hero-h1 { font-size: clamp(40px, 5vw, 68px); font-weight: 800; color: #fff; line-height: 1.0; letter-spacing: -2.5px; margin-bottom: 24px; }
 .hero-h1 em {
   font-style: italic;
