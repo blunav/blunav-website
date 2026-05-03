@@ -1,0 +1,3900 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Aerios</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --navy: #1a3c6e;
+        --navy-dark: #122d54;
+        --navy-mid: #1e4882;
+        --accent: #3b6fd4;
+        --accent-soft: #eef3fb;
+        --gold: #ef4847;
+        --gold-dark: #d63b3a;
+        --gold-light: #fef0f0;
+        --green: #1e7e34;
+        --green-bg: #e6f4ea;
+        --red: #e11d48;
+        --surface: #ffffff;
+        --page-bg: #f4f6f9;
+        --border: #dde2ea;
+        --text: #1a2332;
+        --text-2: #4a5568;
+        --text-3: #8a94a0;
+        --font: "DM Sans", sans-serif;
+        --mono: "DM Mono", monospace;
+        --r: 10px;
+        --r-lg: 16px;
+        --sh: 0 4px 20px rgba(26, 60, 110, 0.1);
+        --sh-lg: 0 16px 48px rgba(26, 60, 110, 0.16);
+        --tr: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font);
+        background: var(--surface);
+        color: var(--text);
+        font-size: 15px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .reveal-fast {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
+      }
+      .reveal-fast.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 1px 4px rgba(26, 60, 110, 0.06);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        height: 70px;
+        gap: 0;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        flex-shrink: 0;
+        padding-right: 28px;
+        border-right: 1px solid var(--border);
+        margin-right: 4px;
+      }
+      .nav-logo-svg {
+        height: 38px;
+        width: auto;
+        display: block;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        list-style: none;
+        flex: 1;
+      }
+      .nav-item {
+        position: relative;
+      }
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-2);
+        text-decoration: none;
+        padding: 0 14px;
+        height: 70px;
+        transition:
+          color var(--tr),
+          background var(--tr);
+        cursor: pointer;
+        white-space: nowrap;
+        border: none;
+        background: transparent;
+        font-family: var(--font);
+      }
+      .nav-link:hover {
+        color: var(--navy);
+        background: var(--page-bg);
+      }
+      .nav-link svg {
+        opacity: 0.4;
+        transition:
+          transform var(--tr),
+          opacity var(--tr);
+        flex-shrink: 0;
+      }
+      .nav-item:hover .nav-link svg {
+        opacity: 0.8;
+        transform: rotate(180deg);
+      }
+      .nav-item:hover .nav-link {
+        color: var(--navy);
+        background: var(--page-bg);
+      }
+
+      .nav-dropdown {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 3px solid var(--accent);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 20px 60px rgba(26, 60, 110, 0.14);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition:
+          opacity 200ms ease,
+          transform 200ms ease;
+        z-index: 300;
+      }
+      .nav-item:hover .nav-dropdown {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .mega-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: grid;
+        gap: 0;
+      }
+      .mega-inner.cols-4 {
+        grid-template-columns: 1fr 1fr 1fr 280px;
+      }
+      .mega-inner.cols-3 {
+        grid-template-columns: 1fr 1fr 360px;
+      }
+      .mega-inner.cols-suite {
+        grid-template-columns: 260px 1fr;
+        padding: 0;
+      }
+
+      /* Left rail */
+      .suite-rail {
+        background: var(--page-bg);
+        padding: 16px 0;
+        border-right: 1px solid var(--border);
+      }
+      .suite-rail-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 22px;
+        cursor: pointer;
+        border-left: 3px solid transparent;
+        transition:
+          background var(--tr),
+          border-color var(--tr);
+      }
+      .suite-rail-item:hover,
+      .suite-rail-item.is-active {
+        background: var(--surface);
+        border-left-color: var(--accent);
+      }
+      .suite-rail-item-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 7px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(59, 111, 212, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .suite-rail-item.is-foundation .suite-rail-item-icon {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+        border-color: var(--navy);
+      }
+      .suite-rail-item-text {
+        flex: 1;
+        min-width: 0;
+      }
+      .suite-rail-item-name {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--navy);
+        letter-spacing: -0.2px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .suite-rail-item-badge {
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        padding: 1.5px 5px;
+        border-radius: 3px;
+        background: var(--gold-light);
+        color: var(--gold);
+        border: 1px solid rgba(239, 72, 71, 0.2);
+        text-transform: uppercase;
+      }
+      .suite-rail-item-tagline {
+        font-size: 10.5px;
+        color: var(--text-3);
+        margin-top: 2px;
+        line-height: 1.3;
+      }
+      .suite-rail-item-chevron {
+        color: var(--text-3);
+        opacity: 0.4;
+        transition:
+          opacity var(--tr),
+          transform var(--tr);
+        flex-shrink: 0;
+      }
+      .suite-rail-item.is-active .suite-rail-item-chevron {
+        color: var(--accent);
+        opacity: 1;
+        transform: translateX(2px);
+      }
+
+      /* Right panes */
+      .suite-panes {
+        position: relative;
+        padding: 32px 40px 28px;
+        min-height: 420px;
+      }
+      .suite-pane {
+        display: none;
+      }
+      .suite-pane.is-visible {
+        display: block;
+      }
+      .suite-pane-head {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+      }
+      .suite-pane-name {
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -0.6px;
+      }
+      .suite-pane-name-badge {
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        padding: 2.5px 7px;
+        border-radius: 4px;
+        background: var(--gold-light);
+        color: var(--gold);
+        border: 1px solid rgba(239, 72, 71, 0.22);
+        text-transform: uppercase;
+        align-self: center;
+      }
+      .suite-pane-desc {
+        font-size: 13.5px;
+        color: var(--text-2);
+        line-height: 1.55;
+        margin-bottom: 22px;
+        max-width: 640px;
+      }
+      .suite-pane-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 32px;
+      }
+      .suite-mod {
+        padding: 10px 0;
+        border-bottom: 1px solid #f4f6f9;
+        text-decoration: none;
+        display: block;
+        transition: padding-left var(--tr);
+      }
+      .suite-mod:hover {
+        padding-left: 4px;
+      }
+      .suite-mod-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 3px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color var(--tr);
+      }
+      .suite-mod:hover .suite-mod-name {
+        color: var(--accent);
+      }
+      .suite-mod-name-live::after {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #16a34a;
+        display: inline-block;
+      }
+      .suite-mod-desc {
+        font-size: 11.5px;
+        color: var(--text-3);
+        line-height: 1.5;
+      }
+      .suite-pane-footer {
+        margin-top: 22px;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+      }
+      .suite-pane-footer-link {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: gap var(--tr);
+      }
+      .suite-pane-footer-link:hover {
+        gap: 8px;
+      }
+
+      .mega-col {
+        padding: 36px 36px 36px 36px;
+        border-right: 1px solid var(--border);
+      }
+      .mega-col:first-child {
+        padding-left: 0;
+      }
+      .mega-col:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+      .mega-col + .mega-col {
+        padding-left: 36px;
+      }
+
+      .mega-col-label {
+        font-size: 10.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        color: var(--text-3);
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .mega-link {
+        display: block;
+        padding: 10px 0;
+        border-bottom: 1px solid #f4f6f9;
+        text-decoration: none;
+        transition: padding-left var(--tr);
+      }
+      .mega-link:last-of-type {
+        border-bottom: none;
+      }
+      .mega-link:hover {
+        padding-left: 4px;
+      }
+      .mega-link-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--navy);
+        margin-bottom: 3px;
+        transition: color var(--tr);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .mega-link:hover .mega-link-title {
+        color: var(--accent);
+      }
+      .mega-link-desc {
+        font-size: 12.5px;
+        color: var(--text-3);
+        line-height: 1.5;
+      }
+      .mega-col-footer {
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+      }
+      .mega-footer-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+        transition: gap var(--tr);
+      }
+      .mega-footer-link:hover {
+        gap: 9px;
+      }
+
+      .mega-featured {
+        padding: 32px 0 32px 36px;
+        display: flex;
+        flex-direction: column;
+      }
+      .mega-featured-label {
+        font-size: 10.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+        color: var(--text-3);
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .mega-featured-card {
+        background: var(--page-bg);
+        border: 1.5px solid var(--border);
+        border-radius: var(--r-lg);
+        overflow: hidden;
+        flex: 1;
+      }
+      .mega-featured-img {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .mega-featured-img-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
+      }
+      .mega-featured-body {
+        padding: 18px;
+      }
+      .mega-featured-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 7px;
+        letter-spacing: -0.3px;
+        line-height: 1.3;
+      }
+      .mega-featured-desc {
+        font-size: 12.5px;
+        color: var(--text-2);
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+      .mega-featured-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+        transition: gap var(--tr);
+      }
+      .mega-featured-cta:hover {
+        gap: 8px;
+      }
+
+      .nav-badge-pill {
+        font-size: 9px;
+        font-weight: 700;
+        padding: 1px 6px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        vertical-align: middle;
+      }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto;
+        flex-shrink: 0;
+        padding-left: 16px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--font);
+        font-weight: 600;
+        letter-spacing: 0.1px;
+        cursor: pointer;
+        border: none;
+        border-radius: var(--r);
+        transition: all var(--tr);
+        text-decoration: none;
+        white-space: nowrap;
+        line-height: 1;
+      }
+      .btn-gold {
+        background: var(--gold);
+        color: #fff;
+        padding: 10px 22px;
+        font-size: 13.5px;
+      }
+      .btn-gold:hover {
+        background: var(--gold-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(239, 72, 71, 0.35);
+      }
+      .btn-gold-lg {
+        background: var(--gold);
+        color: #fff;
+        padding: 14px 32px;
+        font-size: 15px;
+        border-radius: 11px;
+        font-weight: 700;
+      }
+      .btn-gold-lg:hover {
+        background: var(--gold-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(239, 72, 71, 0.4);
+      }
+      .btn-outline-navy {
+        background: transparent;
+        color: var(--navy);
+        border: 1.5px solid var(--border);
+        padding: 12px 22px;
+        font-size: 14px;
+      }
+      .btn-outline-navy:hover {
+        border-color: var(--navy);
+        background: var(--accent-soft);
+      }
+      .btn-ghost-white {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        padding: 9px 18px;
+        font-size: 13px;
+        border: 1.5px solid rgba(255, 255, 255, 0.22);
+      }
+      .btn-ghost-white:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.45);
+      }
+      .btn-outline-white {
+        background: transparent;
+        color: #fff;
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        padding: 13px 26px;
+        font-size: 14px;
+      }
+      .btn-outline-white:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.7);
+      }
+      .sign-in-btn {
+        background: transparent;
+        color: var(--text-2);
+        border: 1.5px solid var(--border);
+        padding: 8px 18px;
+        font-size: 13px;
+      }
+      .sign-in-btn:hover {
+        color: var(--navy);
+        border-color: var(--navy);
+      }
+
+      /* ── SECTION SHARED ── */
+      .section {
+        padding: 96px 0;
+      }
+      .section-alt {
+        background: var(--page-bg);
+      }
+      .section-navy {
+        background: var(--navy);
+        position: relative;
+        overflow: hidden;
+      }
+      .section-navy-dark {
+        background: var(--navy-dark);
+        position: relative;
+        overflow: hidden;
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border: 1px solid rgba(59, 111, 212, 0.18);
+        padding: 5px 13px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+      }
+      .eyebrow-light {
+        color: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+      .section-h2 {
+        font-size: clamp(28px, 3vw, 42px);
+        font-weight: 800;
+        letter-spacing: -1.2px;
+        color: var(--navy);
+        margin-bottom: 14px;
+        line-height: 1.1;
+      }
+      .section-h2-light {
+        color: #fff;
+      }
+      .section-sub {
+        font-size: 17px;
+        color: var(--text-2);
+        max-width: 540px;
+        margin: 0 auto;
+        line-height: 1.65;
+      }
+      .section-sub-light {
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .section-positioning {
+        font-size: 15px;
+        color: var(--text-3);
+        max-width: 600px;
+        margin: 4px auto 28px;
+        line-height: 1.6;
+        font-weight: 500;
+      }
+      .dot-pattern::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.055) 1px,
+          transparent 1px
+        );
+        background-size: 32px 32px;
+        pointer-events: none;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        background: var(--navy-dark);
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+        min-height: 660px;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        );
+        background-size: 32px 32px;
+        pointer-events: none;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            circle at 75% 30%,
+            rgba(59, 111, 212, 0.25) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 20% 80%,
+            rgba(239, 72, 71, 0.07) 0%,
+            transparent 45%
+          );
+        pointer-events: none;
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+        padding: 96px 0 88px;
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--gold);
+        background: rgba(239, 72, 71, 0.12);
+        border: 1px solid rgba(239, 72, 71, 0.25);
+        padding: 6px 13px;
+        border-radius: 20px;
+        margin-bottom: 24px;
+      }
+      .hero-h1 {
+        font-size: clamp(40px, 5vw, 68px);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1;
+        letter-spacing: -2.5px;
+        margin-bottom: 24px;
+      }
+      .hero-h1 em {
+        font-style: italic;
+        font-family: "Instrument Sans", sans-serif;
+        font-weight: 700;
+        letter-spacing: -1px;
+        background: linear-gradient(
+          90deg,
+          #ef4847 0%,
+          #ff8a7a 60%,
+          #ffc4b8 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-sub {
+        font-size: 17px;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.65;
+        margin-bottom: 40px;
+        max-width: 560px;
+      }
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .hero-trust {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 44px;
+        padding-top: 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        flex-wrap: wrap;
+      }
+      .hero-trust-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.45);
+        font-weight: 500;
+      }
+      .hero-trust-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--gold);
+        flex-shrink: 0;
+      }
+
+      /* Hero right — platform diagram */
+      .hero-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .platform-wrap {
+        position: relative;
+        width: 580px;
+        height: 580px;
+        max-width: 100%;
+        flex-shrink: 1;
+      }
+      .platform-wrap::before {
+        content: "";
+        position: absolute;
+        inset: -40px;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(59, 111, 212, 0.18) 0%,
+          transparent 55%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+      .platform-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── PROOF BAR ── */
+      .proof-bar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0;
+      }
+      .proof-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 68px;
+        gap: 0;
+      }
+      .proof-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        white-space: nowrap;
+      }
+      .proof-item-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(59, 111, 212, 0.14);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .proof-item-text {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .proof-item-sub {
+        font-size: 11px;
+        color: var(--text-3);
+      }
+      .proof-divider {
+        width: 1px;
+        height: 28px;
+        background: var(--border);
+        flex-shrink: 0;
+      }
+
+      /* ── PLATFORM OVERVIEW ── */
+      .platform-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .platform-card {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 32px 28px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          border-color var(--tr),
+          box-shadow var(--tr),
+          transform var(--tr);
+        cursor: default;
+      }
+      .platform-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #ef4847;
+        opacity: 0;
+        transition: opacity var(--tr);
+      }
+      .platform-card:hover {
+        border-color: rgba(239, 72, 71, 0.25);
+        box-shadow: 0 8px 32px rgba(239, 72, 71, 0.08);
+        transform: translateY(-3px);
+      }
+      .platform-card:hover::before {
+        opacity: 1;
+      }
+      .platform-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(59, 111, 212, 0.12);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .platform-num {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-3);
+        margin-bottom: 10px;
+      }
+      .platform-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 10px;
+        letter-spacing: -0.3px;
+      }
+      .platform-desc {
+        font-size: 13.5px;
+        color: var(--text-2);
+        line-height: 1.6;
+        margin-bottom: 18px;
+      }
+      .platform-modules {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .platform-module-tag {
+        font-size: 10.5px;
+        font-weight: 600;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 3px 9px;
+        border-radius: 20px;
+      }
+
+      /* ── MODULES GRID ── */
+      .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .module-card {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 24px 22px;
+        transition:
+          border-color var(--tr),
+          box-shadow var(--tr),
+          transform var(--tr);
+        cursor: default;
+        position: relative;
+        overflow: hidden;
+      }
+      .module-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #ef4847;
+        opacity: 0;
+        transition: opacity var(--tr);
+      }
+      .module-card:hover {
+        border-color: rgba(239, 72, 71, 0.25);
+        box-shadow: 0 4px 20px rgba(239, 72, 71, 0.08);
+        transform: translateY(-2px);
+      }
+      .module-card:hover::before {
+        opacity: 1;
+      }
+      .module-icon {
+        width: 42px;
+        height: 42px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(59, 111, 212, 0.12);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+      }
+      .module-title {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 6px;
+        letter-spacing: -0.1px;
+      }
+      .module-desc {
+        font-size: 12px;
+        color: var(--text-2);
+        line-height: 1.55;
+      }
+      .module-badge {
+        margin-top: 12px;
+        display: inline-flex;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--green);
+        background: var(--green-bg);
+        padding: 2px 8px;
+        border-radius: 20px;
+      }
+      .module-badge-soon {
+        margin-top: 12px;
+        display: inline-flex;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--text-3);
+        background: var(--page-bg);
+        padding: 2px 8px;
+        border-radius: 20px;
+      }
+
+      /* ── ARCHITECTURE ── */
+      .arch-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .arch-diagram {
+        position: relative;
+      }
+      .arch-layer {
+        background: #ffffff;
+        border: 1.5px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 20px 22px;
+        margin-bottom: 12px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          border-color var(--tr),
+          box-shadow var(--tr);
+      }
+      .arch-layer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #ef4847;
+      }
+      .arch-layer:hover {
+        border-color: rgba(239, 72, 71, 0.3);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+      }
+      .arch-layer-label {
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: var(--text-3);
+        margin-bottom: 8px;
+      }
+      .arch-layer-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 4px;
+      }
+      .arch-layer-desc {
+        font-size: 12px;
+        color: var(--text-2);
+        line-height: 1.5;
+      }
+      .arch-arrow {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 18px;
+        margin: -4px 0 8px;
+      }
+      .arch-layer.cloud {
+      }
+      .arch-layer.cloud .arch-layer-title {
+      }
+      .arch-layer.ail {
+      }
+      .arch-layer.ail .arch-layer-title {
+      }
+      .arch-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .arch-chip {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: var(--mono);
+        background: var(--accent-soft);
+        color: var(--accent);
+        border: 1px solid rgba(59, 111, 212, 0.15);
+      }
+      .arch-chip-blue {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border: 1px solid rgba(59, 111, 212, 0.15);
+      }
+      .arch-chip-gold {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border: 1px solid rgba(59, 111, 212, 0.15);
+      }
+      .arch-chip-white {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border: 1px solid rgba(59, 111, 212, 0.15);
+      }
+
+      .arch-bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 8px;
+      }
+      .arch-bullet {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .arch-bullet-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .arch-bullet-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+      .arch-bullet-desc {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.55;
+      }
+
+      /* ── METRICS ── */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .metric-card {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 36px 28px 30px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          box-shadow var(--tr),
+          transform var(--tr),
+          border-color var(--tr);
+      }
+      .metric-card:hover {
+        box-shadow: 0 8px 32px rgba(26, 60, 110, 0.1);
+        transform: translateY(-3px);
+        border-color: rgba(59, 111, 212, 0.3);
+      }
+      .metric-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), var(--navy));
+      }
+      .metric-icon-wrap {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(59, 111, 212, 0.14);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .metric-value {
+        font-size: 42px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -2px;
+        line-height: 1;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: baseline;
+        gap: 2px;
+      }
+      .metric-value span {
+        font-size: 24px;
+        letter-spacing: -0.5px;
+        color: var(--navy);
+      }
+      .metric-label {
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.55;
+        margin-bottom: 16px;
+      }
+      .metric-sub {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--green);
+        background: var(--green-bg);
+        border: 1px solid rgba(30, 126, 52, 0.18);
+        padding: 3px 10px;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      /* ── INTEGRATION STRIP ── */
+      .integrations-strip {
+        padding: 64px 0;
+        background: var(--page-bg);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      .integrations-label {
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-3);
+        margin-bottom: 32px;
+      }
+      .integrations-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .integration-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 16px;
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: var(--r);
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--text-2);
+        transition:
+          border-color var(--tr),
+          color var(--tr),
+          transform var(--tr);
+        cursor: default;
+      }
+      .integration-chip:hover {
+        border-color: var(--accent);
+        color: var(--navy);
+        transform: translateY(-2px);
+      }
+      .integration-chip-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
+      }
+
+      /* ── TESTIMONIAL / QUOTE ── */
+      .quote-section {
+        padding: 96px 0;
+        background: var(--navy);
+        position: relative;
+        overflow: hidden;
+      }
+      .quote-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.055) 1px,
+          transparent 1px
+        );
+        background-size: 32px 32px;
+        pointer-events: none;
+      }
+      .quote-inner {
+        max-width: 780px;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .quote-mark {
+        font-size: 80px;
+        font-weight: 800;
+        color: rgba(239, 72, 71, 0.2);
+        line-height: 0.8;
+        margin-bottom: 24px;
+        font-family: Georgia, serif;
+      }
+      .quote-text {
+        font-size: clamp(20px, 2.5vw, 28px);
+        font-weight: 600;
+        color: #fff;
+        line-height: 1.45;
+        letter-spacing: -0.5px;
+        margin-bottom: 32px;
+      }
+      .quote-text em {
+        font-style: normal;
+        color: var(--gold);
+      }
+      .quote-source {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+      }
+      .quote-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .quote-source-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .quote-source-role {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: 2px;
+      }
+
+      /* ── CTA ── */
+      .cta-section {
+        background: var(--accent-soft);
+        border-top: 1px solid rgba(59, 111, 212, 0.14);
+        padding: 96px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            circle at 20% 50%,
+            rgba(59, 111, 212, 0.06) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 80% 30%,
+            rgba(239, 72, 71, 0.05) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+      .cta-h2 {
+        font-size: clamp(28px, 3.5vw, 44px);
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -1.2px;
+        margin-bottom: 14px;
+        line-height: 1.1;
+        position: relative;
+        z-index: 1;
+      }
+      .cta-sub {
+        font-size: 17px;
+        color: var(--text-2);
+        margin-bottom: 40px;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        position: relative;
+        z-index: 1;
+      }
+      .cta-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+      .cta-note {
+        margin-top: 18px;
+        font-size: 12px;
+        color: var(--text-3);
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: #0d1f38;
+        padding: 56px 0 32px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2.4fr 1fr 1fr;
+        gap: 56px;
+        margin-bottom: 48px;
+      }
+      .footer-logo {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 18px;
+        text-decoration: none;
+      }
+      .footer-logo-svg {
+        height: 32px;
+        width: auto;
+        display: block;
+      }
+      .footer-desc {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.45);
+        line-height: 1.65;
+        max-width: 360px;
+      }
+      .footer-aai {
+        margin-top: 16px;
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.4);
+        font-family: var(--mono);
+        letter-spacing: 0.2px;
+      }
+      .footer-col-title {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 16px;
+      }
+      .footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .footer-links a {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        transition: color var(--tr);
+      }
+      .footer-links a:hover {
+        color: #fff;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .footer-copy {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.25);
+      }
+      .footer-socials {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .footer-social {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: rgba(255, 255, 255, 0.45);
+        text-decoration: none;
+        transition: all var(--tr);
+      }
+      .footer-social:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+        color: #fff;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 1024px) {
+        .platform-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .modules-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .metrics-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .arch-grid {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero-inner {
+          gap: 40px;
+        }
+      }
+      @media (max-width: 768px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+          padding: 64px 0 56px;
+        }
+        .hero-visual {
+          display: none;
+        }
+        .platform-grid {
+          grid-template-columns: 1fr;
+        }
+        .modules-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .metrics-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .proof-inner {
+          gap: 16px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .proof-divider {
+          display: none;
+        }
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 4px;
+      }
+
+      /* ══════════════ PRODUCT LINES SUITE ══════════════ */
+
+      /* Foundation hero card (full width, 3-column composition) */
+      .suite-foundation {
+        display: grid;
+        grid-template-columns: 116px 1fr 1px 360px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r-lg);
+        overflow: hidden;
+        position: relative;
+        box-shadow:
+          0 1px 2px rgba(26, 60, 110, 0.04),
+          0 6px 16px rgba(26, 60, 110, 0.06);
+        transition:
+          border-color var(--tr),
+          box-shadow var(--tr);
+        margin-bottom: 36px;
+      }
+      .suite-foundation::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold) 0%, var(--accent) 100%);
+        z-index: 2;
+      }
+      .suite-foundation:hover {
+        border-color: rgba(239, 72, 71, 0.22);
+        box-shadow:
+          0 2px 4px rgba(26, 60, 110, 0.05),
+          0 16px 40px rgba(26, 60, 110, 0.1);
+      }
+      .suite-foundation-panel {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-right: 1px solid var(--navy);
+        min-height: 200px;
+      }
+      .suite-foundation-panel::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(255, 255, 255, 0.18) 1px,
+          transparent 0
+        );
+        background-size: 12px 12px;
+        opacity: 0.55;
+        pointer-events: none;
+      }
+      .suite-foundation-panel svg {
+        position: relative;
+        z-index: 1;
+      }
+      .suite-foundation-body {
+        padding: 28px 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
+      }
+      .suite-foundation-divider {
+        background: var(--border);
+      }
+      .suite-foundation-side {
+        padding: 28px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        justify-content: center;
+      }
+      .suite-foundation-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .suite-foundation-badge {
+        display: inline-flex;
+        align-items: center;
+        font-size: 9.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        padding: 3px 8px;
+        border-radius: 3px;
+        background: var(--gold-light);
+        color: var(--gold);
+        border: 1px solid rgba(239, 72, 71, 0.22);
+      }
+      .suite-foundation-title {
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
+        line-height: 1.15;
+      }
+      .suite-foundation-tagline {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+      .suite-foundation-desc {
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.6;
+      }
+      .suite-foundation-desc-line {
+        display: block;
+      }
+      .suite-side-label {
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-3);
+        margin-bottom: 12px;
+      }
+      .suite-capabilities {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 16px;
+      }
+      .suite-capability {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--text-1, var(--navy));
+        font-weight: 500;
+      }
+      .suite-capability-icon {
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--accent);
+      }
+      .suite-foundation-role {
+        font-size: 12.5px;
+        color: var(--text-2);
+        line-height: 1.5;
+      }
+
+      /* Section group (Operations / Passenger & Commercial) */
+      .suite-group {
+        margin-bottom: 32px;
+      }
+      .suite-group:last-of-type {
+        margin-bottom: 0;
+      }
+      .suite-group-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        padding: 0 4px;
+      }
+      .suite-group-label {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-2);
+      }
+      .suite-group-caption {
+        font-size: 12px;
+        color: var(--text-3);
+        font-weight: 500;
+      }
+
+      /* Module grid */
+      .suite-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .suite-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 22px;
+        position: relative;
+        box-shadow:
+          0 1px 2px rgba(26, 60, 110, 0.04),
+          0 4px 12px rgba(26, 60, 110, 0.05);
+        transition:
+          border-color var(--tr),
+          box-shadow var(--tr),
+          transform var(--tr);
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+      }
+      .suite-card:hover {
+        border-color: rgba(59, 111, 212, 0.3);
+        box-shadow:
+          0 2px 4px rgba(26, 60, 110, 0.05),
+          0 14px 36px rgba(59, 111, 212, 0.1);
+        transform: translateY(-2px);
+      }
+      .suite-card-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 4px;
+      }
+      .suite-card-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background: var(--accent-soft);
+        border: 1px solid rgba(59, 111, 212, 0.14);
+        color: var(--accent);
+      }
+      .suite-card-head-text {
+        flex: 1;
+        min-width: 0;
+      }
+      .suite-card-title {
+        font-size: 16.5px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -0.3px;
+        line-height: 1.2;
+      }
+      .suite-card-chevron {
+        color: var(--text-3);
+        opacity: 0.4;
+        flex-shrink: 0;
+        transition:
+          opacity var(--tr),
+          transform var(--tr);
+      }
+      .suite-card:hover .suite-card-chevron {
+        opacity: 1;
+        color: var(--accent);
+        transform: translateX(2px);
+      }
+      .suite-card-tagline {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--accent);
+        margin: 0 0 12px 50px; /* aligns with title — past the icon */
+        line-height: 1.4;
+      }
+      .suite-card-desc {
+        font-size: 12.5px;
+        color: var(--text-2);
+        line-height: 1.55;
+        margin-bottom: 14px;
+        flex: 1;
+      }
+      .suite-card-divider {
+        border: 0;
+        border-top: 1px solid #f0f3f7;
+        margin: 0 0 12px;
+      }
+      .suite-card-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      .suite-pill {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-2);
+      }
+      .suite-pill-sep {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #c8d0db;
+        flex-shrink: 0;
+      }
+
+      /* Per-category color schemes */
+      .suite-card.cat-blue .suite-card-icon {
+        background: var(--accent-soft);
+        border-color: rgba(59, 111, 212, 0.14);
+        color: var(--accent);
+      }
+      .suite-card.cat-blue .suite-card-tagline {
+        color: var(--accent);
+      }
+
+      .suite-card.cat-green .suite-card-icon {
+        background: rgba(34, 197, 94, 0.1);
+        border-color: rgba(34, 197, 94, 0.2);
+        color: #16a34a;
+      }
+      .suite-card.cat-green .suite-card-tagline {
+        color: #16a34a;
+      }
+      .suite-card.cat-green:hover {
+        border-color: rgba(34, 197, 94, 0.32);
+        box-shadow:
+          0 2px 4px rgba(26, 60, 110, 0.05),
+          0 14px 36px rgba(34, 197, 94, 0.12);
+      }
+      .suite-card.cat-green:hover .suite-card-chevron {
+        color: #16a34a;
+      }
+
+      .suite-card.cat-purple .suite-card-icon {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.2);
+        color: #7c3aed;
+      }
+      .suite-card.cat-purple .suite-card-tagline {
+        color: #7c3aed;
+      }
+      .suite-card.cat-purple:hover {
+        border-color: rgba(139, 92, 246, 0.32);
+        box-shadow:
+          0 2px 4px rgba(26, 60, 110, 0.05),
+          0 14px 36px rgba(139, 92, 246, 0.12);
+      }
+      .suite-card.cat-purple:hover .suite-card-chevron {
+        color: #7c3aed;
+      }
+
+      /* Composable CTA card (sits inside grid like a card) */
+      .suite-cta-card {
+        background: var(--surface);
+        border: 1.5px dashed rgba(59, 111, 212, 0.3);
+        border-radius: var(--r-lg);
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        transition:
+          border-color var(--tr),
+          background var(--tr);
+      }
+      .suite-cta-card:hover {
+        border-color: var(--accent);
+        border-style: solid;
+        background: linear-gradient(
+          135deg,
+          var(--accent-soft) 0%,
+          var(--surface) 100%
+        );
+      }
+      .suite-cta-card-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .suite-cta-card-plus {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        border: 1.5px dashed rgba(59, 111, 212, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+      .suite-cta-card-title {
+        font-size: 16.5px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -0.3px;
+      }
+      .suite-cta-card-desc {
+        font-size: 12.5px;
+        color: var(--text-2);
+        line-height: 1.55;
+        margin-bottom: 14px;
+        flex: 1;
+      }
+      .suite-cta-card-link {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: gap var(--tr);
+      }
+      .suite-cta-card:hover .suite-cta-card-link {
+        gap: 9px;
+      }
+
+      @media (max-width: 1024px) {
+        .suite-foundation {
+          grid-template-columns: 116px 1fr;
+        }
+        .suite-foundation-divider,
+        .suite-foundation-side {
+          display: none;
+        }
+        .suite-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 640px) {
+        .suite-foundation {
+          grid-template-columns: 1fr;
+        }
+        .suite-foundation-panel {
+          min-height: 100px;
+        }
+        .suite-grid {
+          grid-template-columns: 1fr;
+        }
+        .suite-group-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+        }
+      }
+
+      /* Comparison labels (preview-only) */
+      .comparison-label {
+        background: linear-gradient(
+          180deg,
+          rgba(26, 60, 110, 0.04) 0%,
+          rgba(26, 60, 110, 0) 100%
+        );
+        padding: 56px 0 24px;
+        border-top: 1px dashed rgba(26, 60, 110, 0.18);
+        text-align: center;
+      }
+      .comparison-label-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--navy);
+        color: #fff;
+        padding: 7px 16px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .comparison-label-tag-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+      .comparison-label-desc {
+        font-size: 13px;
+        color: var(--text-3);
+        font-weight: 500;
+        letter-spacing: 0.2px;
+      }
+
+      /* ══════════════ ABOUT PAGE ══════════════ */
+
+      /* Hero */
+      .about-hero {
+        background: var(--surface);
+        padding: 120px 0 100px;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--border);
+      }
+      .about-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(59, 111, 212, 0.07) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 15% 80%,
+            rgba(239, 72, 71, 0.04) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+      .about-hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 760px;
+      }
+      .about-hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--gold);
+        background: var(--gold-light);
+        border: 1px solid rgba(239, 72, 71, 0.22);
+        padding: 5px 13px;
+        border-radius: 20px;
+        margin-bottom: 24px;
+      }
+      .about-hero-h1 {
+        font-size: clamp(40px, 4.8vw, 64px);
+        font-weight: 800;
+        letter-spacing: -1.8px;
+        color: var(--navy);
+        line-height: 1.05;
+        margin-bottom: 26px;
+      }
+      .about-hero-h1-accent {
+        background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-style: italic;
+      }
+      .about-hero-lead {
+        font-size: 18px;
+        color: var(--text-2);
+        line-height: 1.65;
+        font-weight: 500;
+        max-width: 660px;
+      }
+
+      /* Section spacing */
+      .about-section {
+        padding: 100px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .about-section.alt {
+        background: var(--page-bg);
+      }
+
+      .about-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border: 1px solid rgba(59, 111, 212, 0.18);
+        padding: 5px 13px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+      }
+      .about-h2 {
+        font-size: clamp(30px, 3.4vw, 44px);
+        font-weight: 800;
+        letter-spacing: -1.2px;
+        color: var(--navy);
+        line-height: 1.1;
+        margin-bottom: 18px;
+        max-width: 760px;
+      }
+      .about-section-lead {
+        font-size: 17px;
+        color: var(--text-2);
+        line-height: 1.65;
+        margin-bottom: 56px;
+        max-width: 720px;
+      }
+
+      /* "What's broken" cards */
+      .about-broken-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .about-broken-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 32px 28px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          border-color var(--tr),
+          box-shadow var(--tr),
+          transform var(--tr);
+        box-shadow:
+          0 1px 2px rgba(26, 60, 110, 0.04),
+          0 4px 12px rgba(26, 60, 110, 0.04);
+      }
+      .about-broken-card:hover {
+        border-color: rgba(239, 72, 71, 0.22);
+        box-shadow:
+          0 2px 4px rgba(26, 60, 110, 0.05),
+          0 14px 32px rgba(26, 60, 110, 0.08);
+        transform: translateY(-2px);
+      }
+      .about-broken-numeral {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--gold);
+        letter-spacing: 1.4px;
+        margin-bottom: 14px;
+      }
+      .about-broken-h3 {
+        font-size: 19px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -0.4px;
+        margin-bottom: 12px;
+        line-height: 1.25;
+      }
+      .about-broken-prose {
+        font-size: 14px;
+        color: var(--text-2);
+        line-height: 1.65;
+      }
+
+      /* "What we're doing differently" — alternating image-text */
+      .about-principle {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        padding: 64px 0;
+        border-bottom: 1px solid #f0f3f7;
+      }
+      .about-principle:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .about-principle:first-child {
+        padding-top: 0;
+      }
+      .about-principle.reverse {
+        direction: rtl;
+      }
+      .about-principle.reverse > * {
+        direction: ltr;
+      }
+      .about-principle-tag {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+      .about-principle-h3 {
+        font-size: 30px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -0.8px;
+        line-height: 1.15;
+        margin-bottom: 18px;
+      }
+      .about-principle-prose {
+        font-size: 15.5px;
+        color: var(--text-2);
+        line-height: 1.7;
+        margin-bottom: 22px;
+      }
+      .about-principle-prose:last-child {
+        margin-bottom: 0;
+      }
+      .about-principle-prose strong {
+        color: var(--navy);
+        font-weight: 700;
+      }
+
+      /* Visual blocks for principles */
+      .about-principle-visual {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 36px 32px;
+        box-shadow:
+          0 1px 2px rgba(26, 60, 110, 0.04),
+          0 12px 32px rgba(26, 60, 110, 0.06);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Modular visual: 6 stacked product blocks */
+      .about-modular {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .about-modular-block {
+        padding: 18px 14px;
+        background: var(--page-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        text-align: center;
+        transition: all var(--tr);
+      }
+      .about-modular-block.is-foundation {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+        border-color: var(--navy);
+        color: #fff;
+        grid-column: span 3;
+        position: relative;
+        margin-bottom: 6px;
+      }
+      .about-modular-block.is-foundation::after {
+        content: "FOUNDATION";
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 8.5px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .about-modular-icon {
+        width: 28px;
+        height: 28px;
+        margin: 0 auto 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+      }
+      .about-modular-block.is-foundation .about-modular-icon {
+        color: rgba(255, 255, 255, 0.95);
+      }
+      .about-modular-name {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--navy);
+        letter-spacing: -0.1px;
+      }
+      .about-modular-block.is-foundation .about-modular-name {
+        color: #fff;
+      }
+
+      /* Unified data layer visual */
+      .about-unified {
+        background: var(--page-bg);
+        border-radius: 10px;
+        padding: 24px;
+        position: relative;
+      }
+      .about-unified-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .about-unified-source {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 10px 8px;
+        text-align: center;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--text-2);
+        position: relative;
+      }
+      .about-unified-source::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 1px;
+        height: 24px;
+        background: linear-gradient(180deg, var(--border) 0%, transparent 100%);
+      }
+      .about-unified-core {
+        background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+        border-radius: 8px;
+        padding: 22px 18px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .about-unified-core-label {
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.4px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 4px;
+      }
+      .about-unified-core-name {
+        font-size: 18px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.3px;
+      }
+      .about-unified-pulse {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        margin-top: 12px;
+        font-size: 9.5px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .about-unified-pulse::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #4ade80;
+        animation: about-pulse 1.6s ease-in-out infinite;
+      }
+      @keyframes about-pulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* Closing — credibility + CTA */
+      .about-closing {
+        background: linear-gradient(135deg, var(--navy) 0%, #122a55 100%);
+        padding: 96px 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .about-closing::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(255, 255, 255, 0.05) 1px,
+          transparent 0
+        );
+        background-size: 14px 14px;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .about-closing-inner {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .about-closing-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 5px 13px;
+        border-radius: 20px;
+        margin-bottom: 24px;
+      }
+      .about-closing-h2 {
+        font-size: clamp(28px, 3vw, 40px);
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -1px;
+        line-height: 1.2;
+        margin-bottom: 22px;
+      }
+      .about-closing-prose {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+      .about-closing-prose strong {
+        color: #fff;
+        font-weight: 600;
+      }
+      .about-closing-aai {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 16px 0 36px;
+        padding: 12px 18px;
+        background: rgba(239, 72, 71, 0.1);
+        border: 1px solid rgba(239, 72, 71, 0.25);
+        border-radius: 24px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.92);
+      }
+      .about-closing-aai-icon {
+        width: 16px;
+        height: 16px;
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .about-closing-cta-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 1024px) {
+        .about-hero {
+          padding: 80px 0 64px;
+        }
+        .about-section {
+          padding: 72px 0;
+        }
+        .about-broken-grid {
+          grid-template-columns: 1fr;
+        }
+        .about-principle {
+          grid-template-columns: 1fr;
+          gap: 36px;
+          padding: 48px 0;
+        }
+        .about-principle.reverse {
+          direction: ltr;
+        }
+        .about-closing {
+          padding: 72px 0;
+        }
+      }
+
+      .about-audience-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-bottom: 36px;
+        text-align: left;
+      }
+      .about-audience {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--r-lg);
+        padding: 26px 24px;
+        transition: all var(--tr);
+      }
+      .about-audience:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.18);
+        transform: translateY(-2px);
+      }
+      .about-audience-tag {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--gold);
+        background: rgba(239, 72, 71, 0.12);
+        border: 1px solid rgba(239, 72, 71, 0.22);
+        padding: 3px 9px;
+        border-radius: 4px;
+        margin-bottom: 14px;
+      }
+      .about-audience-prose {
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.6;
+      }
+      @media (max-width: 1024px) {
+        .about-audience-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════ NAV ══════════════ -->
+    <nav>
+      <div class="container">
+        <div class="nav-inner">
+          <a href="#" class="nav-logo" aria-label="Aerios">
+            <svg
+              class="nav-logo-svg"
+              viewBox="0 0 426 126"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <mask
+                id="aerios-logo-mask"
+                style="mask-type: alpha"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="117"
+                height="117"
+              >
+                <circle cx="58.5" cy="58.5" r="58.5" fill="white" />
+              </mask>
+              <g mask="url(#aerios-logo-mask)">
+                <path
+                  d="M0 106.254V116.999H48.949L61.2857 70.8359L0 106.254Z"
+                  fill="#F13A40"
+                />
+                <path
+                  d="M0 42.7148V86.4904L51.7347 56.6434L0 42.7148Z"
+                  fill="#F13A40"
+                />
+                <path
+                  d="M0 25.2041V0H117V18.9694L72.6939 44.5714L0 25.2041Z"
+                  fill="#003B8F"
+                />
+                <path
+                  d="M117 38.6055V117.003H66.5918L82.2449 58.6361L117 38.6055Z"
+                  fill="#003B8F"
+                />
+              </g>
+              <path
+                d="M240.869 117V87.9091H246.011V98.7898H246.224C246.49 98.2595 246.864 97.696 247.347 97.0994C247.83 96.4934 248.483 95.9773 249.307 95.5511C250.131 95.1155 251.182 94.8977 252.46 94.8977C254.146 94.8977 255.666 95.3286 257.02 96.1903C258.384 97.0426 259.463 98.3068 260.259 99.983C261.063 101.65 261.466 103.695 261.466 106.119C261.466 108.515 261.073 110.551 260.287 112.227C259.501 113.903 258.431 115.182 257.077 116.062C255.723 116.943 254.188 117.384 252.474 117.384C251.224 117.384 250.188 117.175 249.364 116.759C248.54 116.342 247.877 115.84 247.375 115.253C246.883 114.656 246.499 114.093 246.224 113.562H245.926V117H240.869ZM245.912 106.091C245.912 107.502 246.111 108.738 246.509 109.798C246.916 110.859 247.498 111.687 248.256 112.284C249.023 112.871 249.951 113.165 251.04 113.165C252.176 113.165 253.128 112.862 253.895 112.256C254.662 111.64 255.24 110.802 255.628 109.741C256.026 108.671 256.224 107.455 256.224 106.091C256.224 104.737 256.03 103.534 255.642 102.483C255.254 101.432 254.676 100.608 253.909 100.011C253.142 99.4148 252.186 99.1165 251.04 99.1165C249.941 99.1165 249.009 99.4053 248.241 99.983C247.474 100.561 246.892 101.37 246.494 102.412C246.106 103.454 245.912 104.68 245.912 106.091ZM268.291 125.182C267.59 125.182 266.942 125.125 266.345 125.011C265.758 124.907 265.289 124.784 264.939 124.642L266.132 120.636C266.88 120.854 267.548 120.958 268.135 120.949C268.722 120.939 269.238 120.755 269.683 120.395C270.138 120.045 270.521 119.457 270.834 118.634L271.274 117.455L263.362 95.1818H268.817L273.845 111.659H274.072L279.115 95.1818H284.584L275.848 119.642C275.441 120.797 274.901 121.787 274.229 122.611C273.556 123.444 272.732 124.079 271.757 124.514C270.791 124.959 269.636 125.182 268.291 125.182ZM298.291 117V87.9091H303.433V98.7898H303.646C303.911 98.2595 304.286 97.696 304.768 97.0994C305.251 96.4934 305.905 95.9773 306.729 95.5511C307.553 95.1155 308.604 94.8977 309.882 94.8977C311.568 94.8977 313.088 95.3286 314.442 96.1903C315.805 97.0426 316.885 98.3068 317.68 99.983C318.485 101.65 318.888 103.695 318.888 106.119C318.888 108.515 318.495 110.551 317.709 112.227C316.923 113.903 315.853 115.182 314.499 116.062C313.144 116.943 311.61 117.384 309.896 117.384C308.646 117.384 307.609 117.175 306.786 116.759C305.962 116.342 305.299 115.84 304.797 115.253C304.304 114.656 303.921 114.093 303.646 113.562H303.348V117H298.291ZM303.334 106.091C303.334 107.502 303.533 108.738 303.93 109.798C304.338 110.859 304.92 111.687 305.678 112.284C306.445 112.871 307.373 113.165 308.462 113.165C309.598 113.165 310.55 112.862 311.317 112.256C312.084 111.64 312.661 110.802 313.05 109.741C313.447 108.671 313.646 107.455 313.646 106.091C313.646 104.737 313.452 103.534 313.064 102.483C312.676 101.432 312.098 100.608 311.331 100.011C310.564 99.4148 309.607 99.1165 308.462 99.1165C307.363 99.1165 306.43 99.4053 305.663 99.983C304.896 100.561 304.314 101.37 303.916 102.412C303.528 103.454 303.334 104.68 303.334 106.091ZM328.401 87.9091V117H323.259V87.9091H328.401ZM347.595 107.824V95.1818H352.737V117H347.751V113.122H347.524C347.032 114.344 346.222 115.343 345.095 116.119C343.978 116.896 342.6 117.284 340.962 117.284C339.532 117.284 338.268 116.967 337.169 116.332C336.08 115.688 335.228 114.756 334.612 113.534C333.997 112.303 333.689 110.816 333.689 109.074V95.1818H338.831V108.278C338.831 109.661 339.21 110.759 339.967 111.574C340.725 112.388 341.719 112.795 342.95 112.795C343.708 112.795 344.442 112.611 345.152 112.241C345.862 111.872 346.445 111.323 346.899 110.594C347.363 109.855 347.595 108.932 347.595 107.824ZM363.167 104.216V117H358.025V95.1818H362.94V98.8892H363.195C363.697 97.6676 364.497 96.697 365.596 95.9773C366.704 95.2576 368.072 94.8977 369.701 94.8977C371.207 94.8977 372.518 95.2197 373.636 95.8636C374.763 96.5076 375.634 97.4403 376.249 98.6619C376.874 99.8835 377.182 101.366 377.173 103.108V117H372.031V103.903C372.031 102.445 371.652 101.304 370.894 100.48C370.146 99.6562 369.109 99.2443 367.783 99.2443C366.884 99.2443 366.084 99.4432 365.383 99.8409C364.692 100.229 364.147 100.793 363.749 101.531C363.361 102.27 363.167 103.165 363.167 104.216ZM388.678 117.44C387.296 117.44 386.05 117.194 384.942 116.702C383.844 116.2 382.973 115.461 382.329 114.486C381.694 113.51 381.377 112.308 381.377 110.878C381.377 109.647 381.604 108.629 382.059 107.824C382.513 107.019 383.134 106.375 383.92 105.892C384.706 105.409 385.591 105.045 386.576 104.798C387.57 104.543 388.598 104.358 389.658 104.244C390.937 104.112 391.974 103.993 392.769 103.889C393.565 103.776 394.142 103.605 394.502 103.378C394.871 103.141 395.056 102.777 395.056 102.284V102.199C395.056 101.129 394.739 100.3 394.104 99.7131C393.47 99.1259 392.556 98.8324 391.363 98.8324C390.103 98.8324 389.104 99.107 388.366 99.6562C387.637 100.205 387.144 100.854 386.888 101.602L382.087 100.92C382.466 99.5947 383.091 98.4867 383.962 97.5966C384.834 96.697 385.899 96.0246 387.158 95.5795C388.418 95.125 389.81 94.8977 391.335 94.8977C392.386 94.8977 393.432 95.0208 394.474 95.267C395.515 95.5133 396.467 95.9205 397.329 96.4886C398.191 97.0473 398.882 97.8097 399.403 98.7756C399.933 99.7415 400.198 100.949 400.198 102.398V117H395.255V114.003H395.085C394.772 114.609 394.332 115.177 393.763 115.707C393.205 116.228 392.499 116.65 391.647 116.972C390.804 117.284 389.815 117.44 388.678 117.44ZM390.013 113.662C391.046 113.662 391.941 113.458 392.698 113.051C393.456 112.634 394.038 112.085 394.445 111.403C394.862 110.722 395.07 109.978 395.07 109.173V106.602C394.909 106.735 394.635 106.858 394.246 106.972C393.868 107.085 393.442 107.185 392.968 107.27C392.495 107.355 392.026 107.431 391.562 107.497C391.098 107.563 390.695 107.62 390.354 107.668C389.587 107.772 388.901 107.942 388.295 108.179C387.689 108.416 387.21 108.747 386.86 109.173C386.51 109.59 386.335 110.13 386.335 110.793C386.335 111.74 386.68 112.455 387.371 112.938C388.063 113.42 388.943 113.662 390.013 113.662ZM424.076 95.1818L416.306 117H410.624L402.854 95.1818H408.337L413.352 111.389H413.579L418.607 95.1818H424.076Z"
+                fill="#003B8F"
+              />
+              <path
+                d="M176.9 71.1969C170.9 71.1969 166.233 69.8635 162.9 67.1969C159.633 64.5302 158 60.7635 158 55.8969C158 50.6969 159.733 46.7302 163.2 43.9969C166.733 41.2635 171.633 39.8969 177.9 39.8969H190.6C190.2 36.2302 189.167 33.4302 187.5 31.4969C185.833 29.5635 183.367 28.5969 180.1 28.5969C177.7 28.5969 175.6 29.0969 173.8 30.0969C172 31.0969 170.467 32.6635 169.2 34.7969L159.4 31.1969C160.467 28.9969 161.867 26.9635 163.6 25.0969C165.4 23.1635 167.633 21.6302 170.3 20.4969C173.033 19.3635 176.3 18.7969 180.1 18.7969C184.967 18.7969 189.033 19.7635 192.3 21.6969C195.567 23.5635 197.967 26.2635 199.5 29.7969C201.1 33.3302 201.9 37.5969 201.9 42.5969L201.6 69.9969H191.3L191 63.8969C189.667 66.2302 187.8 68.0302 185.4 69.2969C183.067 70.5635 180.233 71.1969 176.9 71.1969ZM178.3 61.7969C180.767 61.7969 182.933 61.2635 184.8 60.1969C186.733 59.0635 188.2 57.5635 189.2 55.6969C190.267 53.8302 190.8 51.7635 190.8 49.4969V48.4969H181.5C177.033 48.4969 173.9 49.1302 172.1 50.3969C170.3 51.5969 169.4 53.3302 169.4 55.5969C169.4 57.5302 170.167 59.0635 171.7 60.1969C173.3 61.2635 175.5 61.7969 178.3 61.7969Z"
+                fill="#003B8F"
+              />
+              <path
+                d="M235.541 71.1969C230.675 71.1969 226.341 70.0969 222.541 67.8969C218.808 65.6302 215.841 62.5302 213.641 58.5969C211.508 54.6635 210.441 50.1302 210.441 44.9969C210.441 39.8635 211.541 35.3302 213.741 31.3969C215.941 27.4635 218.941 24.3969 222.741 22.1969C226.608 19.9302 231.008 18.7969 235.941 18.7969C240.408 18.7969 244.441 19.9635 248.041 22.2969C251.641 24.5635 254.475 27.8635 256.541 32.1969C258.675 36.5302 259.741 41.6969 259.741 47.6969H222.041C222.375 51.8969 223.908 55.1969 226.641 57.5969C229.441 59.9969 232.741 61.1969 236.541 61.1969C239.608 61.1969 242.141 60.5302 244.141 59.1969C246.141 57.7969 247.708 55.9969 248.841 53.7969L258.741 57.9969C257.341 60.6635 255.541 62.9969 253.341 64.9969C251.208 66.9969 248.641 68.5302 245.641 69.5969C242.708 70.6635 239.341 71.1969 235.541 71.1969ZM222.741 39.0969H247.641C247.441 36.6969 246.741 34.7302 245.541 33.1969C244.341 31.5969 242.875 30.3969 241.141 29.5969C239.408 28.7969 237.575 28.3969 235.641 28.3969C233.775 28.3969 231.875 28.7969 229.941 29.5969C228.075 30.3302 226.475 31.4969 225.141 33.0969C223.808 34.6969 223.008 36.6969 222.741 39.0969Z"
+                fill="#003B8F"
+              />
+              <path
+                d="M268.32 69.9969V19.9969H279.52V29.0969C281.52 25.9635 284.12 23.6302 287.32 22.0969C290.52 20.5635 293.82 19.7969 297.22 19.7969V30.4969C294.153 30.4969 291.253 30.9302 288.52 31.7969C285.853 32.5969 283.686 33.9302 282.02 35.7969C280.353 37.6635 279.52 40.1302 279.52 43.1969V69.9969H268.32Z"
+                fill="#003B8F"
+              />
+              <path
+                d="M305.348 69.9969V19.9969H316.448V69.9969H305.348Z"
+                fill="#003B8F"
+              />
+              <path
+                d="M352.648 71.1969C347.648 71.1969 343.181 70.0969 339.248 67.8969C335.381 65.6302 332.348 62.5302 330.148 58.5969C327.948 54.6635 326.848 50.1302 326.848 44.9969C326.848 39.8635 327.914 35.3302 330.048 31.3969C332.248 27.4635 335.281 24.3969 339.148 22.1969C343.014 19.9302 347.448 18.7969 352.448 18.7969C357.448 18.7969 361.881 19.9302 365.748 22.1969C369.614 24.3969 372.614 27.4635 374.748 31.3969C376.948 35.3302 378.048 39.8635 378.048 44.9969C378.048 50.1302 376.981 54.6635 374.848 58.5969C372.714 62.5302 369.714 65.6302 365.848 67.8969C361.981 70.0969 357.581 71.1969 352.648 71.1969ZM352.648 60.8969C355.381 60.8969 357.814 60.2302 359.948 58.8969C362.081 57.4969 363.748 55.6302 364.948 53.2969C366.148 50.8969 366.748 48.1302 366.748 44.9969C366.748 41.8635 366.114 39.1302 364.848 36.7969C363.648 34.3969 361.981 32.5302 359.848 31.1969C357.714 29.7969 355.248 29.0969 352.448 29.0969C349.648 29.0969 347.181 29.7635 345.048 31.0969C342.914 32.4302 341.248 34.2969 340.048 36.6969C338.848 39.0969 338.248 41.8635 338.248 44.9969C338.248 48.1302 338.848 50.8969 340.048 53.2969C341.314 55.6302 343.014 57.4969 345.148 58.8969C347.348 60.2302 349.848 60.8969 352.648 60.8969Z"
+                fill="#003B8F"
+              />
+              <path
+                d="M405.953 71.1969C402.62 71.1969 399.553 70.6969 396.753 69.6969C393.953 68.6969 391.553 67.2969 389.553 65.4969C387.553 63.6302 386.02 61.4635 384.953 58.9969L394.653 54.6969C395.653 56.5635 397.12 58.1302 399.053 59.3969C401.053 60.6635 403.253 61.2969 405.653 61.2969C408.253 61.2969 410.32 60.8635 411.853 59.9969C413.453 59.0635 414.253 57.7969 414.253 56.1969C414.253 54.6635 413.653 53.4969 412.453 52.6969C411.253 51.8302 409.553 51.1302 407.353 50.5969L402.653 49.2969C397.92 48.0969 394.22 46.1969 391.553 43.5969C388.886 40.9302 387.553 37.8969 387.553 34.4969C387.553 29.4969 389.153 25.6302 392.353 22.8969C395.62 20.1635 400.286 18.7969 406.353 18.7969C409.42 18.7969 412.22 19.2635 414.753 20.1969C417.353 21.0635 419.586 22.3302 421.453 23.9969C423.32 25.5969 424.62 27.4969 425.353 29.6969L416.053 33.8969C415.386 32.2302 414.12 30.9635 412.253 30.0969C410.386 29.1635 408.32 28.6969 406.053 28.6969C403.786 28.6969 402.02 29.1969 400.753 30.1969C399.486 31.1302 398.853 32.4635 398.853 34.1969C398.853 35.1969 399.42 36.1302 400.553 36.9969C401.686 37.7969 403.32 38.4635 405.453 38.9969L411.353 40.3969C414.62 41.1969 417.286 42.4635 419.353 44.1969C421.42 45.8635 422.953 47.7635 423.953 49.8969C424.953 51.9635 425.453 54.0635 425.453 56.1969C425.453 59.1969 424.586 61.8302 422.853 64.0969C421.186 66.3635 418.886 68.1302 415.953 69.3969C413.02 70.5969 409.686 71.1969 405.953 71.1969Z"
+                fill="#003B8F"
+              />
+              <path
+                d="M316.569 14H305.6L310.087 0H320.6L316.569 14Z"
+                fill="#F13A40"
+              />
+            </svg>
+          </a>
+          <ul class="nav-links">
+            <!-- Products -->
+            <li class="nav-item">
+              <button class="nav-link">
+                Products
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div class="nav-dropdown">
+                <div class="mega-inner cols-suite">
+                  <!-- Left rail: 6 product lines -->
+                  <div class="suite-rail">
+                    <div
+                      class="suite-rail-item is-foundation is-active"
+                      data-pane="flight"
+                    >
+                      <div class="suite-rail-item-icon">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="rgba(255,255,255,0.95)"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <ellipse cx="12" cy="5" rx="9" ry="3" />
+                          <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
+                          <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
+                        </svg>
+                      </div>
+                      <div class="suite-rail-item-text">
+                        <div class="suite-rail-item-name">
+                          Flight
+                          <span class="suite-rail-item-badge">Foundation</span>
+                        </div>
+                        <div class="suite-rail-item-tagline">
+                          The operational core
+                        </div>
+                      </div>
+                      <svg
+                        class="suite-rail-item-chevron"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </div>
+
+                    <div class="suite-rail-item" data-pane="view">
+                      <div class="suite-rail-item-icon">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="var(--accent)"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect x="2" y="3" width="20" height="14" rx="2" />
+                          <line x1="2" y1="9" x2="22" y2="9" />
+                          <line x1="8" y1="21" x2="16" y2="21" />
+                          <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                      </div>
+                      <div class="suite-rail-item-text">
+                        <div class="suite-rail-item-name">View</div>
+                        <div class="suite-rail-item-tagline">
+                          Live flight info, terminal-wide
+                        </div>
+                      </div>
+                      <svg
+                        class="suite-rail-item-chevron"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </div>
+
+                    <div class="suite-rail-item" data-pane="works">
+                      <div class="suite-rail-item-icon">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="var(--accent)"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.7 2.7-2-2 2.7-2.7z"
+                          />
+                        </svg>
+                      </div>
+                      <div class="suite-rail-item-text">
+                        <div class="suite-rail-item-name">Works</div>
+                        <div class="suite-rail-item-tagline">
+                          Find it. Fix it. Track it.
+                        </div>
+                      </div>
+                      <svg
+                        class="suite-rail-item-chevron"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </div>
+
+                    <div class="suite-rail-item" data-pane="ops">
+                      <div class="suite-rail-item-icon">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="var(--accent)"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                          />
+                          <polyline points="9 12 11 14 15 10" />
+                        </svg>
+                      </div>
+                      <div class="suite-rail-item-text">
+                        <div class="suite-rail-item-name">Ops</div>
+                        <div class="suite-rail-item-tagline">
+                          Every operation. Logged.
+                        </div>
+                      </div>
+                      <svg
+                        class="suite-rail-item-chevron"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </div>
+
+                    <div class="suite-rail-item" data-pane="commercial">
+                      <div class="suite-rail-item-icon">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="var(--accent)"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <line x1="12" y1="1" x2="12" y2="23" />
+                          <path
+                            d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                          />
+                        </svg>
+                      </div>
+                      <div class="suite-rail-item-text">
+                        <div class="suite-rail-item-name">Commercial</div>
+                        <div class="suite-rail-item-tagline">
+                          Revenue and tenancy, unified
+                        </div>
+                      </div>
+                      <svg
+                        class="suite-rail-item-chevron"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </div>
+
+                    <div class="suite-rail-item" data-pane="pax">
+                      <div class="suite-rail-item-icon">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="var(--accent)"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M2 9V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 0 0 4v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4a2 2 0 0 0 0-4z"
+                          />
+                          <line x1="13" y1="5" x2="13" y2="7" />
+                          <line x1="13" y1="11" x2="13" y2="13" />
+                          <line x1="13" y1="17" x2="13" y2="19" />
+                        </svg>
+                      </div>
+                      <div class="suite-rail-item-text">
+                        <div class="suite-rail-item-name">Pax Processing</div>
+                        <div class="suite-rail-item-tagline">
+                          Common-use, end to end
+                        </div>
+                      </div>
+                      <svg
+                        class="suite-rail-item-chevron"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- Right panes -->
+                  <div class="suite-panes">
+                    <!-- Flight pane -->
+                    <div class="suite-pane is-visible" data-pane="flight">
+                      <div class="suite-pane-head">
+                        <div class="suite-pane-name">Aerios Flight</div>
+                        <div class="suite-pane-name-badge">Foundation</div>
+                      </div>
+                      <div class="suite-pane-desc">
+                        The operational core. Flight scheduling, the AODB, and
+                        resource allocation across every gate, counter, parking
+                        stand, and baggage belt. Every other product line in the
+                        suite extends from this layer.
+                      </div>
+                      <div class="suite-pane-grid">
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">AODB</div>
+                          <div class="suite-mod-desc">
+                            Real-time central data hub for all flight operations
+                            across the airport.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Flight Schedule</div>
+                          <div class="suite-mod-desc">
+                            Manage scheduled, planned, and actual flight
+                            movements.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Resource Management</div>
+                          <div class="suite-mod-desc">
+                            Allocate gates, counters, stands, and belts with
+                            built-in conflict checks.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Stand Allocation</div>
+                          <div class="suite-mod-desc">
+                            Optimise stand assignment and reassignment in real
+                            time.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Counter Management</div>
+                          <div class="suite-mod-desc">
+                            Open, close, and assign check-in counters by airline
+                            and flight.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Baggage Belts</div>
+                          <div class="suite-mod-desc">
+                            Allocate and track baggage claim belts for arriving
+                            flights.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Turnaround</div>
+                          <div class="suite-mod-desc">
+                            Track and optimise aircraft turnaround time.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Airport CDM</div>
+                          <div class="suite-mod-desc">
+                            A-CDM milestones, predictability, and collaborative
+                            ops.
+                          </div></a
+                        >
+                      </div>
+                      <div class="suite-pane-footer">
+                        <a href="#" class="suite-pane-footer-link"
+                          >Explore Aerios Flight →</a
+                        >
+                      </div>
+                    </div>
+
+                    <!-- View pane -->
+                    <div class="suite-pane" data-pane="view">
+                      <div class="suite-pane-head">
+                        <div class="suite-pane-name">Aerios View</div>
+                      </div>
+                      <div class="suite-pane-desc">
+                        Live flight info, terminal-wide. Arrivals and departures
+                        boards, gate and counter displays, and CIDS/GIDS
+                        controls — all reading from the same AODB feed.
+                      </div>
+                      <div class="suite-pane-grid">
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">FIDS</div>
+                          <div class="suite-mod-desc">
+                            Flight information display with airline-customisable
+                            layouts.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Gate Displays</div>
+                          <div class="suite-mod-desc">
+                            Boarding gate screens powered by the AODB feed.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">CIDS / GIDS</div>
+                          <div class="suite-mod-desc">
+                            Counter and gate identification displays for staff.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Boards</div>
+                          <div class="suite-mod-desc">
+                            Public arrivals and departures boards across the
+                            terminal.
+                          </div></a
+                        >
+                      </div>
+                      <div class="suite-pane-footer">
+                        <a href="#" class="suite-pane-footer-link"
+                          >Explore Aerios View →</a
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Works pane -->
+                    <div class="suite-pane" data-pane="works">
+                      <div class="suite-pane-head">
+                        <div class="suite-pane-name">Aerios Works</div>
+                      </div>
+                      <div class="suite-pane-desc">
+                        The CMMS layer — inspections, asset management, work
+                        orders, and issue tracking. Closes the loop from problem
+                        identification to resolution, with full audit history.
+                      </div>
+                      <div class="suite-pane-grid">
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Inspections</div>
+                          <div class="suite-mod-desc">
+                            Scheduled and ad-hoc facility inspections with
+                            reusable templates.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Assets</div>
+                          <div class="suite-mod-desc">
+                            Track physical and digital airfield and terminal
+                            assets.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Work Orders</div>
+                          <div class="suite-mod-desc">
+                            Maintenance task creation, assignment, and tracking.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Issues</div>
+                          <div class="suite-mod-desc">
+                            Identify, escalate, and resolve operational issues
+                            with audit trails.
+                          </div></a
+                        >
+                      </div>
+                      <div class="suite-pane-footer">
+                        <a href="#" class="suite-pane-footer-link"
+                          >Explore Aerios Works →</a
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Ops pane -->
+                    <div class="suite-pane" data-pane="ops">
+                      <div class="suite-pane-head">
+                        <div class="suite-pane-name">Aerios Ops</div>
+                      </div>
+                      <div class="suite-pane-desc">
+                        Every operation. Logged. Terminal and airside operations
+                        end to end — safety, compliance, FOD, wildlife, NOTAMs,
+                        permits, training, ops logging, and Lost &amp; Found.
+                      </div>
+                      <div class="suite-pane-grid">
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name suite-mod-name-live">
+                            Lost &amp; Found
+                          </div>
+                          <div class="suite-mod-desc">
+                            AI-matched item recovery with audit-trailed
+                            handover. Live in production.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Safety</div>
+                          <div class="suite-mod-desc">
+                            Incident reporting, hazard logs, and safety case
+                            workflows.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Compliance</div>
+                          <div class="suite-mod-desc">
+                            DGCA and regulatory compliance tracking with full
+                            reporting.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">NOTAMs</div>
+                          <div class="suite-mod-desc">
+                            Notice to Airmen drafting, distribution, and
+                            archive.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Permits</div>
+                          <div class="suite-mod-desc">
+                            Airside permit issuance, tracking, and renewal
+                            workflows.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Wildlife</div>
+                          <div class="suite-mod-desc">
+                            Hazard assessment and mitigation tracking.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Training</div>
+                          <div class="suite-mod-desc">
+                            Staff training records and compliance workflows.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Ops Log</div>
+                          <div class="suite-mod-desc">
+                            Centralised operational activity logging across all
+                            teams.
+                          </div></a
+                        >
+                      </div>
+                      <div class="suite-pane-footer">
+                        <a href="#" class="suite-pane-footer-link"
+                          >Explore Aerios Ops →</a
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Commercial pane -->
+                    <div class="suite-pane" data-pane="commercial">
+                      <div class="suite-pane-head">
+                        <div class="suite-pane-name">Aerios Commercial</div>
+                      </div>
+                      <div class="suite-pane-desc">
+                        The airport's commercial layer — billing, lease and
+                        tenant management, concessionaire coordination, and
+                        hangar operations. Unified revenue tracking across every
+                        commercial relationship.
+                      </div>
+                      <div class="suite-pane-grid">
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Billing</div>
+                          <div class="suite-mod-desc">
+                            Aeronautical and non-aeronautical billing
+                            automation.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Leases</div>
+                          <div class="suite-mod-desc">
+                            Tenant lease management and renewal tracking.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Concessions</div>
+                          <div class="suite-mod-desc">
+                            Commercial partner coordination and revenue
+                            tracking.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Hangars</div>
+                          <div class="suite-mod-desc">
+                            Hangar space allocation, scheduling, and billing.
+                          </div></a
+                        >
+                      </div>
+                      <div class="suite-pane-footer">
+                        <a href="#" class="suite-pane-footer-link"
+                          >Explore Aerios Commercial →</a
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Pax pane -->
+                    <div class="suite-pane" data-pane="pax">
+                      <div class="suite-pane-head">
+                        <div class="suite-pane-name">Aerios Pax Processing</div>
+                      </div>
+                      <div class="suite-pane-desc">
+                        Common-use passenger flow, end to end. Check-in, bag
+                        drop, and boarding pass handling on CUTE/CUPPS
+                        infrastructure across every shared counter and gate in
+                        the terminal.
+                      </div>
+                      <div class="suite-pane-grid">
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Check-in</div>
+                          <div class="suite-mod-desc">
+                            Common-use check-in counter management.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Bag Drop</div>
+                          <div class="suite-mod-desc">
+                            Self-service and assisted bag drop workflows.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">Boarding</div>
+                          <div class="suite-mod-desc">
+                            Common-use boarding gate management.
+                          </div></a
+                        >
+                        <a href="#" class="suite-mod"
+                          ><div class="suite-mod-name">CUTE / CUPPS</div>
+                          <div class="suite-mod-desc">
+                            Common-use terminal equipment and passenger
+                            processing platform.
+                          </div></a
+                        >
+                      </div>
+                      <div class="suite-pane-footer">
+                        <a href="#" class="suite-pane-footer-link"
+                          >Explore Aerios Pax Processing →</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Platform -->
+            <li class="nav-item">
+              <button class="nav-link">
+                Platform
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div class="nav-dropdown">
+                <div class="mega-inner cols-3">
+                  <div class="mega-col">
+                    <div class="mega-col-label">Architecture</div>
+                    <a href="#" class="mega-link"
+                      ><div class="mega-link-title">
+                        Airport Operational Database
+                      </div>
+                      <div class="mega-link-desc">
+                        Centralised real-time data hub across all airports
+                      </div></a
+                    >
+                    <a href="#" class="mega-link"
+                      ><div class="mega-link-title">
+                        Airport Integration Layer
+                      </div>
+                      <div class="mega-link-desc">
+                        On-premise middleware connecting local systems to cloud
+                      </div></a
+                    >
+                    <a href="#" class="mega-link"
+                      ><div class="mega-link-title">
+                        Hybrid Cloud Architecture
+                      </div>
+                      <div class="mega-link-desc">
+                        Cloud-native with local resilience and offline
+                        capability
+                      </div></a
+                    >
+                    <a href="#" class="mega-link"
+                      ><div class="mega-link-title">Data Warehouse</div>
+                      <div class="mega-link-desc">
+                        Cross-airport analytics, long-term storage and BI
+                      </div></a
+                    >
+                  </div>
+                  <div class="mega-col">
+                    <div class="mega-col-label">Integrations & Standards</div>
+                    <a href="#" class="mega-link"
+                      ><div class="mega-link-title">SITA XML / AIDX</div>
+                      <div class="mega-link-desc">
+                        Native support for aviation data exchange formats
+                      </div></a
+                    >
+                    <a href="#" class="mega-link"
+                      ><div class="mega-link-title">IATA & ICAO Standards</div>
+                      <div class="mega-link-desc">
+                        Dual coding support across all modules
+                      </div></a
+                    >
+                    <a href="#" class="mega-link"
+                      ><div class="mega-link-title">Third-party Connectors</div>
+                      <div class="mega-link-desc">
+                        BHS, FIDS, PAVA, BRS, A-CDM and more
+                      </div></a
+                    >
+                    <div class="mega-col-footer" style="margin-top: 20px">
+                      <div
+                        style="
+                          font-size: 10.5px;
+                          font-weight: 700;
+                          text-transform: uppercase;
+                          letter-spacing: 0.8px;
+                          color: var(--text-3);
+                          margin-bottom: 10px;
+                        "
+                      >
+                        Developer
+                      </div>
+                      <a
+                        href="#"
+                        class="nav-simple-item"
+                        style="
+                          padding: 5px 0;
+                          border-radius: 0;
+                          margin: 0;
+                          font-size: 12.5px;
+                          color: var(--text-2);
+                          text-decoration: none;
+                          display: block;
+                          transition: color var(--tr);
+                        "
+                        >API Reference</a
+                      >
+                      <a
+                        href="#"
+                        class="nav-simple-item"
+                        style="
+                          padding: 5px 0;
+                          border-radius: 0;
+                          margin: 0;
+                          font-size: 12.5px;
+                          color: var(--text-2);
+                          text-decoration: none;
+                          display: block;
+                          transition: color var(--tr);
+                        "
+                        >Integration guides</a
+                      >
+                      <a
+                        href="#"
+                        class="nav-simple-item"
+                        style="
+                          padding: 5px 0;
+                          border-radius: 0;
+                          margin: 0;
+                          font-size: 12.5px;
+                          color: var(--text-2);
+                          text-decoration: none;
+                          display: block;
+                          transition: color var(--tr);
+                        "
+                        >Security & compliance docs</a
+                      >
+                    </div>
+                  </div>
+                  <div class="mega-col">
+                    <div class="mega-featured">
+                      <div class="mega-featured-label">Why Aerios</div>
+                      <div class="mega-featured-card">
+                        <div
+                          class="mega-featured-img"
+                          style="
+                            background: linear-gradient(
+                              135deg,
+                              #122d54 0%,
+                              #1a3c6e 100%
+                            );
+                          "
+                        >
+                          <div class="mega-featured-img-inner">
+                            <svg
+                              width="28"
+                              height="28"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="rgba(255,255,255,0.7)"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <rect x="2" y="3" width="20" height="14" rx="2" />
+                              <path d="M8 21h8M12 17v4" />
+                            </svg>
+                            <span
+                              style="
+                                font-size: 12px;
+                                font-weight: 700;
+                                color: rgba(255, 255, 255, 0.7);
+                              "
+                              >Cloud-Native Platform</span
+                            >
+                          </div>
+                        </div>
+                        <div class="mega-featured-body">
+                          <div class="mega-featured-title">
+                            Built for scale from day one
+                          </div>
+                          <div class="mega-featured-desc">
+                            Modular architecture means airports deploy only what
+                            they need — and expand without re-implementation.
+                          </div>
+                          <a href="#" class="mega-featured-cta"
+                            >Platform overview →</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">Success Stories</a>
+            </li>
+            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+          </ul>
+
+          <div class="nav-cta">
+            <button class="btn sign-in-btn">Sign in</button>
+            <a href="#" class="btn btn-gold">Request demo</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ══════════════ ABOUT — HERO ══════════════ -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-hero-inner">
+          <div class="about-hero-eyebrow reveal visible">Our thesis</div>
+          <h1
+            class="about-hero-h1 reveal visible"
+            style="transition-delay: 0.05s"
+          >
+            Airport ops
+            <span class="about-hero-h1-accent">deserves</span> better software.
+          </h1>
+          <p
+            class="about-hero-lead reveal visible"
+            style="transition-delay: 0.1s"
+          >
+            Air travel is set to nearly double over the next two decades. India
+            alone is targeting 230 operational airports by 2030, up from 74 a
+            decade ago. The systems running airports today were not designed for
+            that future — they were designed for an era of monolithic on-premise
+            deployments, multi-year migrations, and vendor lock-in. We think the
+            next decade of airport growth deserves something better.
+            That&rsquo;s why we&rsquo;re building Aerios.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ WHAT'S BROKEN ══════════════ -->
+    <section class="about-section alt">
+      <div class="container">
+        <div class="reveal">
+          <div class="about-eyebrow">What we&rsquo;re solving for</div>
+          <h2 class="about-h2">
+            The way airport software has been built doesn&rsquo;t serve the way
+            airports run.
+          </h2>
+          <p class="about-section-lead">
+            Three patterns that have shaped legacy airport platforms — and why
+            they no longer fit.
+          </p>
+        </div>
+
+        <div class="about-broken-grid">
+          <div class="about-broken-card reveal">
+            <div class="about-broken-numeral">01 / Architecture</div>
+            <h3 class="about-broken-h3">
+              Software designed before the cloud existed.
+            </h3>
+            <p class="about-broken-prose">
+              Most airport platforms in production today were built when
+              integration was an afterthought and on-premise was the only
+              option. Cloud-native, API-first design wasn&rsquo;t a choice — it
+              wasn&rsquo;t a category. Airports adopting these systems inherit
+              decades of architectural decisions that no longer fit how modern
+              operations run.
+            </p>
+          </div>
+
+          <div class="about-broken-card reveal" style="transition-delay: 0.08s">
+            <div class="about-broken-numeral">02 / Deployment</div>
+            <h3 class="about-broken-h3">Rip-and-replace, every time.</h3>
+            <p class="about-broken-prose">
+              Legacy on-premise platforms are usually sold as all-or-nothing
+              implementations. Either you migrate the entire airport, all at
+              once, over 18&ndash;36 months — or you don&rsquo;t move at all.
+              That cycle works for vendors. It doesn&rsquo;t work for the
+              operations director who needs to fix one workflow this quarter.
+            </p>
+          </div>
+
+          <div class="about-broken-card reveal" style="transition-delay: 0.16s">
+            <div class="about-broken-numeral">03 / Data</div>
+            <h3 class="about-broken-h3">Operational data trapped in silos.</h3>
+            <p class="about-broken-prose">
+              The flight schedule doesn&rsquo;t talk to the FIDS. The FIDS
+              doesn&rsquo;t talk to billing. Billing doesn&rsquo;t talk to
+              compliance. Operations directors don&rsquo;t have a unified view
+              of what&rsquo;s actually happening — they have ten dashboards,
+              three of which contradict each other. The data exists. It just
+              isn&rsquo;t in one place.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ CLOSING ══════════════ -->
+    <section class="about-closing">
+      <div class="container about-closing-inner">
+        <div class="about-closing-eyebrow reveal visible">
+          Who Aerios is for
+        </div>
+        <h2
+          class="about-closing-h2 reveal visible"
+          style="transition-delay: 0.05s"
+        >
+          Built for the airports that will define the next decade.
+        </h2>
+
+        <div
+          class="about-audience-grid reveal visible"
+          style="transition-delay: 0.1s"
+        >
+          <div class="about-audience">
+            <div class="about-audience-tag">Regional</div>
+            <p class="about-audience-prose">
+              For the regional airport modernizing without disruption —
+              replacing legacy AODB and operations spreadsheets with a
+              cloud-native system that grows alongside it.
+            </p>
+          </div>
+          <div class="about-audience">
+            <div class="about-audience-tag">Authority</div>
+            <p class="about-audience-prose">
+              For the multi-airport authority unifying operations across a
+              network — segregated data per airport, shared master data, one
+              operational standard.
+            </p>
+          </div>
+          <div class="about-audience">
+            <div class="about-audience-tag">Hub</div>
+            <p class="about-audience-prose">
+              For the international hub built for the decade ahead — sub-second
+              flight state propagation, A-CDM milestones automated,
+              conflict-aware allocation at hub volume.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="about-closing-aai reveal visible"
+          style="transition-delay: 0.2s"
+        >
+          <span class="about-closing-aai-icon">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="8" r="7" />
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+            </svg>
+          </span>
+          Winner · AAI Startup Initiative
+        </div>
+
+        <p
+          class="about-closing-prose reveal visible"
+          style="transition-delay: 0.25s"
+        >
+          If that sounds like your airport,
+          <strong>we&rsquo;d like to talk.</strong>
+        </p>
+
+        <div
+          class="about-closing-cta-row reveal visible"
+          style="transition-delay: 0.3s"
+        >
+          <a href="#" class="btn btn-gold-lg">Talk to the Aerios team</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ FOOTER ══════════════ -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="#" class="footer-logo" aria-label="Aerios">
+              <svg
+                class="footer-logo-svg"
+                viewBox="0 0 426 126"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <mask
+                  id="aerios-footer-mask"
+                  style="mask-type: alpha"
+                  maskUnits="userSpaceOnUse"
+                  x="0"
+                  y="0"
+                  width="117"
+                  height="117"
+                >
+                  <circle cx="58.5" cy="58.5" r="58.5" fill="white" />
+                </mask>
+                <g mask="url(#aerios-footer-mask)">
+                  <path
+                    d="M0 106.254V116.999H48.949L61.2857 70.8359L0 106.254Z"
+                    fill="#F13A40"
+                  />
+                  <path
+                    d="M0 42.7148V86.4904L51.7347 56.6434L0 42.7148Z"
+                    fill="#F13A40"
+                  />
+                  <path
+                    d="M0 25.2041V0H117V18.9694L72.6939 44.5714L0 25.2041Z"
+                    fill="#FFFFFF"
+                  />
+                  <path
+                    d="M117 38.6055V117.003H66.5918L82.2449 58.6361L117 38.6055Z"
+                    fill="#FFFFFF"
+                  />
+                </g>
+                <path
+                  d="M279.511 121V95.5455H284.01V105.066H284.196C284.428 104.602 284.756 104.109 285.178 103.587C285.601 103.057 286.173 102.605 286.893 102.232C287.614 101.851 288.534 101.661 289.653 101.661C291.128 101.661 292.458 102.038 293.642 102.792C294.836 103.537 295.78 104.643 296.476 106.11C297.181 107.568 297.533 109.358 297.533 111.479C297.533 113.576 297.189 115.357 296.501 116.824C295.813 118.29 294.877 119.409 293.692 120.18C292.507 120.95 291.165 121.336 289.665 121.336C288.571 121.336 287.664 121.153 286.943 120.789C286.222 120.424 285.642 119.985 285.203 119.471C284.772 118.949 284.437 118.456 284.196 117.992H283.935V121H279.511ZM283.923 111.455C283.923 112.689 284.097 113.77 284.445 114.699C284.801 115.627 285.311 116.352 285.974 116.874C286.645 117.387 287.457 117.644 288.41 117.644C289.404 117.644 290.237 117.379 290.908 116.849C291.579 116.31 292.085 115.577 292.424 114.649C292.772 113.712 292.946 112.648 292.946 111.455C292.946 110.27 292.777 109.217 292.437 108.298C292.097 107.378 291.592 106.657 290.92 106.135C290.249 105.613 289.412 105.352 288.41 105.352C287.449 105.352 286.632 105.605 285.961 106.11C285.29 106.616 284.781 107.324 284.433 108.235C284.093 109.147 283.923 110.22 283.923 111.455ZM303.505 128.159C302.892 128.159 302.324 128.109 301.802 128.01C301.288 127.919 300.878 127.811 300.572 127.687L301.616 124.182C302.27 124.372 302.854 124.464 303.368 124.455C303.882 124.447 304.333 124.285 304.723 123.971C305.121 123.664 305.456 123.15 305.73 122.429L306.115 121.398L299.192 101.909H303.965L308.365 116.327H308.563L312.976 101.909H317.761L310.117 123.312C309.761 124.323 309.288 125.189 308.7 125.909C308.112 126.639 307.391 127.194 306.537 127.575C305.692 127.964 304.681 128.159 303.505 128.159ZM329.755 121V95.5455H334.254V105.066H334.441C334.673 104.602 335 104.109 335.422 103.587C335.845 103.057 336.417 102.605 337.138 102.232C337.858 101.851 338.778 101.661 339.897 101.661C341.372 101.661 342.702 102.038 343.887 102.792C345.08 103.537 346.024 104.643 346.72 106.11C347.425 107.568 347.777 109.358 347.777 111.479C347.777 113.576 347.433 115.357 346.745 116.824C346.057 118.29 345.121 119.409 343.936 120.18C342.751 120.95 341.409 121.336 339.909 121.336C338.816 121.336 337.908 121.153 337.187 120.789C336.466 120.424 335.886 119.985 335.447 119.471C335.016 118.949 334.681 118.456 334.441 117.992H334.18V121H329.755ZM334.167 111.455C334.167 112.689 334.341 113.77 334.689 114.699C335.045 115.627 335.555 116.352 336.218 116.874C336.889 117.387 337.701 117.644 338.654 117.644C339.648 117.644 340.481 117.379 341.152 116.849C341.823 116.31 342.329 115.577 342.669 114.649C343.017 113.712 343.191 112.648 343.191 111.455C343.191 110.27 343.021 109.217 342.681 108.298C342.341 107.378 341.836 106.657 341.165 106.135C340.493 105.613 339.657 105.352 338.654 105.352C337.693 105.352 336.877 105.605 336.205 106.11C335.534 106.616 335.025 107.324 334.677 108.235C334.337 109.147 334.167 110.22 334.167 111.455ZM356.101 95.5455V121H351.602V95.5455H356.101ZM372.896 112.971V101.909H377.395V121H373.032V117.607H372.834C372.403 118.676 371.694 119.55 370.708 120.229C369.731 120.909 368.525 121.249 367.091 121.249C365.84 121.249 364.734 120.971 363.773 120.416C362.82 119.852 362.074 119.036 361.536 117.967C360.997 116.89 360.728 115.589 360.728 114.065V101.909H365.227V113.369C365.227 114.578 365.559 115.54 366.221 116.252C366.884 116.965 367.754 117.321 368.831 117.321C369.494 117.321 370.137 117.159 370.758 116.836C371.379 116.513 371.889 116.033 372.287 115.395C372.693 114.748 372.896 113.94 372.896 112.971ZM386.521 109.814V121H382.022V101.909H386.322V105.153H386.546C386.985 104.084 387.685 103.235 388.646 102.605C389.616 101.975 390.813 101.661 392.238 101.661C393.556 101.661 394.703 101.942 395.681 102.506C396.667 103.069 397.43 103.885 397.968 104.954C398.515 106.023 398.784 107.32 398.776 108.844V121H394.277V109.54C394.277 108.264 393.945 107.266 393.282 106.545C392.628 105.824 391.72 105.464 390.56 105.464C389.773 105.464 389.073 105.638 388.46 105.986C387.855 106.326 387.379 106.819 387.031 107.465C386.691 108.111 386.521 108.894 386.521 109.814ZM408.843 121.385C407.634 121.385 406.544 121.17 405.575 120.739C404.613 120.3 403.851 119.654 403.288 118.8C402.733 117.947 402.455 116.894 402.455 115.643C402.455 114.566 402.654 113.675 403.052 112.971C403.449 112.267 403.992 111.703 404.68 111.281C405.368 110.858 406.142 110.539 407.004 110.324C407.874 110.1 408.773 109.938 409.701 109.839C410.82 109.723 411.727 109.619 412.423 109.528C413.119 109.429 413.624 109.279 413.939 109.081C414.263 108.873 414.424 108.554 414.424 108.124V108.049C414.424 107.113 414.147 106.388 413.591 105.874C413.036 105.36 412.237 105.103 411.193 105.103C410.091 105.103 409.216 105.344 408.57 105.824C407.932 106.305 407.501 106.872 407.277 107.527L403.076 106.93C403.408 105.77 403.955 104.801 404.717 104.022C405.479 103.235 406.412 102.647 407.514 102.257C408.616 101.859 409.834 101.661 411.168 101.661C412.087 101.661 413.003 101.768 413.915 101.984C414.826 102.199 415.659 102.555 416.413 103.053C417.167 103.541 417.772 104.208 418.227 105.054C418.691 105.899 418.923 106.955 418.923 108.223V121H414.598V118.377H414.449C414.176 118.908 413.79 119.405 413.293 119.869C412.804 120.325 412.187 120.693 411.441 120.975C410.704 121.249 409.838 121.385 408.843 121.385ZM410.012 118.079C410.915 118.079 411.698 117.901 412.361 117.545C413.024 117.18 413.533 116.7 413.89 116.103C414.254 115.506 414.437 114.856 414.437 114.152V111.902C414.296 112.018 414.055 112.126 413.716 112.225C413.384 112.325 413.011 112.412 412.597 112.486C412.183 112.561 411.773 112.627 411.367 112.685C410.961 112.743 410.608 112.793 410.31 112.834C409.639 112.925 409.038 113.074 408.508 113.282C407.978 113.489 407.559 113.779 407.253 114.152C406.946 114.516 406.793 114.989 406.793 115.569C406.793 116.397 407.095 117.023 407.7 117.445C408.305 117.868 409.075 118.079 410.012 118.079ZM439.816 101.909L433.018 121H428.046L421.248 101.909H426.045L430.433 116.091H430.631L435.031 101.909H439.816Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  d="M193.3 71.1969C187.3 71.1969 182.634 69.8635 179.3 67.1969C176.034 64.5302 174.4 60.7635 174.4 55.8969C174.4 50.6969 176.134 46.7302 179.6 43.9969C183.134 41.2635 188.034 39.8969 194.3 39.8969H207C206.6 36.2302 205.567 33.4302 203.9 31.4969C202.234 29.5635 199.767 28.5969 196.5 28.5969C194.1 28.5969 192 29.0969 190.2 30.0969C188.4 31.0969 186.867 32.6635 185.6 34.7969L175.8 31.1969C176.867 28.9969 178.267 26.9635 180 25.0969C181.8 23.1635 184.034 21.6302 186.7 20.4969C189.434 19.3635 192.7 18.7969 196.5 18.7969C201.367 18.7969 205.434 19.7635 208.7 21.6969C211.967 23.5635 214.367 26.2635 215.9 29.7969C217.5 33.3302 218.3 37.5969 218.3 42.5969L218 69.9969H207.7L207.4 63.8969C206.067 66.2302 204.2 68.0302 201.8 69.2969C199.467 70.5635 196.634 71.1969 193.3 71.1969ZM194.7 61.7969C197.167 61.7969 199.334 61.2635 201.2 60.1969C203.134 59.0635 204.6 57.5635 205.6 55.6969C206.667 53.8302 207.2 51.7635 207.2 49.4969V48.4969H197.9C193.434 48.4969 190.3 49.1302 188.5 50.3969C186.7 51.5969 185.8 53.3302 185.8 55.5969C185.8 57.5302 186.567 59.0635 188.1 60.1969C189.7 61.2635 191.9 61.7969 194.7 61.7969Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  d="M251.942 71.1969C247.075 71.1969 242.742 70.0969 238.942 67.8969C235.208 65.6302 232.242 62.5302 230.042 58.5969C227.908 54.6635 226.842 50.1302 226.842 44.9969C226.842 39.8635 227.942 35.3302 230.142 31.3969C232.342 27.4635 235.342 24.3969 239.142 22.1969C243.008 19.9302 247.408 18.7969 252.342 18.7969C256.808 18.7969 260.842 19.9635 264.442 22.2969C268.042 24.5635 270.875 27.8635 272.942 32.1969C275.075 36.5302 276.142 41.6969 276.142 47.6969H238.442C238.775 51.8969 240.308 55.1969 243.042 57.5969C245.842 59.9969 249.142 61.1969 252.942 61.1969C256.008 61.1969 258.542 60.5302 260.542 59.1969C262.542 57.7969 264.108 55.9969 265.242 53.7969L275.142 57.9969C273.742 60.6635 271.942 62.9969 269.742 64.9969C267.608 66.9969 265.042 68.5302 262.042 69.5969C259.108 70.6635 255.742 71.1969 251.942 71.1969ZM239.142 39.0969H264.042C263.842 36.6969 263.142 34.7302 261.942 33.1969C260.742 31.5969 259.275 30.3969 257.542 29.5969C255.808 28.7969 253.975 28.3969 252.042 28.3969C250.175 28.3969 248.275 28.7969 246.342 29.5969C244.475 30.3302 242.875 31.4969 241.542 33.0969C240.208 34.6969 239.408 36.6969 239.142 39.0969Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  d="M284.72 69.9969V19.9969H295.92V29.0969C297.92 25.9635 300.52 23.6302 303.72 22.0969C306.92 20.5635 310.22 19.7969 313.62 19.7969V30.4969C310.553 30.4969 307.653 30.9302 304.92 31.7969C302.253 32.5969 300.087 33.9302 298.42 35.7969C296.753 37.6635 295.92 40.1302 295.92 43.1969V69.9969H284.72Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  d="M321.748 69.9969V19.9969H332.848V69.9969H321.748Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  d="M369.048 71.1969C364.048 71.1969 359.581 70.0969 355.648 67.8969C351.781 65.6302 348.748 62.5302 346.548 58.5969C344.348 54.6635 343.248 50.1302 343.248 44.9969C343.248 39.8635 344.315 35.3302 346.448 31.3969C348.648 27.4635 351.681 24.3969 355.548 22.1969C359.415 19.9302 363.848 18.7969 368.848 18.7969C373.848 18.7969 378.281 19.9302 382.148 22.1969C386.015 24.3969 389.015 27.4635 391.148 31.3969C393.348 35.3302 394.448 39.8635 394.448 44.9969C394.448 50.1302 393.381 54.6635 391.248 58.5969C389.115 62.5302 386.115 65.6302 382.248 67.8969C378.381 70.0969 373.981 71.1969 369.048 71.1969ZM369.048 60.8969C371.781 60.8969 374.215 60.2302 376.348 58.8969C378.481 57.4969 380.148 55.6302 381.348 53.2969C382.548 50.8969 383.148 48.1302 383.148 44.9969C383.148 41.8635 382.515 39.1302 381.248 36.7969C380.048 34.3969 378.381 32.5302 376.248 31.1969C374.115 29.7969 371.648 29.0969 368.848 29.0969C366.048 29.0969 363.581 29.7635 361.448 31.0969C359.315 32.4302 357.648 34.2969 356.448 36.6969C355.248 39.0969 354.648 41.8635 354.648 44.9969C354.648 48.1302 355.248 50.8969 356.448 53.2969C357.715 55.6302 359.415 57.4969 361.548 58.8969C363.748 60.2302 366.248 60.8969 369.048 60.8969Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  d="M422.354 71.1969C419.02 71.1969 415.954 70.6969 413.154 69.6969C410.354 68.6969 407.954 67.2969 405.954 65.4969C403.954 63.6302 402.42 61.4635 401.354 58.9969L411.054 54.6969C412.054 56.5635 413.52 58.1302 415.454 59.3969C417.454 60.6635 419.654 61.2969 422.054 61.2969C424.654 61.2969 426.72 60.8635 428.254 59.9969C429.854 59.0635 430.654 57.7969 430.654 56.1969C430.654 54.6635 430.054 53.4969 428.854 52.6969C427.654 51.8302 425.954 51.1302 423.754 50.5969L419.054 49.2969C414.32 48.0969 410.62 46.1969 407.954 43.5969C405.287 40.9302 403.954 37.8969 403.954 34.4969C403.954 29.4969 405.554 25.6302 408.754 22.8969C412.02 20.1635 416.687 18.7969 422.754 18.7969C425.82 18.7969 428.62 19.2635 431.154 20.1969C433.754 21.0635 435.987 22.3302 437.854 23.9969C439.72 25.5969 441.02 27.4969 441.754 29.6969L432.454 33.8969C431.787 32.2302 430.52 30.9635 428.654 30.0969C426.787 29.1635 424.72 28.6969 422.454 28.6969C420.187 28.6969 418.42 29.1969 417.154 30.1969C415.887 31.1302 415.254 32.4635 415.254 34.1969C415.254 35.1969 415.82 36.1302 416.954 36.9969C418.087 37.7969 419.72 38.4635 421.854 38.9969L427.754 40.3969C431.02 41.1969 433.687 42.4635 435.754 44.1969C437.82 45.8635 439.354 47.7635 440.354 49.8969C441.354 51.9635 441.854 54.0635 441.854 56.1969C441.854 59.1969 440.987 61.8302 439.254 64.0969C437.587 66.3635 435.287 68.1302 432.354 69.3969C429.42 70.5969 426.087 71.1969 422.354 71.1969Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  d="M332.97 14H322L326.488 0H337L332.97 14Z"
+                  fill="#F13A40"
+                />
+              </svg>
+            </a>
+            <p class="footer-desc">
+              The operating system for airports — a cloud-native, modular
+              platform serving airports of all sizes, from regional hubs to
+              major international terminals.
+            </p>
+            <p class="footer-aai">Winner · AAI Startup Initiative</p>
+          </div>
+          <div>
+            <div class="footer-col-title">Products</div>
+            <ul class="footer-links">
+              <li><a href="#">Aerios Flight</a></li>
+              <li><a href="#">Aerios View</a></li>
+              <li><a href="#">Aerios Works</a></li>
+              <li><a href="#">Aerios Ops</a></li>
+              <li><a href="#">Aerios Commercial</a></li>
+              <li><a href="#">Aerios Pax Processing</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-col-title">Company</div>
+            <ul class="footer-links">
+              <li><a href="#">About Aerios</a></li>
+              <li><a href="#">Success Stories</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Request Demo</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-copy">© 2026 Aerios. All rights reserved.</div>
+          <div class="footer-socials">
+            <a href="#" class="footer-social" aria-label="LinkedIn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                />
+              </svg>
+            </a>
+            <a href="#" class="footer-social" aria-label="X / Twitter">
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // ── Scroll reveal ─────────────────────────────────────────────
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      );
+      document
+        .querySelectorAll(".reveal, .reveal-fast")
+        .forEach((el) => observer.observe(el));
+      document
+        .querySelectorAll(".reveal.visible, .reveal-fast.visible")
+        .forEach((el) => el.classList.add("visible"));
+
+      // ── Product suite mega-menu (nav) ─────────────────────────────
+      (function () {
+        const railItems = document.querySelectorAll(".suite-rail-item");
+        const panes = document.querySelectorAll(".suite-pane");
+        if (!railItems.length || !panes.length) return;
+        function activate(target) {
+          railItems.forEach((item) =>
+            item.classList.toggle(
+              "is-active",
+              item.getAttribute("data-pane") === target,
+            ),
+          );
+          panes.forEach((pane) =>
+            pane.classList.toggle(
+              "is-visible",
+              pane.getAttribute("data-pane") === target,
+            ),
+          );
+        }
+        railItems.forEach((item) => {
+          item.addEventListener("mouseenter", () =>
+            activate(item.getAttribute("data-pane")),
+          );
+          item.addEventListener("focus", () =>
+            activate(item.getAttribute("data-pane")),
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>

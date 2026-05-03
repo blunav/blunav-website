@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aerios — Sign In</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --navy: #1a3c6e;
+        --navy-dark: #122d54;
+        --navy-mid: #1e4580;
+        --blue: #3b6fd4;
+        --blue-light: #2a5298;
+        --accent: #f5a623;
+        --white: #ffffff;
+        --bg: #f0f2f5;
+        --surface: #ffffff;
+        --border: #e2e6ea;
+        --border-focus: #3b6fd4;
+        --text-1: #1a2332;
+        --text-2: #5a6474;
+        --text-3: #8a94a0;
+        --success-bg: #e6f4ea;
+        --success-text: #1e7e34;
+        --success-bdr: #a8d5b0;
+        --error-bg: #fef2f2;
+        --error-text: #dc2626;
+        --error-bdr: #fca5a5;
+        --transition: 150ms ease;
+      }
+
+      html,
+      body {
+        height: 100%;
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text-1);
+        font-size: 14px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── Layout ─────────────────────────────────── */
+      .page {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* ── Left Panel ──────────────────────────────── */
+      .left {
+        width: 420px;
+        flex-shrink: 0;
+        background: var(--navy);
+        display: flex;
+        flex-direction: column;
+        padding: 52px 48px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Decorative orbs */
+      .left::before {
+        content: "";
+        position: absolute;
+        top: -80px;
+        right: -80px;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: rgba(59, 111, 212, 0.16);
+        pointer-events: none;
+      }
+      .left::after {
+        content: "";
+        position: absolute;
+        bottom: -60px;
+        left: -50px;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.04);
+        pointer-events: none;
+      }
+      .orb-mid {
+        position: absolute;
+        bottom: 180px;
+        right: -40px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(59, 111, 212, 0.1);
+        pointer-events: none;
+      }
+
+      /* Logo */
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        position: relative;
+        z-index: 1;
+        margin-bottom: auto;
+      }
+      .logo-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .logo-text {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--white);
+        letter-spacing: -0.5px;
+      }
+
+      /* Hero copy */
+      .hero {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 40px;
+      }
+      .hero-eyebrow {
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        display: block;
+        width: 16px;
+        height: 1px;
+        background: rgba(59, 111, 212, 0.8);
+      }
+      .hero h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1.25;
+        letter-spacing: -0.6px;
+        margin-bottom: 14px;
+      }
+      .hero p {
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.65;
+        max-width: 300px;
+        font-weight: 300;
+      }
+
+      /* Module list */
+      .modules {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .module-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        transition: background var(--transition);
+      }
+      .module-item:last-child {
+        border-bottom: none;
+      }
+      .module-item:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .module-pip {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--blue);
+        flex-shrink: 0;
+      }
+      .module-name {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.45);
+        font-family: "DM Mono", monospace;
+        letter-spacing: 0.2px;
+      }
+      .module-status {
+        margin-left: auto;
+        font-size: 10px;
+        font-family: "DM Mono", monospace;
+        color: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .module-status::before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: rgba(30, 126, 52, 0.9);
+        box-shadow: 0 0 4px rgba(30, 200, 70, 0.5);
+      }
+
+      /* ── Right Panel ─────────────────────────────── */
+      .right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 40px;
+        background: var(--white);
+        position: relative;
+      }
+
+      .right-inner {
+        width: 100%;
+        max-width: 380px;
+      }
+
+      /* Form header */
+      .form-header {
+        margin-bottom: 36px;
+      }
+      .form-header h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-1);
+        letter-spacing: -0.5px;
+        margin-bottom: 5px;
+      }
+      .form-header p {
+        font-size: 13.5px;
+        color: var(--text-2);
+      }
+
+      /* Alert banner */
+      .alert {
+        border-radius: 7px;
+        padding: 10px 14px;
+        font-size: 13px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        display: none;
+      }
+      .alert.show {
+        display: flex;
+      }
+      .alert-error {
+        background: var(--error-bg);
+        border: 1px solid var(--error-bdr);
+        color: var(--error-text);
+      }
+      .alert-success {
+        background: var(--success-bg);
+        border: 1px solid var(--success-bdr);
+        color: var(--success-text);
+      }
+      .alert-icon {
+        font-size: 14px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* Fields */
+      .field {
+        margin-bottom: 18px;
+      }
+      .field-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 6px;
+      }
+      .field-label label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-1);
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+      }
+      .field-label .field-hint {
+        font-size: 12px;
+        color: var(--blue);
+        cursor: pointer;
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+      .field-label .field-hint:hover {
+        color: var(--navy);
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+      .input-wrap input {
+        width: 100%;
+        height: 43px;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 0 14px 0 40px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        color: var(--text-1);
+        background: var(--white);
+        transition:
+          border-color var(--transition),
+          box-shadow var(--transition);
+        outline: none;
+      }
+      .input-wrap input:focus {
+        border-color: var(--border-focus);
+        box-shadow: 0 0 0 3px rgba(59, 111, 212, 0.11);
+      }
+      .input-wrap input::placeholder {
+        color: var(--text-3);
+      }
+      .input-wrap input.error {
+        border-color: var(--error-text);
+      }
+      .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-3);
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+      }
+      .input-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-3);
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        transition: color var(--transition);
+      }
+      .input-toggle:hover {
+        color: var(--text-1);
+      }
+      .field-error {
+        font-size: 12px;
+        color: var(--error-text);
+        margin-top: 5px;
+        display: none;
+      }
+      .field-error.show {
+        display: block;
+      }
+
+      /* Row */
+      .row-between {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        color: var(--text-2);
+        cursor: pointer;
+        user-select: none;
+      }
+      .checkbox-label input[type="checkbox"] {
+        width: 15px;
+        height: 15px;
+        accent-color: var(--navy);
+        cursor: pointer;
+      }
+
+      /* Sign in button */
+      .btn-primary {
+        width: 100%;
+        height: 44px;
+        background: var(--navy);
+        color: var(--white);
+        border: none;
+        border-radius: 7px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        letter-spacing: 0.2px;
+        transition:
+          background var(--transition),
+          transform 80ms;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-primary:hover {
+        background: var(--navy-dark);
+      }
+      .btn-primary:active {
+        transform: scale(0.99);
+      }
+      .btn-primary:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .btn-primary .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        display: none;
+      }
+      .btn-primary.loading .btn-text {
+        display: none;
+      }
+      .btn-primary.loading .spinner {
+        display: block;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Divider */
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 22px 0;
+      }
+      .divider-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .divider-text {
+        font-size: 11px;
+        color: var(--text-3);
+        font-family: "DM Mono", monospace;
+        letter-spacing: 0.5px;
+      }
+
+      /* SSO button */
+      .btn-sso {
+        width: 100%;
+        height: 43px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        color: var(--text-1);
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition:
+          background var(--transition),
+          border-color var(--transition);
+      }
+      .btn-sso:hover {
+        background: #f7f9fc;
+        border-color: #c4cdd6;
+      }
+
+      /* Footer */
+      .form-footer {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+      }
+      .form-footer-text {
+        font-size: 12px;
+        color: var(--text-3);
+      }
+      .form-footer-text a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      .form-footer-text a:hover {
+        color: var(--navy);
+        text-decoration: underline;
+      }
+
+      .copyright {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 11px;
+        color: var(--text-3);
+        font-family: "DM Mono", monospace;
+      }
+
+      /* ── Responsive ──────────────────────────────── */
+      @media (max-width: 768px) {
+        .page {
+          flex-direction: column;
+        }
+        .left {
+          width: 100%;
+          padding: 36px 32px;
+          min-height: auto;
+        }
+        .logo {
+          margin-bottom: 32px;
+        }
+        .hero {
+          margin-bottom: 28px;
+        }
+        .hero h2 {
+          font-size: 22px;
+        }
+        .modules {
+          display: none;
+        }
+        .right {
+          padding: 48px 28px 60px;
+        }
+        .orb-mid,
+        .left::before,
+        .left::after {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- ── Left Panel ── -->
+      <div class="left">
+        <div class="orb-mid"></div>
+
+        <div class="logo">
+          <div class="logo-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <polygon
+                points="10,2.5 17.5,6.5 17.5,14.5 10,18.5 2.5,14.5 2.5,6.5"
+                stroke="white"
+                stroke-width="1.4"
+                fill="none"
+              />
+              <circle cx="10" cy="10.5" r="2.8" fill="white" />
+              <line
+                x1="10"
+                y1="2.5"
+                x2="10"
+                y2="7.7"
+                stroke="rgba(255,255,255,0.4)"
+                stroke-width="0.8"
+              />
+              <line
+                x1="17.5"
+                y1="6.5"
+                x2="12.4"
+                y2="9.3"
+                stroke="rgba(255,255,255,0.4)"
+                stroke-width="0.8"
+              />
+              <line
+                x1="2.5"
+                y1="14.5"
+                x2="7.6"
+                y2="11.7"
+                stroke="rgba(255,255,255,0.4)"
+                stroke-width="0.8"
+              />
+            </svg>
+          </div>
+          <span class="logo-text">Aerios</span>
+        </div>
+
+        <div class="hero">
+          <div class="hero-eyebrow">Airport Operations Platform</div>
+          <h2>Airport operations,<br />unified.</h2>
+          <p>
+            Real-time visibility across every terminal, runway, and resource —
+            from a single, cloud-native platform.
+          </p>
+        </div>
+
+        <div class="modules">
+          <div class="module-item">
+            <div class="module-pip"></div>
+            <span class="module-name">Flight &amp; Schedule Operations</span>
+            <span class="module-status">Online</span>
+          </div>
+          <div class="module-item">
+            <div class="module-pip"></div>
+            <span class="module-name">Resource Management (RMS)</span>
+            <span class="module-status">Online</span>
+          </div>
+          <div class="module-item">
+            <div class="module-pip"></div>
+            <span class="module-name">Safety &amp; Compliance</span>
+            <span class="module-status">Online</span>
+          </div>
+          <div class="module-item">
+            <div class="module-pip"></div>
+            <span class="module-name">AODB &amp; Data Sync</span>
+            <span class="module-status">Online</span>
+          </div>
+          <div class="module-item">
+            <div class="module-pip"></div>
+            <span class="module-name">Business Analytics</span>
+            <span class="module-status">Online</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Right Panel ── -->
+      <div class="right">
+        <div class="right-inner">
+          <div class="form-header">
+            <h1>Sign in to Aerios</h1>
+            <p>Enter your credentials to access your airport workspace.</p>
+          </div>
+
+          <!-- Alert banner (hidden by default) -->
+          <div class="alert alert-error" id="alert-error">
+            <span class="alert-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle
+                  cx="7"
+                  cy="7"
+                  r="6.5"
+                  stroke="#dc2626"
+                  stroke-width="1"
+                />
+                <line
+                  x1="7"
+                  y1="4"
+                  x2="7"
+                  y2="7.5"
+                  stroke="#dc2626"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                />
+                <circle cx="7" cy="9.5" r="0.7" fill="#dc2626" />
+              </svg>
+            </span>
+            <span id="alert-error-msg"
+              >Invalid email or password. Please try again.</span
+            >
+          </div>
+
+          <form id="loginForm" novalidate>
+            <!-- Email -->
+            <div class="field">
+              <div class="field-label">
+                <label for="email">Email address</label>
+              </div>
+              <div class="input-wrap">
+                <span class="input-icon">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                    <rect
+                      x="1.5"
+                      y="3"
+                      width="12"
+                      height="9"
+                      rx="1.5"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                    />
+                    <path
+                      d="M1.5 4.5L7.5 8.5L13.5 4.5"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </span>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@airport.aero"
+                  autocomplete="email"
+                />
+              </div>
+              <div class="field-error" id="email-error">
+                Please enter a valid email address.
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="field">
+              <div class="field-label">
+                <label for="password">Password</label>
+                <a href="#" class="field-hint" id="forgot-link"
+                  >Forgot password?</a
+                >
+              </div>
+              <div class="input-wrap">
+                <span class="input-icon">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                    <rect
+                      x="2.5"
+                      y="6"
+                      width="10"
+                      height="7.5"
+                      rx="1.5"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                    />
+                    <path
+                      d="M5 6V4.5a2.5 2.5 0 0 1 5 0V6"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="7.5" cy="9.5" r="1" fill="currentColor" />
+                  </svg>
+                </span>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="••••••••"
+                  autocomplete="current-password"
+                />
+                <button
+                  type="button"
+                  class="input-toggle"
+                  id="pwToggle"
+                  aria-label="Show password"
+                >
+                  <svg
+                    id="eye-show"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <path
+                      d="M1 8C1 8 3.5 3 8 3s7 5 7 5-2.5 5-7 5S1 8 1 8Z"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                    />
+                    <circle
+                      cx="8"
+                      cy="8"
+                      r="2"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                    />
+                  </svg>
+                  <svg
+                    id="eye-hide"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    style="display: none"
+                  >
+                    <path
+                      d="M1 8C1 8 3.5 3 8 3s7 5 7 5-2.5 5-7 5S1 8 1 8Z"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                    />
+                    <circle
+                      cx="8"
+                      cy="8"
+                      r="2"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                    />
+                    <line
+                      x1="2"
+                      y1="2"
+                      x2="14"
+                      y2="14"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="field-error" id="password-error">
+                Password is required.
+              </div>
+            </div>
+
+            <!-- Remember me -->
+            <div class="row-between">
+              <label class="checkbox-label">
+                <input type="checkbox" id="remember" name="remember" />
+                Keep me signed in
+              </label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-primary" id="submitBtn">
+              <span class="btn-text">Sign in</span>
+              <div class="spinner"></div>
+            </button>
+          </form>
+
+          <div class="divider">
+            <div class="divider-line"></div>
+            <span class="divider-text">or</span>
+            <div class="divider-line"></div>
+          </div>
+
+          <button class="btn-sso" id="ssoBtn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect
+                x="1"
+                y="1"
+                width="6.2"
+                height="6.2"
+                rx="1"
+                fill="#4285F4"
+              />
+              <rect
+                x="8.8"
+                y="1"
+                width="6.2"
+                height="6.2"
+                rx="1"
+                fill="#EA4335"
+              />
+              <rect
+                x="1"
+                y="8.8"
+                width="6.2"
+                height="6.2"
+                rx="1"
+                fill="#34A853"
+              />
+              <rect
+                x="8.8"
+                y="8.8"
+                width="6.2"
+                height="6.2"
+                rx="1"
+                fill="#FBBC05"
+              />
+            </svg>
+            Continue with Single Sign-On
+          </button>
+
+          <div class="form-footer">
+            <span class="form-footer-text">
+              Need access? <a href="#">Contact your administrator</a>
+            </span>
+            <span class="form-footer-text">
+              <a href="#">Privacy policy</a> · <a href="#">Terms of service</a>
+            </span>
+          </div>
+        </div>
+
+        <div class="copyright">© 2025 Aerios. All rights reserved.</div>
+      </div>
+    </div>
+
+    <script>
+      // Password visibility toggle
+      const pwInput = document.getElementById("password");
+      const pwToggle = document.getElementById("pwToggle");
+      const eyeShow = document.getElementById("eye-show");
+      const eyeHide = document.getElementById("eye-hide");
+
+      pwToggle.addEventListener("click", () => {
+        const isText = pwInput.type === "text";
+        pwInput.type = isText ? "password" : "text";
+        eyeShow.style.display = isText ? "block" : "none";
+        eyeHide.style.display = isText ? "none" : "block";
+      });
+
+      // Validation helpers
+      function showError(fieldId, errorId) {
+        document.getElementById(fieldId).classList.add("error");
+        document.getElementById(errorId).classList.add("show");
+      }
+      function clearError(fieldId, errorId) {
+        document.getElementById(fieldId).classList.remove("error");
+        document.getElementById(errorId).classList.remove("show");
+      }
+      function isValidEmail(v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      }
+
+      // Live validation
+      document.getElementById("email").addEventListener("input", function () {
+        if (this.value && isValidEmail(this.value))
+          clearError("email", "email-error");
+      });
+      document
+        .getElementById("password")
+        .addEventListener("input", function () {
+          if (this.value) clearError("password", "password-error");
+        });
+
+      // Form submit
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          const alertEl = document.getElementById("alert-error");
+          let valid = true;
+
+          alertEl.classList.remove("show");
+          clearError("email", "email-error");
+          clearError("password", "password-error");
+
+          if (!email || !isValidEmail(email)) {
+            showError("email", "email-error");
+            valid = false;
+          }
+          if (!password) {
+            showError("password", "password-error");
+            valid = false;
+          }
+          if (!valid) return;
+
+          // Simulate loading
+          const btn = document.getElementById("submitBtn");
+          btn.classList.add("loading");
+          btn.disabled = true;
+
+          setTimeout(() => {
+            btn.classList.remove("loading");
+            btn.disabled = false;
+            // Demo: show error for wrong credentials
+            alertEl.classList.add("show");
+          }, 1800);
+        });
+
+      // Forgot password
+      document.getElementById("forgot-link").addEventListener("click", (e) => {
+        e.preventDefault();
+        const alertEl = document.getElementById("alert-error");
+        alertEl.classList.remove("show");
+        const email = document.getElementById("email").value.trim();
+        if (email && isValidEmail(email)) {
+          const msg = document.getElementById("alert-error-msg");
+          const parent = alertEl.parentNode;
+          const successEl = document.createElement("div");
+          successEl.className = "alert alert-success show";
+          successEl.innerHTML = `<span class="alert-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#1e7e34" stroke-width="1"/><polyline points="4,7 6.5,9.5 10,5" stroke="#1e7e34" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Reset link sent to <strong>${email}</strong>. Check your inbox.</span>`;
+          alertEl.after(successEl);
+          setTimeout(() => successEl.remove(), 5000);
+        } else {
+          document.getElementById("email-error").textContent =
+            "Enter your email address first.";
+          showError("email", "email-error");
+        }
+      });
+    </script>
+  </body>
+</html>
