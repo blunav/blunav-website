@@ -1015,7 +1015,24 @@
           <!-- Right: contact form -->
           <div class="reveal visible" style="transition-delay: 0.05s">
             <div class="contact-form-wrap" id="contact-form">
-              <form id="contactForm" novalidate>
+              <form
+                id="contactForm"
+                action="https://formsubmit.co/ajax/susee@blunav.in"
+                method="POST"
+                novalidate
+              >
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="New contact message — Aerios site"
+                />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input
+                  type="hidden"
+                  name="_autoresponse"
+                  value="Thanks for reaching out to Aerios — we've received your message and will be in touch within one business day."
+                />
                 <h2 class="contact-form-title">Send us a message</h2>
                 <p class="contact-form-sub">
                   Fill out the form and the right person on our team will get
@@ -1090,8 +1107,9 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <polyline points="20 6 9 17 4 12" /></svg
-                  ></span>
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
                   <span
                     >I agree to be contacted by the Aerios team and have read
                     the <a href="#">Privacy Policy</a>.</span
@@ -1137,7 +1155,7 @@
                   you within one business day.
                 </p>
                 <div class="contact-success-meta">
-                  UI placeholder · backend submission pending
+                  Confirmation sent to your inbox
                 </div>
               </div>
             </div>
