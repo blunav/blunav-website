@@ -623,4 +623,6 @@
   .case-stats-grid { grid-template-columns: 1fr; }
   .case-blipper { padding: 28px 24px; }
   .case-result-numbers { padding: 28px 24px; }
+  .case-closing-cta-row { flex-direction: column; align-items: stretch; }
+  .case-closing-cta-row .btn { white-space: normal; text-align: center; justify-content: center; }
 }
