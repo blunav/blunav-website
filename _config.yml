@@ -1,0 +1,8 @@
+# GitHub Pages build config.
+# Keep the archived v1 site and repo docs out of the published site — they stay in
+# the repo but are not served from blunav.in.
+exclude:
+  - legacy
+  - tools
+  - CLAUDE.md
+  - README.md

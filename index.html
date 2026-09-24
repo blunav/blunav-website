@@ -1,2081 +1,786 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Aerios is the airport operating system: AODB, gates, counters, displays, ops, billing, and lost-and-found unified into a single modular platform."
-    />
-    <title>Aerios — The Operating System for Airports</title>
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
-    <link rel="apple-touch-icon" href="/assets/icons/apple-icon.png" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="/assets/icons/android-chrome-192x192.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="512x512"
-      href="/assets/icons/android-chrome-512x512.png"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,700;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/shared.css" />
-    <link rel="stylesheet" href="assets/css/home.css" />
-  </head>
-  <body>
-    <!-- ══════════════ NAV ══════════════ -->
-    <nav>
-      <div class="container">
-        <div class="nav-inner">
-          <a href="/" class="nav-logo" aria-label="Aerios">
-            <svg
-              class="nav-logo-svg"
-              viewBox="0 0 442 126"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <mask
-                id="aerios-logo-mask"
-                style="mask-type: alpha"
-                maskUnits="userSpaceOnUse"
-                x="0"
-                y="0"
-                width="117"
-                height="117"
-              >
-                <circle cx="58.5" cy="58.5" r="58.5" fill="white" />
-              </mask>
-              <g mask="url(#aerios-logo-mask)">
-                <path
-                  d="M0 106.254V116.999H48.949L61.2857 70.8359L0 106.254Z"
-                  fill="#F13A40"
-                />
-                <path
-                  d="M0 42.7148V86.4904L51.7347 56.6434L0 42.7148Z"
-                  fill="#F13A40"
-                />
-                <path
-                  d="M0 25.2041V0H117V18.9694L72.6939 44.5714L0 25.2041Z"
-                  fill="#003B8F"
-                />
-                <path
-                  d="M117 38.6055V117.003H66.5918L82.2449 58.6361L117 38.6055Z"
-                  fill="#003B8F"
-                />
-              </g>
-              <path
-                d="M240.869 117V87.9091H246.011V98.7898H246.224C246.49 98.2595 246.864 97.696 247.347 97.0994C247.83 96.4934 248.483 95.9773 249.307 95.5511C250.131 95.1155 251.182 94.8977 252.46 94.8977C254.146 94.8977 255.666 95.3286 257.02 96.1903C258.384 97.0426 259.463 98.3068 260.259 99.983C261.063 101.65 261.466 103.695 261.466 106.119C261.466 108.515 261.073 110.551 260.287 112.227C259.501 113.903 258.431 115.182 257.077 116.062C255.723 116.943 254.188 117.384 252.474 117.384C251.224 117.384 250.188 117.175 249.364 116.759C248.54 116.342 247.877 115.84 247.375 115.253C246.883 114.656 246.499 114.093 246.224 113.562H245.926V117H240.869ZM245.912 106.091C245.912 107.502 246.111 108.738 246.509 109.798C246.916 110.859 247.498 111.687 248.256 112.284C249.023 112.871 249.951 113.165 251.04 113.165C252.176 113.165 253.128 112.862 253.895 112.256C254.662 111.64 255.24 110.802 255.628 109.741C256.026 108.671 256.224 107.455 256.224 106.091C256.224 104.737 256.03 103.534 255.642 102.483C255.254 101.432 254.676 100.608 253.909 100.011C253.142 99.4148 252.186 99.1165 251.04 99.1165C249.941 99.1165 249.009 99.4053 248.241 99.983C247.474 100.561 246.892 101.37 246.494 102.412C246.106 103.454 245.912 104.68 245.912 106.091ZM268.291 125.182C267.59 125.182 266.942 125.125 266.345 125.011C265.758 124.907 265.289 124.784 264.939 124.642L266.132 120.636C266.88 120.854 267.548 120.958 268.135 120.949C268.722 120.939 269.238 120.755 269.683 120.395C270.138 120.045 270.521 119.457 270.834 118.634L271.274 117.455L263.362 95.1818H268.817L273.845 111.659H274.072L279.115 95.1818H284.584L275.848 119.642C275.441 120.797 274.901 121.787 274.229 122.611C273.556 123.444 272.732 124.079 271.757 124.514C270.791 124.959 269.636 125.182 268.291 125.182ZM298.291 117V87.9091H303.433V98.7898H303.646C303.911 98.2595 304.286 97.696 304.768 97.0994C305.251 96.4934 305.905 95.9773 306.729 95.5511C307.553 95.1155 308.604 94.8977 309.882 94.8977C311.568 94.8977 313.088 95.3286 314.442 96.1903C315.805 97.0426 316.885 98.3068 317.68 99.983C318.485 101.65 318.888 103.695 318.888 106.119C318.888 108.515 318.495 110.551 317.709 112.227C316.923 113.903 315.853 115.182 314.499 116.062C313.144 116.943 311.61 117.384 309.896 117.384C308.646 117.384 307.609 117.175 306.786 116.759C305.962 116.342 305.299 115.84 304.797 115.253C304.304 114.656 303.921 114.093 303.646 113.562H303.348V117H298.291ZM303.334 106.091C303.334 107.502 303.533 108.738 303.93 109.798C304.338 110.859 304.92 111.687 305.678 112.284C306.445 112.871 307.373 113.165 308.462 113.165C309.598 113.165 310.55 112.862 311.317 112.256C312.084 111.64 312.661 110.802 313.05 109.741C313.447 108.671 313.646 107.455 313.646 106.091C313.646 104.737 313.452 103.534 313.064 102.483C312.676 101.432 312.098 100.608 311.331 100.011C310.564 99.4148 309.607 99.1165 308.462 99.1165C307.363 99.1165 306.43 99.4053 305.663 99.983C304.896 100.561 304.314 101.37 303.916 102.412C303.528 103.454 303.334 104.68 303.334 106.091ZM328.401 87.9091V117H323.259V87.9091H328.401ZM347.595 107.824V95.1818H352.737V117H347.751V113.122H347.524C347.032 114.344 346.222 115.343 345.095 116.119C343.978 116.896 342.6 117.284 340.962 117.284C339.532 117.284 338.268 116.967 337.169 116.332C336.08 115.688 335.228 114.756 334.612 113.534C333.997 112.303 333.689 110.816 333.689 109.074V95.1818H338.831V108.278C338.831 109.661 339.21 110.759 339.967 111.574C340.725 112.388 341.719 112.795 342.95 112.795C343.708 112.795 344.442 112.611 345.152 112.241C345.862 111.872 346.445 111.323 346.899 110.594C347.363 109.855 347.595 108.932 347.595 107.824ZM363.167 104.216V117H358.025V95.1818H362.94V98.8892H363.195C363.697 97.6676 364.497 96.697 365.596 95.9773C366.704 95.2576 368.072 94.8977 369.701 94.8977C371.207 94.8977 372.518 95.2197 373.636 95.8636C374.763 96.5076 375.634 97.4403 376.249 98.6619C376.874 99.8835 377.182 101.366 377.173 103.108V117H372.031V103.903C372.031 102.445 371.652 101.304 370.894 100.48C370.146 99.6562 369.109 99.2443 367.783 99.2443C366.884 99.2443 366.084 99.4432 365.383 99.8409C364.692 100.229 364.147 100.793 363.749 101.531C363.361 102.27 363.167 103.165 363.167 104.216ZM388.678 117.44C387.296 117.44 386.05 117.194 384.942 116.702C383.844 116.2 382.973 115.461 382.329 114.486C381.694 113.51 381.377 112.308 381.377 110.878C381.377 109.647 381.604 108.629 382.059 107.824C382.513 107.019 383.134 106.375 383.92 105.892C384.706 105.409 385.591 105.045 386.576 104.798C387.57 104.543 388.598 104.358 389.658 104.244C390.937 104.112 391.974 103.993 392.769 103.889C393.565 103.776 394.142 103.605 394.502 103.378C394.871 103.141 395.056 102.777 395.056 102.284V102.199C395.056 101.129 394.739 100.3 394.104 99.7131C393.47 99.1259 392.556 98.8324 391.363 98.8324C390.103 98.8324 389.104 99.107 388.366 99.6562C387.637 100.205 387.144 100.854 386.888 101.602L382.087 100.92C382.466 99.5947 383.091 98.4867 383.962 97.5966C384.834 96.697 385.899 96.0246 387.158 95.5795C388.418 95.125 389.81 94.8977 391.335 94.8977C392.386 94.8977 393.432 95.0208 394.474 95.267C395.515 95.5133 396.467 95.9205 397.329 96.4886C398.191 97.0473 398.882 97.8097 399.403 98.7756C399.933 99.7415 400.198 100.949 400.198 102.398V117H395.255V114.003H395.085C394.772 114.609 394.332 115.177 393.763 115.707C393.205 116.228 392.499 116.65 391.647 116.972C390.804 117.284 389.815 117.44 388.678 117.44ZM390.013 113.662C391.046 113.662 391.941 113.458 392.698 113.051C393.456 112.634 394.038 112.085 394.445 111.403C394.862 110.722 395.07 109.978 395.07 109.173V106.602C394.909 106.735 394.635 106.858 394.246 106.972C393.868 107.085 393.442 107.185 392.968 107.27C392.495 107.355 392.026 107.431 391.562 107.497C391.098 107.563 390.695 107.62 390.354 107.668C389.587 107.772 388.901 107.942 388.295 108.179C387.689 108.416 387.21 108.747 386.86 109.173C386.51 109.59 386.335 110.13 386.335 110.793C386.335 111.74 386.68 112.455 387.371 112.938C388.063 113.42 388.943 113.662 390.013 113.662ZM424.076 95.1818L416.306 117H410.624L402.854 95.1818H408.337L413.352 111.389H413.579L418.607 95.1818H424.076Z"
-                fill="#003B8F"
-              />
-              <path
-                d="M176.9 71.1969C170.9 71.1969 166.233 69.8635 162.9 67.1969C159.633 64.5302 158 60.7635 158 55.8969C158 50.6969 159.733 46.7302 163.2 43.9969C166.733 41.2635 171.633 39.8969 177.9 39.8969H190.6C190.2 36.2302 189.167 33.4302 187.5 31.4969C185.833 29.5635 183.367 28.5969 180.1 28.5969C177.7 28.5969 175.6 29.0969 173.8 30.0969C172 31.0969 170.467 32.6635 169.2 34.7969L159.4 31.1969C160.467 28.9969 161.867 26.9635 163.6 25.0969C165.4 23.1635 167.633 21.6302 170.3 20.4969C173.033 19.3635 176.3 18.7969 180.1 18.7969C184.967 18.7969 189.033 19.7635 192.3 21.6969C195.567 23.5635 197.967 26.2635 199.5 29.7969C201.1 33.3302 201.9 37.5969 201.9 42.5969L201.6 69.9969H191.3L191 63.8969C189.667 66.2302 187.8 68.0302 185.4 69.2969C183.067 70.5635 180.233 71.1969 176.9 71.1969ZM178.3 61.7969C180.767 61.7969 182.933 61.2635 184.8 60.1969C186.733 59.0635 188.2 57.5635 189.2 55.6969C190.267 53.8302 190.8 51.7635 190.8 49.4969V48.4969H181.5C177.033 48.4969 173.9 49.1302 172.1 50.3969C170.3 51.5969 169.4 53.3302 169.4 55.5969C169.4 57.5302 170.167 59.0635 171.7 60.1969C173.3 61.2635 175.5 61.7969 178.3 61.7969Z"
-                fill="#003B8F"
-              />
-              <path
-                d="M235.541 71.1969C230.675 71.1969 226.341 70.0969 222.541 67.8969C218.808 65.6302 215.841 62.5302 213.641 58.5969C211.508 54.6635 210.441 50.1302 210.441 44.9969C210.441 39.8635 211.541 35.3302 213.741 31.3969C215.941 27.4635 218.941 24.3969 222.741 22.1969C226.608 19.9302 231.008 18.7969 235.941 18.7969C240.408 18.7969 244.441 19.9635 248.041 22.2969C251.641 24.5635 254.475 27.8635 256.541 32.1969C258.675 36.5302 259.741 41.6969 259.741 47.6969H222.041C222.375 51.8969 223.908 55.1969 226.641 57.5969C229.441 59.9969 232.741 61.1969 236.541 61.1969C239.608 61.1969 242.141 60.5302 244.141 59.1969C246.141 57.7969 247.708 55.9969 248.841 53.7969L258.741 57.9969C257.341 60.6635 255.541 62.9969 253.341 64.9969C251.208 66.9969 248.641 68.5302 245.641 69.5969C242.708 70.6635 239.341 71.1969 235.541 71.1969ZM222.741 39.0969H247.641C247.441 36.6969 246.741 34.7302 245.541 33.1969C244.341 31.5969 242.875 30.3969 241.141 29.5969C239.408 28.7969 237.575 28.3969 235.641 28.3969C233.775 28.3969 231.875 28.7969 229.941 29.5969C228.075 30.3302 226.475 31.4969 225.141 33.0969C223.808 34.6969 223.008 36.6969 222.741 39.0969Z"
-                fill="#003B8F"
-              />
-              <path
-                d="M268.32 69.9969V19.9969H279.52V29.0969C281.52 25.9635 284.12 23.6302 287.32 22.0969C290.52 20.5635 293.82 19.7969 297.22 19.7969V30.4969C294.153 30.4969 291.253 30.9302 288.52 31.7969C285.853 32.5969 283.686 33.9302 282.02 35.7969C280.353 37.6635 279.52 40.1302 279.52 43.1969V69.9969H268.32Z"
-                fill="#003B8F"
-              />
-              <path
-                d="M305.348 69.9969V19.9969H316.448V69.9969H305.348Z"
-                fill="#003B8F"
-              />
-              <path
-                d="M352.648 71.1969C347.648 71.1969 343.181 70.0969 339.248 67.8969C335.381 65.6302 332.348 62.5302 330.148 58.5969C327.948 54.6635 326.848 50.1302 326.848 44.9969C326.848 39.8635 327.914 35.3302 330.048 31.3969C332.248 27.4635 335.281 24.3969 339.148 22.1969C343.014 19.9302 347.448 18.7969 352.448 18.7969C357.448 18.7969 361.881 19.9302 365.748 22.1969C369.614 24.3969 372.614 27.4635 374.748 31.3969C376.948 35.3302 378.048 39.8635 378.048 44.9969C378.048 50.1302 376.981 54.6635 374.848 58.5969C372.714 62.5302 369.714 65.6302 365.848 67.8969C361.981 70.0969 357.581 71.1969 352.648 71.1969ZM352.648 60.8969C355.381 60.8969 357.814 60.2302 359.948 58.8969C362.081 57.4969 363.748 55.6302 364.948 53.2969C366.148 50.8969 366.748 48.1302 366.748 44.9969C366.748 41.8635 366.114 39.1302 364.848 36.7969C363.648 34.3969 361.981 32.5302 359.848 31.1969C357.714 29.7969 355.248 29.0969 352.448 29.0969C349.648 29.0969 347.181 29.7635 345.048 31.0969C342.914 32.4302 341.248 34.2969 340.048 36.6969C338.848 39.0969 338.248 41.8635 338.248 44.9969C338.248 48.1302 338.848 50.8969 340.048 53.2969C341.314 55.6302 343.014 57.4969 345.148 58.8969C347.348 60.2302 349.848 60.8969 352.648 60.8969Z"
-                fill="#003B8F"
-              />
-              <path
-                d="M405.953 71.1969C402.62 71.1969 399.553 70.6969 396.753 69.6969C393.953 68.6969 391.553 67.2969 389.553 65.4969C387.553 63.6302 386.02 61.4635 384.953 58.9969L394.653 54.6969C395.653 56.5635 397.12 58.1302 399.053 59.3969C401.053 60.6635 403.253 61.2969 405.653 61.2969C408.253 61.2969 410.32 60.8635 411.853 59.9969C413.453 59.0635 414.253 57.7969 414.253 56.1969C414.253 54.6635 413.653 53.4969 412.453 52.6969C411.253 51.8302 409.553 51.1302 407.353 50.5969L402.653 49.2969C397.92 48.0969 394.22 46.1969 391.553 43.5969C388.886 40.9302 387.553 37.8969 387.553 34.4969C387.553 29.4969 389.153 25.6302 392.353 22.8969C395.62 20.1635 400.286 18.7969 406.353 18.7969C409.42 18.7969 412.22 19.2635 414.753 20.1969C417.353 21.0635 419.586 22.3302 421.453 23.9969C423.32 25.5969 424.62 27.4969 425.353 29.6969L416.053 33.8969C415.386 32.2302 414.12 30.9635 412.253 30.0969C410.386 29.1635 408.32 28.6969 406.053 28.6969C403.786 28.6969 402.02 29.1969 400.753 30.1969C399.486 31.1302 398.853 32.4635 398.853 34.1969C398.853 35.1969 399.42 36.1302 400.553 36.9969C401.686 37.7969 403.32 38.4635 405.453 38.9969L411.353 40.3969C414.62 41.1969 417.286 42.4635 419.353 44.1969C421.42 45.8635 422.953 47.7635 423.953 49.8969C424.953 51.9635 425.453 54.0635 425.453 56.1969C425.453 59.1969 424.586 61.8302 422.853 64.0969C421.186 66.3635 418.886 68.1302 415.953 69.3969C413.02 70.5969 409.686 71.1969 405.953 71.1969Z"
-                fill="#003B8F"
-              />
-              <path
-                d="M316.569 14H305.6L310.087 0H320.6L316.569 14Z"
-                fill="#F13A40"
-              />
-            </svg>
-          </a>
-          <ul class="nav-links">
-            <!-- Products -->
-            <li class="nav-item">
-              <button class="nav-link">
-                Products
-                <svg
-                  width="11"
-                  height="11"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </button>
-              <div class="nav-dropdown">
-                <div class="mega-inner cols-suite">
-                  <!-- Left rail: 6 product lines -->
-                  <div class="suite-rail">
-                    <div
-                      class="suite-rail-item is-foundation is-active"
-                      data-pane="flight"
-                    >
-                      <div class="suite-rail-item-icon">
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="rgba(255,255,255,0.95)"
-                          stroke-width="1.7"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <ellipse cx="12" cy="5" rx="9" ry="3" />
-                          <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
-                          <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
-                        </svg>
-                      </div>
-                      <div class="suite-rail-item-text">
-                        <div class="suite-rail-item-name">
-                          Flight
-                          <span class="suite-rail-item-badge">Foundation</span>
-                        </div>
-                        <div class="suite-rail-item-tagline">
-                          The operational core
-                        </div>
-                      </div>
-                      <svg
-                        class="suite-rail-item-chevron"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </div>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aerios by Blunav – Airport Operating System</title>
+<meta name="description" content="Aerios is the Airport Operating System from Blunav. Three product suites on one platform: Aerios AMS (AODB, RMS, FIDS), Aerios Orbis (operations and maintenance) and Aerios Vecta (airside vehicle tracking and safety).">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/icons/apple-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/android-chrome-512x512.png">
+<link rel="canonical" href="https://blunav.in/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aerios by Blunav – Airport Operating System">
+<meta property="og:description" content="Three product suites on one platform: Aerios AMS (AODB, RMS, FIDS), Aerios Orbis (operations and maintenance) and Aerios Vecta (airside vehicle tracking and safety).">
+<meta property="og:url" content="https://blunav.in/">
+<meta property="og:image" content="https://blunav.in/assets/img/hero-apron.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Tokens from design-system.md (light theme). Radius is 0 by product decision. */
+  :root {
+    --background: #F4F7FB;
+    --foreground: #0F172A;
+    --card: #FFFFFF;
+    --primary: #071B34;
+    --primary-dark: #04101F;
+    --primary-muted: #E8F0FF;
+    --primary-muted-foreground: #2A6BC7;
+    --secondary-foreground: #475569;
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+    --border: #CBD5E1;
+    --border-subtle: #E2E8F0;
+    --border-strong: #94A3B8;
+    --ring: #2A6BC7;
+    --coral: #EF4444;
+    --brand-500: #2A6BC7;
+    --brand-600: #1D4C84;
+    --brand-700: #12355F;
+    --brand-900: #071B34;
+    --navbar: #071B34;
+    --navbar-border: #2F3F54;
+    --green-bg: #DCFCE7; --green-border: #22C55E; --green-text: #15803D;
+    --amber-bg: #FFEDD5; --amber-border: #F97316; --amber-text: #C2410C;
+    --slate-bg: #F1F5F9; --slate-border: #CBD5E1; --slate-text: #475569;
+    --sans: "IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --w: 1160px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--sans); font-size: 17px; line-height: 1.55; color: var(--foreground); background: var(--background); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: var(--brand-500); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  h1, h2, h3, h4 { margin: 0; font-weight: 700; line-height: 1.1; letter-spacing: -0.015em; color: var(--brand-900); }
+  h1 { font-size: clamp(38px, 5.2vw, 64px); }
+  h2 { font-size: clamp(30px, 3.6vw, 44px); }
+  h3 { font-size: 24px; }
+  p { margin: 0 0 1em; }
+  .wrap { max-width: var(--w); margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand-500); margin-bottom: 18px; }
+  .lede { font-size: 20px; line-height: 1.5; color: var(--secondary-foreground); max-width: 60ch; }
+  .rule { border: 0; border-top: 3px solid var(--brand-900); margin: 0; position: relative; }
+  .rule::after { content: ""; display: block; border-top: 1px solid var(--brand-900); margin-top: 3px; }
+  section { padding: 96px 0; }
 
-                    <div class="suite-rail-item" data-pane="view">
-                      <div class="suite-rail-item-icon">
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="var(--accent)"
-                          stroke-width="1.8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <rect x="2" y="3" width="20" height="14" rx="2" />
-                          <line x1="2" y1="9" x2="22" y2="9" />
-                          <line x1="8" y1="21" x2="16" y2="21" />
-                          <line x1="12" y1="17" x2="12" y2="21" />
-                        </svg>
-                      </div>
-                      <div class="suite-rail-item-text">
-                        <div class="suite-rail-item-name">View</div>
-                        <div class="suite-rail-item-tagline">
-                          Live flight info, terminal-wide
-                        </div>
-                      </div>
-                      <svg
-                        class="suite-rail-item-chevron"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </div>
+  .btn { display: inline-block; padding: 12px 20px; border-radius: 4px; font-weight: 600; font-size: 16px; text-decoration: none; border: 1px solid transparent; line-height: 1.2; cursor: pointer; font-family: inherit; }
+  .btn:hover { text-decoration: none; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: var(--primary-dark); color: #fff; }
+  .btn-quiet { background: transparent; color: var(--primary); border-color: var(--primary); }
+  .btn-quiet:hover { background: var(--primary-muted); }
+  .btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
-                    <div class="suite-rail-item" data-pane="works">
-                      <div class="suite-rail-item-icon">
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="var(--accent)"
-                          stroke-width="1.8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path
-                            d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.7 2.7-2-2 2.7-2.7z"
-                          />
-                        </svg>
-                      </div>
-                      <div class="suite-rail-item-text">
-                        <div class="suite-rail-item-name">Works</div>
-                        <div class="suite-rail-item-tagline">
-                          Find it. Fix it. Track it.
-                        </div>
-                      </div>
-                      <svg
-                        class="suite-rail-item-chevron"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </div>
+  /* status badges: 4-token scheme */
+  .status { display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 8px; border: 1px solid; vertical-align: middle; }
+  .status-green { background: var(--green-bg); border-color: var(--green-border); color: var(--green-text); }
+  .status-amber { background: var(--amber-bg); border-color: var(--amber-border); color: var(--amber-text); }
+  .status-slate { background: var(--slate-bg); border-color: var(--slate-border); color: var(--slate-text); }
 
-                    <div class="suite-rail-item" data-pane="ops">
-                      <div class="suite-rail-item-icon">
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="var(--accent)"
-                          stroke-width="1.8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path
-                            d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                          />
-                          <polyline points="9 12 11 14 15 10" />
-                        </svg>
-                      </div>
-                      <div class="suite-rail-item-text">
-                        <div class="suite-rail-item-name">Ops</div>
-                        <div class="suite-rail-item-tagline">
-                          Every operation. Logged.
-                        </div>
-                      </div>
-                      <svg
-                        class="suite-rail-item-chevron"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </div>
+  /* top bar + nav */
+  .topline { height: 4px; background: var(--brand-900); }
+  .topline::after { content: ""; display: block; height: 1px; background: var(--brand-900); margin-top: 2px; }
+  header { background: var(--background); border-bottom: 1px solid var(--border-subtle); position: sticky; top: 0; z-index: 10; }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo svg { height: 28px; width: auto; display: block; }
+  .logo-by { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-foreground); padding-left: 12px; border-left: 1px solid var(--border); line-height: 1.3; }
+  .nav-links { display: flex; gap: 28px; align-items: center; list-style: none; margin: 0; padding: 0; }
+  .nav-links a { color: var(--secondary-foreground); font-size: 15px; font-weight: 500; }
+  .nav-links a:hover { color: var(--foreground); text-decoration: none; }
+  .nav-links a.btn { color: #fff; padding: 9px 14px; font-size: 14px; }
+  .nav-toggle { display: none; background: none; border: 1px solid var(--border); padding: 8px 12px; font: inherit; font-size: 14px; color: var(--foreground); }
 
-                    <div class="suite-rail-item" data-pane="commercial">
-                      <div class="suite-rail-item-icon">
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="var(--accent)"
-                          stroke-width="1.8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <line x1="12" y1="1" x2="12" y2="23" />
-                          <path
-                            d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-                          />
-                        </svg>
-                      </div>
-                      <div class="suite-rail-item-text">
-                        <div class="suite-rail-item-name">Commercial</div>
-                        <div class="suite-rail-item-tagline">
-                          Revenue and tenancy, unified
-                        </div>
-                      </div>
-                      <svg
-                        class="suite-rail-item-chevron"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </div>
+  /* hero */
+  .hero { padding: 88px 0 0; }
+  .hero-grid { display: grid; grid-template-columns: 6fr 6fr; gap: 56px; align-items: stretch; }
+  .hero h1 { max-width: 15ch; }
+  .hero .lede { margin: 26px 0 32px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+  .hero-photo { min-height: 420px; overflow: hidden; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--card); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat { padding: 28px 24px 26px; border-left: 1px solid var(--border-subtle); }
+  .stat:first-child { border-left: 0; padding-left: 0; }
+  .stat-n { font-size: 40px; font-weight: 700; color: var(--brand-900); line-height: 1; letter-spacing: -0.02em; }
+  .stat-l { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground); margin-top: 10px; }
+  .stat-l.plain { font-family: var(--sans); font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--secondary-foreground); margin-top: 6px; }
 
-                    <div class="suite-rail-item" data-pane="pax">
-                      <div class="suite-rail-item-icon">
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="var(--accent)"
-                          stroke-width="1.8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path
-                            d="M2 9V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 0 0 4v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4a2 2 0 0 0 0-4z"
-                          />
-                          <line x1="13" y1="5" x2="13" y2="7" />
-                          <line x1="13" y1="11" x2="13" y2="13" />
-                          <line x1="13" y1="17" x2="13" y2="19" />
-                        </svg>
-                      </div>
-                      <div class="suite-rail-item-text">
-                        <div class="suite-rail-item-name">Pax Processing</div>
-                        <div class="suite-rail-item-tagline">
-                          Common-use, end to end
-                        </div>
-                      </div>
-                      <svg
-                        class="suite-rail-item-chevron"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </div>
-                  </div>
+  /* layers */
+  .layers-head { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: end; margin-bottom: 56px; }
+  .layer { display: grid; grid-template-columns: 110px 5fr 6fr; gap: 40px; padding: 48px 0; border-top: 1px solid var(--border); }
+  .layer:last-child { border-bottom: 1px solid var(--border); }
+  .layer-n { font-size: 56px; font-weight: 700; color: var(--brand-900); line-height: 1; letter-spacing: -0.02em; }
+  .layer-n small { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-500); font-weight: 400; margin-top: 10px; }
+  .layer-body h3 { font-size: 30px; }
+  .layer-body .tag { font-style: italic; color: var(--secondary-foreground); margin: 8px 0 16px; font-size: 17px; }
+  .layer-body p { color: var(--secondary-foreground); font-size: 16px; }
+  .layer-body .status { margin-top: 6px; }
+  .layer-mods { display: grid; grid-template-columns: 1fr; margin: 22px 0 0; padding: 0; list-style: none; }
+  .layer-mods li { padding: 9px 0; border-top: 1px solid var(--border-subtle); font-size: 15px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .layer-mods li span { color: var(--muted-foreground); font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .layer-mods li .live { color: var(--green-text); }
+  .layer-mods li .dev { color: var(--amber-text); }
+  .layer-more { margin-top: 18px; font-size: 15px; }
+  .layer-photo { aspect-ratio: 3 / 2; overflow: hidden; align-self: start; }
+  .layer-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-                  <!-- Right panes -->
-                  <div class="suite-panes">
-                    <!-- Flight pane -->
-                    <div class="suite-pane is-visible" data-pane="flight">
-                      <div class="suite-pane-head">
-                        <div class="suite-pane-name">Aerios Flight</div>
-                        <div class="suite-pane-name-badge">Foundation</div>
-                      </div>
-                      <div class="suite-pane-desc">
-                        The operational core. Flight scheduling, the AODB, and
-                        resource allocation across every gate, counter, parking
-                        stand, and baggage belt. Every other product line in the
-                        suite extends from this layer.
-                      </div>
-                      <div class="suite-pane-grid">
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">AODB</div>
-                          <div class="suite-mod-desc">
-                            Real-time central data hub for all flight operations
-                            across the airport.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Flight Schedule</div>
-                          <div class="suite-mod-desc">
-                            Manage scheduled, planned, and actual flight
-                            movements.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Resource Management</div>
-                          <div class="suite-mod-desc">
-                            Allocate gates, counters, stands, and belts with
-                            built-in conflict checks.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Stand Allocation</div>
-                          <div class="suite-mod-desc">
-                            Optimise stand assignment and reassignment in real
-                            time.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Counter Management</div>
-                          <div class="suite-mod-desc">
-                            Open, close, and assign check-in counters by airline
-                            and flight.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Baggage Belts</div>
-                          <div class="suite-mod-desc">
-                            Allocate and track baggage claim belts for arriving
-                            flights.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Turnaround</div>
-                          <div class="suite-mod-desc">
-                            Track and optimise aircraft turnaround time.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Airport CDM</div>
-                          <div class="suite-mod-desc">
-                            A-CDM milestones, predictability, and collaborative
-                            ops.
-                          </div></a
-                        >
-                      </div>
-                      <div class="suite-pane-footer">
-                        <a href="#" class="suite-pane-footer-link"
-                          >Explore Aerios Flight →</a
-                        >
-                      </div>
-                    </div>
+  /* vertical integration */
+  .vert { background: var(--card); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .vert-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: center; }
+  .vert p { color: var(--secondary-foreground); }
+  .stack { border: 1px solid var(--border); }
+  .stack-row { display: grid; grid-template-columns: 150px 1fr; border-top: 1px solid var(--border); }
+  .stack-row:first-child { border-top: 0; }
+  .stack-k { padding: 18px 20px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-500); background: var(--muted); border-right: 1px solid var(--border); }
+  .stack-v { padding: 18px 22px; font-size: 15px; }
+  .stack-v strong { display: block; color: var(--brand-900); font-weight: 600; margin-bottom: 2px; }
+  .stack-v em { color: var(--muted-foreground); font-style: normal; }
+  .stack-base { background: var(--brand-900); color: #fff; padding: 18px 22px; font-size: 15px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .stack-base strong { font-weight: 600; }
+  .stack-base span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
 
-                    <!-- View pane -->
-                    <div class="suite-pane" data-pane="view">
-                      <div class="suite-pane-head">
-                        <div class="suite-pane-name">Aerios View</div>
-                      </div>
-                      <div class="suite-pane-desc">
-                        Live flight info, terminal-wide. Arrivals and departures
-                        boards, gate and counter displays, and CIDS/GIDS
-                        controls — all reading from the same AODB feed.
-                      </div>
-                      <div class="suite-pane-grid">
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">FIDS</div>
-                          <div class="suite-mod-desc">
-                            Flight information display with airline-customisable
-                            layouts.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Gate Displays</div>
-                          <div class="suite-mod-desc">
-                            Boarding gate screens powered by the AODB feed.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">CIDS / GIDS</div>
-                          <div class="suite-mod-desc">
-                            Counter and gate identification displays for staff.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Boards</div>
-                          <div class="suite-mod-desc">
-                            Public arrivals and departures boards across the
-                            terminal.
-                          </div></a
-                        >
-                      </div>
-                      <div class="suite-pane-footer">
-                        <a href="#" class="suite-pane-footer-link"
-                          >Explore Aerios View →</a
-                        >
-                      </div>
-                    </div>
+  /* common capabilities */
+  .caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 40px; margin: 40px 0 0; padding: 0; list-style: none; }
+  .caps li { padding: 12px 0; border-top: 1px solid var(--border-subtle); font-size: 16px; }
 
-                    <!-- Works pane -->
-                    <div class="suite-pane" data-pane="works">
-                      <div class="suite-pane-head">
-                        <div class="suite-pane-name">Aerios Works</div>
-                      </div>
-                      <div class="suite-pane-desc">
-                        The CMMS layer — inspections, asset management, work
-                        orders, and issue tracking. Closes the loop from problem
-                        identification to resolution, with full audit history.
-                      </div>
-                      <div class="suite-pane-grid">
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Inspections</div>
-                          <div class="suite-mod-desc">
-                            Scheduled and ad-hoc facility inspections with
-                            reusable templates.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Assets</div>
-                          <div class="suite-mod-desc">
-                            Track physical and digital airfield and terminal
-                            assets.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Work Orders</div>
-                          <div class="suite-mod-desc">
-                            Maintenance task creation, assignment, and tracking.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Issues</div>
-                          <div class="suite-mod-desc">
-                            Identify, escalate, and resolve operational issues
-                            with audit trails.
-                          </div></a
-                        >
-                      </div>
-                      <div class="suite-pane-footer">
-                        <a href="#" class="suite-pane-footer-link"
-                          >Explore Aerios Works →</a
-                        >
-                      </div>
-                    </div>
+  /* platform */
+  .platform { background: var(--navbar); color: #fff; }
+  .platform h2, .platform h3 { color: #fff; }
+  .platform .eyebrow { color: #93C5FD; }
+  .platform .lede { color: rgba(255,255,255,0.8); }
+  .platform a { color: #fff; }
+  .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--navbar-border); border: 1px solid var(--navbar-border); margin-top: 48px; }
+  .pcell { background: var(--navbar); padding: 26px 24px 28px; }
+  .pcell .where { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px; }
+  .pcell h3 { font-size: 20px; }
+  .pcell p { margin: 10px 0 0; font-size: 15px; color: rgba(255,255,255,0.82); }
+  .pcell .speaks { margin-top: 14px; font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.6); }
+  .pnotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; font-size: 15px; color: rgba(255,255,255,0.82); }
+  .pnotes strong { display: block; color: #fff; font-weight: 600; margin-bottom: 4px; }
 
-                    <!-- Ops pane -->
-                    <div class="suite-pane" data-pane="ops">
-                      <div class="suite-pane-head">
-                        <div class="suite-pane-name">Aerios Ops</div>
-                      </div>
-                      <div class="suite-pane-desc">
-                        Every operation. Logged. Terminal and airside operations
-                        end to end — safety, compliance, FOD, wildlife, NOTAMs,
-                        permits, training, ops logging, and Lost &amp; Found.
-                      </div>
-                      <div class="suite-pane-grid">
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name suite-mod-name-live">
-                            Lost &amp; Found
-                          </div>
-                          <div class="suite-mod-desc">
-                            AI-matched item recovery with audit-trailed
-                            handover. Live in production.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Safety</div>
-                          <div class="suite-mod-desc">
-                            Incident reporting, hazard logs, and safety case
-                            workflows.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Compliance</div>
-                          <div class="suite-mod-desc">
-                            DGCA and regulatory compliance tracking with full
-                            reporting.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">NOTAMs</div>
-                          <div class="suite-mod-desc">
-                            Notice to Airmen drafting, distribution, and
-                            archive.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Permits</div>
-                          <div class="suite-mod-desc">
-                            Airside permit issuance, tracking, and renewal
-                            workflows.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Wildlife</div>
-                          <div class="suite-mod-desc">
-                            Hazard assessment and mitigation tracking.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Training</div>
-                          <div class="suite-mod-desc">
-                            Staff training records and compliance workflows.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Ops Log</div>
-                          <div class="suite-mod-desc">
-                            Centralised operational activity logging across all
-                            teams.
-                          </div></a
-                        >
-                      </div>
-                      <div class="suite-pane-footer">
-                        <a href="#" class="suite-pane-footer-link"
-                          >Explore Aerios Ops →</a
-                        >
-                      </div>
-                    </div>
+  /* how we work */
+  .work-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+  .work-grid > div:first-child { position: sticky; top: 100px; }
+  .work-photo { margin-top: 32px; aspect-ratio: 3 / 2; overflow: hidden; }
+  .work-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .work-item { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding: 24px 0; border-top: 1px solid var(--border); }
+  .work-item:last-child { border-bottom: 1px solid var(--border); }
+  .work-item .n { font-family: var(--mono); font-size: 13px; color: var(--brand-500); padding-top: 6px; }
+  .work-item h3 { font-size: 21px; margin-bottom: 6px; }
+  .work-item p { margin: 0; color: var(--secondary-foreground); font-size: 16px; }
 
-                    <!-- Commercial pane -->
-                    <div class="suite-pane" data-pane="commercial">
-                      <div class="suite-pane-head">
-                        <div class="suite-pane-name">Aerios Commercial</div>
-                      </div>
-                      <div class="suite-pane-desc">
-                        The airport's commercial layer — billing, lease and
-                        tenant management, concessionaire coordination, and
-                        hangar operations. Unified revenue tracking across every
-                        commercial relationship.
-                      </div>
-                      <div class="suite-pane-grid">
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Billing</div>
-                          <div class="suite-mod-desc">
-                            Aeronautical and non-aeronautical billing
-                            automation.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Leases</div>
-                          <div class="suite-mod-desc">
-                            Tenant lease management and renewal tracking.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Concessions</div>
-                          <div class="suite-mod-desc">
-                            Commercial partner coordination and revenue
-                            tracking.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Hangars</div>
-                          <div class="suite-mod-desc">
-                            Hangar space allocation, scheduling, and billing.
-                          </div></a
-                        >
-                      </div>
-                      <div class="suite-pane-footer">
-                        <a href="#" class="suite-pane-footer-link"
-                          >Explore Aerios Commercial →</a
-                        >
-                      </div>
-                    </div>
+  /* people */
+  .people { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+  .person { border-top: 3px solid var(--brand-900); padding-top: 18px; }
+  .person h3 { font-size: 20px; }
+  .person .role { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-500); margin: 6px 0 10px; }
+  .person p { margin: 0; color: var(--secondary-foreground); font-size: 16px; }
 
-                    <!-- Pax pane -->
-                    <div class="suite-pane" data-pane="pax">
-                      <div class="suite-pane-head">
-                        <div class="suite-pane-name">Aerios Pax Processing</div>
-                      </div>
-                      <div class="suite-pane-desc">
-                        Common-use passenger flow, end to end. Check-in, bag
-                        drop, and boarding pass handling on CUTE/CUPPS
-                        infrastructure across every shared counter and gate in
-                        the terminal.
-                      </div>
-                      <div class="suite-pane-grid">
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Check-in</div>
-                          <div class="suite-mod-desc">
-                            Common-use check-in counter management.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Bag Drop</div>
-                          <div class="suite-mod-desc">
-                            Self-service and assisted bag drop workflows.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">Boarding</div>
-                          <div class="suite-mod-desc">
-                            Common-use boarding gate management.
-                          </div></a
-                        >
-                        <a href="#" class="suite-mod"
-                          ><div class="suite-mod-name">CUTE / CUPPS</div>
-                          <div class="suite-mod-desc">
-                            Common-use terminal equipment and passenger
-                            processing platform.
-                          </div></a
-                        >
-                      </div>
-                      <div class="suite-pane-footer">
-                        <a href="#" class="suite-pane-footer-link"
-                          >Explore Aerios Pax Processing →</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
+  /* contact */
+  .contact { background: var(--card); border-top: 1px solid var(--border-subtle); }
+  .contact-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: start; }
+  .contact-card { border: 1px solid var(--border); padding: 28px; background: var(--background); }
+  .contact-card .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground); margin-bottom: 6px; }
+  .contact-card .v { font-size: 20px; font-weight: 600; color: var(--brand-900); margin-bottom: 20px; }
+  .contact-card .v a { color: var(--brand-900); }
+  .contact-card .btn { width: 100%; text-align: center; }
+  .contact-card small { display: block; margin-top: 14px; color: var(--muted-foreground); font-size: 13px; }
 
-            <!-- Platform -->
-            <li class="nav-item">
-              <button class="nav-link">
-                Platform
-                <svg
-                  width="11"
-                  height="11"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </button>
-              <div class="nav-dropdown">
-                <div class="mega-inner cols-3">
-                  <div class="mega-col">
-                    <div class="mega-col-label">Architecture</div>
-                    <a href="#" class="mega-link"
-                      ><div class="mega-link-title">
-                        Airport Operational Database
-                      </div>
-                      <div class="mega-link-desc">
-                        Centralised real-time data hub across all airports
-                      </div></a
-                    >
-                    <a href="#" class="mega-link"
-                      ><div class="mega-link-title">
-                        Airport Integration Layer
-                      </div>
-                      <div class="mega-link-desc">
-                        On-premise middleware connecting local systems to cloud
-                      </div></a
-                    >
-                    <a href="#" class="mega-link"
-                      ><div class="mega-link-title">
-                        Hybrid Cloud Architecture
-                      </div>
-                      <div class="mega-link-desc">
-                        Cloud-native with local resilience and offline
-                        capability
-                      </div></a
-                    >
-                    <a href="#" class="mega-link"
-                      ><div class="mega-link-title">Data Warehouse</div>
-                      <div class="mega-link-desc">
-                        Cross-airport analytics, long-term storage and BI
-                      </div></a
-                    >
-                  </div>
-                  <div class="mega-col">
-                    <div class="mega-col-label">Integrations & Standards</div>
-                    <a href="#" class="mega-link"
-                      ><div class="mega-link-title">SITA XML / AIDX</div>
-                      <div class="mega-link-desc">
-                        Native support for aviation data exchange formats
-                      </div></a
-                    >
-                    <a href="#" class="mega-link"
-                      ><div class="mega-link-title">IATA & ICAO Standards</div>
-                      <div class="mega-link-desc">
-                        Dual coding support across all modules
-                      </div></a
-                    >
-                    <a href="#" class="mega-link"
-                      ><div class="mega-link-title">Third-party Connectors</div>
-                      <div class="mega-link-desc">
-                        BHS, FIDS, PAVA, BRS, A-CDM and more
-                      </div></a
-                    >
-                    <div class="mega-col-footer" style="margin-top: 20px">
-                      <div
-                        style="
-                          font-size: 10.5px;
-                          font-weight: 700;
-                          text-transform: uppercase;
-                          letter-spacing: 0.8px;
-                          color: var(--text-3);
-                          margin-bottom: 10px;
-                        "
-                      >
-                        Developer
-                      </div>
-                      <a
-                        href="#"
-                        class="nav-simple-item"
-                        style="
-                          padding: 5px 0;
-                          border-radius: 0;
-                          margin: 0;
-                          font-size: 12.5px;
-                          color: var(--text-2);
-                          text-decoration: none;
-                          display: block;
-                          transition: color var(--tr);
-                        "
-                        >API Reference</a
-                      >
-                      <a
-                        href="#"
-                        class="nav-simple-item"
-                        style="
-                          padding: 5px 0;
-                          border-radius: 0;
-                          margin: 0;
-                          font-size: 12.5px;
-                          color: var(--text-2);
-                          text-decoration: none;
-                          display: block;
-                          transition: color var(--tr);
-                        "
-                        >Integration guides</a
-                      >
-                      <a
-                        href="#"
-                        class="nav-simple-item"
-                        style="
-                          padding: 5px 0;
-                          border-radius: 0;
-                          margin: 0;
-                          font-size: 12.5px;
-                          color: var(--text-2);
-                          text-decoration: none;
-                          display: block;
-                          transition: color var(--tr);
-                        "
-                        >Security & compliance docs</a
-                      >
-                    </div>
-                  </div>
-                  <div class="mega-col">
-                    <div class="mega-featured">
-                      <div class="mega-featured-label">Why Aerios</div>
-                      <div class="mega-featured-card">
-                        <div
-                          class="mega-featured-img"
-                          style="
-                            background: linear-gradient(
-                              135deg,
-                              #122d54 0%,
-                              #1a3c6e 100%
-                            );
-                          "
-                        >
-                          <div class="mega-featured-img-inner">
-                            <svg
-                              width="28"
-                              height="28"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="rgba(255,255,255,0.7)"
-                              stroke-width="1.5"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            >
-                              <rect x="2" y="3" width="20" height="14" rx="2" />
-                              <path d="M8 21h8M12 17v4" />
-                            </svg>
-                            <span
-                              style="
-                                font-size: 12px;
-                                font-weight: 700;
-                                color: rgba(255, 255, 255, 0.7);
-                              "
-                              >Cloud-Native Platform</span
-                            >
-                          </div>
-                        </div>
-                        <div class="mega-featured-body">
-                          <div class="mega-featured-title">
-                            Built for scale from day one
-                          </div>
-                          <div class="mega-featured-desc">
-                            Modular architecture means airports deploy only what
-                            they need — and expand without re-implementation.
-                          </div>
-                          <a href="#" class="mega-featured-cta"
-                            >Platform overview →</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
+  footer { background: var(--navbar); color: rgba(255,255,255,0.7); padding: 48px 0 40px; font-size: 14px; }
+  .foot { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 32px; }
+  .foot img { height: 26px; width: auto; margin-bottom: 14px; }
+  .foot h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; font-weight: 500; }
+  .foot ul { list-style: none; margin: 0; padding: 0; }
+  .foot li { margin-bottom: 8px; }
+  .foot a { color: rgba(255,255,255,0.85); }
+  .foot-bottom { border-top: 1px solid var(--navbar-border); margin-top: 40px; padding-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 
-            <li class="nav-item">
-              <a href="/success-stories" class="nav-link">Success Stories</a>
-            </li>
-            <li class="nav-item">
-              <a href="/about" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-              <a href="/contact" class="nav-link">Contact</a>
-            </li>
-          </ul>
+  /* modal */
+  .modal { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(4,16,31,0.45); }
+  .modal.open { display: flex; }
+  .modal-box { background: var(--card); width: 100%; max-width: 520px; max-height: calc(100vh - 40px); overflow: auto; border: 1px solid var(--border); padding: 32px; position: relative; }
+  .modal-box h3 { font-size: 24px; margin-bottom: 6px; }
+  .modal-box .sub { color: var(--secondary-foreground); font-size: 15px; margin-bottom: 22px; }
+  .modal-close { position: absolute; top: 14px; right: 14px; background: none; border: 0; font: inherit; font-size: 22px; line-height: 1; color: var(--muted-foreground); cursor: pointer; padding: 6px; }
+  .modal-close:hover { color: var(--foreground); }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; color: var(--secondary-foreground); margin-bottom: 6px; }
+  .field input, .field select, .field textarea { width: 100%; font: inherit; font-size: 15px; padding: 10px 12px; border: 1px solid var(--border); background: #fff; color: var(--foreground); border-radius: 4px; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--ring); outline-offset: 1px; border-color: var(--ring); }
+  .field textarea { min-height: 88px; resize: vertical; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-actions { display: flex; align-items: center; gap: 14px; margin-top: 8px; flex-wrap: wrap; }
+  .form-note { font-size: 13px; color: var(--muted-foreground); }
+  .form-msg { font-size: 14px; margin-top: 12px; display: none; padding: 10px 12px; border: 1px solid; }
+  .form-msg.ok { display: block; background: var(--green-bg); border-color: var(--green-border); color: var(--green-text); }
+  .form-msg.err { display: block; background: var(--amber-bg); border-color: var(--amber-border); color: var(--amber-text); }
+  .hp { position: absolute; left: -9999px; }
+  @media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } .modal-box { padding: 24px 20px; } }
 
-          <div class="nav-cta">
-            <a href="/login" class="btn sign-in-btn">Sign in</a>
-            <a href="/demo" class="btn btn-gold">Request demo</a>
-          </div>
-          <button
-            class="nav-toggle"
-            type="button"
-            aria-label="Toggle menu"
-            aria-expanded="false"
-          >
-            <span class="nav-toggle-bar"></span>
-            <span class="nav-toggle-bar"></span>
-            <span class="nav-toggle-bar"></span>
-          </button>
+  @media (max-width: 900px) {
+    body { font-size: 16px; }
+    section { padding: 64px 0; }
+    .hero { padding-top: 48px; }
+    .lede { font-size: 18px; }
+    .nav-links { display: none; position: absolute; left: 0; right: 0; top: 72px; background: var(--background); border-bottom: 1px solid var(--border); flex-direction: column; align-items: flex-start; padding: 16px 24px 20px; gap: 14px; }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: inline-block; }
+    .logo-by { display: none; }
+    .hero-grid, .layers-head, .vert-grid, .work-grid, .people, .contact-grid, .pgrid, .pnotes { grid-template-columns: 1fr; }
+    .hero-actions { margin-bottom: 40px; }
+    .hero-photo { min-height: 0; aspect-ratio: 4 / 3; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 20px 16px; }
+    .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--border-subtle); }
+    .layer { grid-template-columns: 1fr; gap: 20px; padding: 36px 0; }
+    .layer-n { font-size: 44px; }
+    .layer-mods { grid-template-columns: 1fr; }
+    .caps { grid-template-columns: 1fr; }
+    .work-grid > div:first-child { position: static; }
+    .stack-row { grid-template-columns: 1fr; }
+    .stack-k { border-right: 0; border-bottom: 1px solid var(--border); padding: 10px 16px; }
+    .foot { grid-template-columns: 1fr 1fr; }
+    .pcell { border-top: 1px solid var(--navbar-border); }
+  }
+</style>
+</head>
+<body>
+
+<div class="topline"></div>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/" aria-label="Aerios, by Blunav">
+      <svg viewBox="0 0 442 126" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <mask id="m" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="117" height="117"><circle cx="58.5" cy="58.5" r="58.5" fill="#fff"/></mask>
+        <g mask="url(#m)">
+          <path d="M0 106.254V116.999H48.949L61.2857 70.8359L0 106.254Z" fill="#EF4444"/>
+          <path d="M0 42.7148V86.4904L51.7347 56.6434L0 42.7148Z" fill="#EF4444"/>
+          <path d="M0 25.2041V0H117V18.9694L72.6939 44.5714L0 25.2041Z" fill="#071B34"/>
+          <path d="M117 38.6055V117.003H66.5918L82.2449 58.6361L117 38.6055Z" fill="#071B34"/>
+        </g>
+        <path d="M176.9 71.1969C170.9 71.1969 166.233 69.8635 162.9 67.1969C159.633 64.5302 158 60.7635 158 55.8969C158 50.6969 159.733 46.7302 163.2 43.9969C166.733 41.2635 171.633 39.8969 177.9 39.8969H190.6C190.2 36.2302 189.167 33.4302 187.5 31.4969C185.833 29.5635 183.367 28.5969 180.1 28.5969C177.7 28.5969 175.6 29.0969 173.8 30.0969C172 31.0969 170.467 32.6635 169.2 34.7969L159.4 31.1969C160.467 28.9969 161.867 26.9635 163.6 25.0969C165.4 23.1635 167.633 21.6302 170.3 20.4969C173.033 19.3635 176.3 18.7969 180.1 18.7969C184.967 18.7969 189.033 19.7635 192.3 21.6969C195.567 23.5635 197.967 26.2635 199.5 29.7969C201.1 33.3302 201.9 37.5969 201.9 42.5969L201.6 69.9969H191.3L191 63.8969C189.667 66.2302 187.8 68.0302 185.4 69.2969C183.067 70.5635 180.233 71.1969 176.9 71.1969ZM178.3 61.7969C180.767 61.7969 182.933 61.2635 184.8 60.1969C186.733 59.0635 188.2 57.5635 189.2 55.6969C190.267 53.8302 190.8 51.7635 190.8 49.4969V48.4969H181.5C177.033 48.4969 173.9 49.1302 172.1 50.3969C170.3 51.5969 169.4 53.3302 169.4 55.5969C169.4 57.5302 170.167 59.0635 171.7 60.1969C173.3 61.2635 175.5 61.7969 178.3 61.7969Z" fill="#071B34"/>
+        <path d="M235.541 71.1969C230.675 71.1969 226.341 70.0969 222.541 67.8969C218.808 65.6302 215.841 62.5302 213.641 58.5969C211.508 54.6635 210.441 50.1302 210.441 44.9969C210.441 39.8635 211.541 35.3302 213.741 31.3969C215.941 27.4635 218.941 24.3969 222.741 22.1969C226.608 19.9302 231.008 18.7969 235.941 18.7969C240.408 18.7969 244.441 19.9635 248.041 22.2969C251.641 24.5635 254.475 27.8635 256.541 32.1969C258.675 36.5302 259.741 41.6969 259.741 47.6969H222.041C222.375 51.8969 223.908 55.1969 226.641 57.5969C229.441 59.9969 232.741 61.1969 236.541 61.1969C239.608 61.1969 242.141 60.5302 244.141 59.1969C246.141 57.7969 247.708 55.9969 248.841 53.7969L258.741 57.9969C257.341 60.6635 255.541 62.9969 253.341 64.9969C251.208 66.9969 248.641 68.5302 245.641 69.5969C242.708 70.6635 239.341 71.1969 235.541 71.1969ZM222.741 39.0969H247.641C247.441 36.6969 246.741 34.7302 245.541 33.1969C244.341 31.5969 242.875 30.3969 241.141 29.5969C239.408 28.7969 237.575 28.3969 235.641 28.3969C233.775 28.3969 231.875 28.7969 229.941 29.5969C228.075 30.3302 226.475 31.4969 225.141 33.0969C223.808 34.6969 223.008 36.6969 222.741 39.0969Z" fill="#071B34"/>
+        <path d="M268.32 69.9969V19.9969H279.52V29.0969C281.52 25.9635 284.12 23.6302 287.32 22.0969C290.52 20.5635 293.82 19.7969 297.22 19.7969V30.4969C294.153 30.4969 291.253 30.9302 288.52 31.7969C285.853 32.5969 283.686 33.9302 282.02 35.7969C280.353 37.6635 279.52 40.1302 279.52 43.1969V69.9969H268.32Z" fill="#071B34"/>
+        <path d="M305.348 69.9969V19.9969H316.448V69.9969H305.348Z" fill="#071B34"/>
+        <path d="M352.648 71.1969C347.648 71.1969 343.181 70.0969 339.248 67.8969C335.381 65.6302 332.348 62.5302 330.148 58.5969C327.948 54.6635 326.848 50.1302 326.848 44.9969C326.848 39.8635 327.914 35.3302 330.048 31.3969C332.248 27.4635 335.281 24.3969 339.148 22.1969C343.014 19.9302 347.448 18.7969 352.448 18.7969C357.448 18.7969 361.881 19.9302 365.748 22.1969C369.614 24.3969 372.614 27.4635 374.748 31.3969C376.948 35.3302 378.048 39.8635 378.048 44.9969C378.048 50.1302 376.981 54.6635 374.848 58.5969C372.714 62.5302 369.714 65.6302 365.848 67.8969C361.981 70.0969 357.581 71.1969 352.648 71.1969ZM352.648 60.8969C355.381 60.8969 357.814 60.2302 359.948 58.8969C362.081 57.4969 363.748 55.6302 364.948 53.2969C366.148 50.8969 366.748 48.1302 366.748 44.9969C366.748 41.8635 366.114 39.1302 364.848 36.7969C363.648 34.3969 361.981 32.5302 359.848 31.1969C357.714 29.7969 355.248 29.0969 352.448 29.0969C349.648 29.0969 347.181 29.7635 345.048 31.0969C342.914 32.4302 341.248 34.2969 340.048 36.6969C338.848 39.0969 338.248 41.8635 338.248 44.9969C338.248 48.1302 338.848 50.8969 340.048 53.2969C341.314 55.6302 343.014 57.4969 345.148 58.8969C347.348 60.2302 349.848 60.8969 352.648 60.8969Z" fill="#071B34"/>
+        <path d="M405.953 71.1969C402.62 71.1969 399.553 70.6969 396.753 69.6969C393.953 68.6969 391.553 67.2969 389.553 65.4969C387.553 63.6302 386.02 61.4635 384.953 58.9969L394.653 54.6969C395.653 56.5635 397.12 58.1302 399.053 59.3969C401.053 60.6635 403.253 61.2969 405.653 61.2969C408.253 61.2969 410.32 60.8635 411.853 59.9969C413.453 59.0635 414.253 57.7969 414.253 56.1969C414.253 54.6635 413.653 53.4969 412.453 52.6969C411.253 51.8302 409.553 51.1302 407.353 50.5969L402.653 49.2969C397.92 48.0969 394.22 46.1969 391.553 43.5969C388.886 40.9302 387.553 37.8969 387.553 34.4969C387.553 29.4969 389.153 25.6302 392.353 22.8969C395.62 20.1635 400.286 18.7969 406.353 18.7969C409.42 18.7969 412.22 19.2635 414.753 20.1969C417.353 21.0635 419.586 22.3302 421.453 23.9969C423.32 25.5969 424.62 27.4969 425.353 29.6969L416.053 33.8969C415.386 32.2302 414.12 30.9635 412.253 30.0969C410.386 29.1635 408.32 28.6969 406.053 28.6969C403.786 28.6969 402.02 29.1969 400.753 30.1969C399.486 31.1302 398.853 32.4635 398.853 34.1969C398.853 35.1969 399.42 36.1302 400.553 36.9969C401.686 37.7969 403.32 38.4635 405.453 38.9969L411.353 40.3969C414.62 41.1969 417.286 42.4635 419.353 44.1969C421.42 45.8635 422.953 47.7635 423.953 49.8969C424.953 51.9635 425.453 54.0635 425.453 56.1969C425.453 59.1969 424.586 61.8302 422.853 64.0969C421.186 66.3635 418.886 68.1302 415.953 69.3969C413.02 70.5969 409.686 71.1969 405.953 71.1969Z" fill="#071B34"/>
+        <path d="M316.569 14H305.6L310.087 0H320.6L316.569 14Z" fill="#EF4444"/>
+      </svg>
+      <span class="logo-by">Airport<br>Operating System</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#suites">Products</a></li>
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#how-we-work">How we work</a></li>
+      <li><a href="#people">Company</a></li>
+      <li><a href="https://aerios.blunav.cloud" rel="noopener">Sign in</a></li>
+      <li><a class="btn btn-primary" href="#contact" data-open-modal>Book a walkthrough</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Airport Operating System</div>
+        <h1>From schedules to screens. One operational record.</h1>
+        <p class="lede">Aerios connects the operational functions of an airport into a single platform: flight management, resource allocation, passenger information, airside safety and day-to-day operations. Built for airports of all sizes, and built alongside the people who run them.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact" data-open-modal>Book a walkthrough</a>
+          <a class="btn btn-quiet" href="#suites">See the three suites</a>
         </div>
       </div>
-    </nav>
+      <div class="hero-photo"><img src="assets/img/hero-apron.jpg" alt="Ground staff in a Blunav vest walking towards an aircraft at a jet bridge" width="1200" height="901"></div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat"><div class="stat-n">3</div><div class="stat-l">Product suites</div></div>
+      <div class="stat"><div class="stat-n">11</div><div class="stat-l">Operational modules</div></div>
+      <div class="stat"><div class="stat-n">1</div><div class="stat-l">Integrated platform</div></div>
+      <div class="stat"><div class="stat-n" style="font-size:22px;padding-top:8px">Chennai International</div><div class="stat-l plain">Running today, under the AAI Startup India initiative</div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- ══════════════ HERO ══════════════ -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-inner">
-          <div class="hero-left">
-            <div class="hero-eyebrow reveal-fast visible">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                />
-              </svg>
-              Aerios
-            </div>
-            <h1 class="hero-h1 reveal visible" style="transition-delay: 0.1s">
-              The Operating System<br />for <em>Airports.</em>
-            </h1>
-            <p class="hero-sub reveal visible" style="transition-delay: 0.2s">
-              Aerios helps airports manage flights, resources, passenger
-              systems, and operations in real time, bringing all airport systems
-              together into one unified realtime operating platform.
-            </p>
-            <div
-              class="hero-actions reveal visible"
-              style="transition-delay: 0.3s"
-            >
-              <a href="/demo" class="btn btn-gold-lg">Request a Demo →</a>
-              <a href="#platform" class="btn btn-outline-white"
-                >Explore the platform</a
-              >
-            </div>
-            <!-- <div
-              class="hero-trust reveal visible"
-              style="transition-delay: 0.4s"
-            >
-              <div class="hero-trust-item">
-                <div class="hero-trust-dot"></div>
-                14+ airports on a single AODB
-              </div>
-              <div class="hero-trust-item">
-                <div class="hero-trust-dot"></div>
-                99.5% SLA uptime
-              </div>
-              <div class="hero-trust-item">
-                <div class="hero-trust-dot"></div>
-                IATA & ICAO compliant
-              </div>
-            </div> -->
-          </div>
-
-          <!-- Platform diagram -->
-          <div
-            class="hero-visual reveal visible"
-            style="transition-delay: 0.35s"
-          >
-            <div class="platform-wrap">
-              <canvas class="platform-canvas" id="platformCanvas"></canvas>
-            </div>
-          </div>
-        </div>
+<section id="suites">
+  <div class="wrap">
+    <div class="layers-head">
+      <div>
+        <div class="eyebrow">Three layers of airport IT</div>
+        <h2>Three suites, one foundation.</h2>
       </div>
-    </section>
-
-    <!-- ══════════════ PROOF BAR ══════════════ -->
-    <div class="proof-bar">
-      <div class="container">
-        <div class="proof-inner">
-          <div class="proof-item">
-            <div class="proof-item-icon">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-              </svg>
-            </div>
-            <div>
-              <div class="proof-item-text">99.5% SLA uptime</div>
-              <div class="proof-item-sub">24/7 operations</div>
-            </div>
-          </div>
-          <div class="proof-divider"></div>
-          <div class="proof-item">
-            <div class="proof-item-icon">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <path d="M8 21h8M12 17v4" />
-              </svg>
-            </div>
-            <div>
-              <div class="proof-item-text">20+ modules</div>
-              <div class="proof-item-sub">Fully integrated suite</div>
-            </div>
-          </div>
-          <div class="proof-divider"></div>
-          <div class="proof-item">
-            <div class="proof-item-icon">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-            </div>
-            <div>
-              <div class="proof-item-text">IATA & ICAO</div>
-              <div class="proof-item-sub">Fully compliant</div>
-            </div>
-          </div>
-          <div class="proof-divider"></div>
-          <div class="proof-item">
-            <div class="proof-item-icon">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"
-                />
-              </svg>
-            </div>
-            <div>
-              <div class="proof-item-text">Dedicated support</div>
-              <div class="proof-item-sub">Named account team</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p class="lede" style="font-size:18px">Airport IT stacks in three layers: the operational record, the operations and maintenance work that runs against it, and the airside picture. Most airports buy each from a different vendor. Aerios builds all three on one database, so nothing is re-keyed and every record shares one audit trail.</p>
     </div>
 
-    <!-- ══════════════ THE AERIOS SUITE ══════════════ -->
-    <section class="section section-alt" id="platform">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="eyebrow">Cloud Native, Modular Offering</div>
-          <h2 class="section-h2">The Aerios Suite</h2>
-          <p class="section-sub" style="max-width: 780px">
-            Aerios is a cloud-native, modular Airport Operating System designed
-            to scale with your evolving operations — from regional airports to
-            major international terminals.<br /><span
-              style="font-weight: 600; color: var(--navy)"
-              >Start with what you need today, and expand seamlessly as your
-              operations evolve.</span
-            >
-          </p>
-        </div>
-
-        <!-- Foundation hero card -->
-        <div class="suite-foundation reveal">
-          <div class="suite-foundation-panel">
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="rgba(255,255,255,0.95)"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <ellipse cx="12" cy="5" rx="9" ry="3" />
-              <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
-              <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
-            </svg>
-          </div>
-          <div class="suite-foundation-body">
-            <div class="suite-foundation-meta">
-              <span class="suite-foundation-badge">Foundation</span>
-            </div>
-            <h3 class="suite-foundation-title">Aerios Flight</h3>
-            <p class="suite-foundation-tagline">Operational data backbone.</p>
-            <p class="suite-foundation-desc">
-              <span class="suite-foundation-desc-line"
-                >Schedule management, AODB, flight management, and real-time
-                resource allocation — the operational core of the airport.</span
-              >
-              <span class="suite-foundation-desc-line" style="margin-top: 8px"
-                >Every other product in the Aerios suite extends from this
-                layer.</span
-              >
-            </p>
-          </div>
-          <div class="suite-foundation-divider"></div>
-          <div class="suite-foundation-side">
-            <div>
-              <div class="suite-side-label">Core Capabilities</div>
-              <div class="suite-capabilities">
-                <div class="suite-capability">
-                  <span class="suite-capability-icon">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect x="3" y="4" width="18" height="18" rx="2" />
-                      <line x1="16" y1="2" x2="16" y2="6" />
-                      <line x1="8" y1="2" x2="8" y2="6" />
-                      <line x1="3" y1="10" x2="21" y2="10" />
-                    </svg>
-                  </span>
-                  Schedule Manager
-                </div>
-                <div class="suite-capability">
-                  <span class="suite-capability-icon">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <ellipse cx="12" cy="5" rx="9" ry="3" />
-                      <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
-                      <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
-                    </svg>
-                  </span>
-                  AODB
-                </div>
-                <div class="suite-capability">
-                  <span class="suite-capability-icon">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"
-                      />
-                    </svg>
-                  </span>
-                  Flight Management
-                </div>
-                <div class="suite-capability">
-                  <span class="suite-capability-icon">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
-                  </span>
-                  Resource Allocation
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="suite-side-label">Role in Aerios</div>
-              <div class="suite-foundation-role">
-                System of record for all operational and commercial processes.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Operations group -->
-        <div class="suite-group reveal">
-          <div class="suite-group-header">
-            <div class="suite-group-label">Operations</div>
-            <div class="suite-group-caption">Core operational modules</div>
-          </div>
-          <div class="suite-grid">
-            <!-- Aerios View -->
-            <a href="#" class="suite-card cat-blue">
-              <div class="suite-card-head">
-                <div class="suite-card-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                    <line x1="2" y1="9" x2="22" y2="9" />
-                    <line x1="8" y1="21" x2="16" y2="21" />
-                    <line x1="12" y1="17" x2="12" y2="21" />
-                  </svg>
-                </div>
-                <div class="suite-card-head-text">
-                  <h3 class="suite-card-title">Aerios View</h3>
-                </div>
-                <svg
-                  class="suite-card-chevron"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </div>
-              <p class="suite-card-tagline">Real-time terminal operations.</p>
-              <p class="suite-card-desc">
-                Control FIDS, gate and counter displays, and CIDS/GIDS with live
-                AODB sync.
-              </p>
-              <hr class="suite-card-divider" />
-              <div class="suite-card-pills">
-                <span class="suite-pill">FIDS</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Gate Displays</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">CIDS/gIDS</span>
-              </div>
-            </a>
-
-            <!-- Aerios Works -->
-            <a href="#" class="suite-card cat-blue">
-              <div class="suite-card-head">
-                <div class="suite-card-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.7 2.7-2-2 2.7-2.7z"
-                    />
-                  </svg>
-                </div>
-                <div class="suite-card-head-text">
-                  <h3 class="suite-card-title">Aerios Works</h3>
-                </div>
-                <svg
-                  class="suite-card-chevron"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </div>
-              <p class="suite-card-tagline">Work management, streamlined.</p>
-              <p class="suite-card-desc">
-                Manage inspections, assets, work orders, and issues from
-                identification to resolution.
-              </p>
-              <hr class="suite-card-divider" />
-              <div class="suite-card-pills">
-                <span class="suite-pill">Inspections</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Assets</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Work Orders</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Issues</span>
-              </div>
-            </a>
-
-            <!-- Aerios Ops -->
-            <a href="#" class="suite-card cat-blue">
-              <div class="suite-card-head">
-                <div class="suite-card-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    <polyline points="9 12 11 14 15 10" />
-                  </svg>
-                </div>
-                <div class="suite-card-head-text">
-                  <h3 class="suite-card-title">Aerios Ops</h3>
-                </div>
-                <svg
-                  class="suite-card-chevron"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </div>
-              <p class="suite-card-tagline">Every operation. Logged.</p>
-              <p class="suite-card-desc">
-                Ensure safety, compliance, and awareness across all terminal and
-                airside operations.
-              </p>
-              <hr class="suite-card-divider" />
-              <div class="suite-card-pills">
-                <span class="suite-pill">Safety</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Compliance</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">NOTAMs</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Permits</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">L&amp;F</span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Passenger & Commercial group -->
-        <div class="suite-group reveal">
-          <div class="suite-group-header">
-            <div class="suite-group-label">Passenger &amp; Commercial</div>
-            <div class="suite-group-caption">
-              Commercial and passenger experience
-            </div>
-          </div>
-          <div class="suite-grid">
-            <!-- Aerios Commercial -->
-            <a href="#" class="suite-card cat-green">
-              <div class="suite-card-head">
-                <div class="suite-card-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="12" y1="1" x2="12" y2="23" />
-                    <path
-                      d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-                    />
-                  </svg>
-                </div>
-                <div class="suite-card-head-text">
-                  <h3 class="suite-card-title">Aerios Commercial</h3>
-                </div>
-                <svg
-                  class="suite-card-chevron"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </div>
-              <p class="suite-card-tagline">Revenue and tenancy, unified.</p>
-              <p class="suite-card-desc">
-                Unify billing, leases, concessions, and hangar operations in one
-                commercial layer.
-              </p>
-              <hr class="suite-card-divider" />
-              <div class="suite-card-pills">
-                <span class="suite-pill">Billing</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Leases</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Concessions</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Hangars</span>
-              </div>
-            </a>
-
-            <!-- Aerios Pax Processing -->
-            <a href="#" class="suite-card cat-purple">
-              <div class="suite-card-head">
-                <div class="suite-card-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M2 9V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 0 0 4v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4a2 2 0 0 0 0-4z"
-                    />
-                    <line x1="13" y1="5" x2="13" y2="7" />
-                    <line x1="13" y1="11" x2="13" y2="13" />
-                    <line x1="13" y1="17" x2="13" y2="19" />
-                  </svg>
-                </div>
-                <div class="suite-card-head-text">
-                  <h3 class="suite-card-title">Aerios Pax Processing</h3>
-                </div>
-                <svg
-                  class="suite-card-chevron"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </div>
-              <p class="suite-card-tagline">Common-use, end to end.</p>
-              <p class="suite-card-desc">
-                Seamless check-in, bag drop, and boarding across CUTE/CUPPS
-                infrastructure.
-              </p>
-              <hr class="suite-card-divider" />
-              <div class="suite-card-pills">
-                <span class="suite-pill">Check-in</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Bag Drop</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">Boarding</span
-                ><span class="suite-pill-sep"></span>
-                <span class="suite-pill">CUTE / CUPPS</span>
-              </div>
-            </a>
-
-            <!-- Composable CTA card -->
-            <a href="/contact" class="suite-cta-card">
-              <div class="suite-cta-card-head">
-                <div class="suite-cta-card-plus">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </div>
-                <div class="suite-cta-card-title">Composable by design</div>
-              </div>
-              <div class="suite-cta-card-desc">
-                Deploy the modules you need today. Add more as your airport
-                grows.
-              </div>
-              <span class="suite-cta-card-link">Talk to the Aerios team →</span>
-            </a>
-          </div>
-        </div>
+    <div class="layer">
+      <div class="layer-n">01<small>Core platform</small></div>
+      <div class="layer-body">
+        <h3>Aerios AMS</h3>
+        <div class="tag">Schedules to screens. The airport's authoritative operational record.</div>
+        <ul class="layer-mods">
+          <li>Airport Operational Database (AODB)</li>
+          <li>Resource Management System (RMS)</li>
+          <li>Flight Information Display System (FIDS)</li>
+        </ul>
+        <p style="margin-top:18px">Seasonal SSIM planning, active flight and turnaround management, rule-based allocation of gates, stands, counters and belts on a rolling Gantt with conflict detection, and display management for every screen in the terminal plus APIs and an embeddable web widget.</p>
+        <a class="layer-more" href="/brochures/aerios-ams.pdf" target="_blank" rel="noopener">Aerios AMS brochure</a>
       </div>
-    </section>
-
-    <!-- ══════════════ ARCHITECTURE ══════════════ -->
-    <section class="section section-navy dot-pattern" id="architecture">
-      <div class="container">
-        <div class="arch-grid">
-          <div>
-            <div class="eyebrow eyebrow-light reveal">Architecture</div>
-            <h2
-              class="section-h2 section-h2-light reveal"
-              style="transition-delay: 0.05s"
-            >
-              Hybrid cloud.<br />Built for aviation.
-            </h2>
-            <p
-              class="section-sub section-sub-light reveal"
-              style="transition-delay: 0.1s; margin: 0 0 40px"
-            >
-              The AODB lives in the cloud. The AIL lives at your airport.
-              Together they give you the resilience of on-premise with the scale
-              of cloud.
-            </p>
-            <ul class="arch-bullets reveal" style="transition-delay: 0.15s">
-              <li class="arch-bullet">
-                <div class="arch-bullet-icon">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.65)"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                  </svg>
-                </div>
-                <div>
-                  <div class="arch-bullet-title">Always-on operations</div>
-                  <div class="arch-bullet-desc">
-                    Local AIL continues operating during connectivity
-                    interruptions — data syncs automatically when the link
-                    restores.
-                  </div>
-                </div>
-              </li>
-              <li class="arch-bullet">
-                <div class="arch-bullet-icon">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.65)"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect x="2" y="2" width="9" height="9" rx="2" />
-                    <rect x="13" y="2" width="9" height="9" rx="2" />
-                    <rect x="2" y="13" width="9" height="9" rx="2" />
-                    <rect x="13" y="13" width="9" height="9" rx="2" />
-                  </svg>
-                </div>
-                <div>
-                  <div class="arch-bullet-title">
-                    Horizontal & vertical scale
-                  </div>
-                  <div class="arch-bullet-desc">
-                    Add airports without re-architecture. Extend tenure without
-                    data migration. The system grows with your network.
-                  </div>
-                </div>
-              </li>
-              <li class="arch-bullet">
-                <div class="arch-bullet-icon">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.65)"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                </div>
-                <div>
-                  <div class="arch-bullet-title">
-                    Security & compliance first
-                  </div>
-                  <div class="arch-bullet-desc">
-                    TLS 1.2+, role-based access, full audit logging, CERT-IN
-                    compliant. Per-airport data segregation with cross-airport
-                    analytics.
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="arch-diagram reveal" style="transition-delay: 0.2s">
-            <div class="arch-layer cloud">
-              <div class="arch-layer-label">Cloud — Central AOCC</div>
-              <div class="arch-layer-title">
-                Airport Operational Database (AODB)
-              </div>
-              <div class="arch-layer-desc">
-                Real-time data hub, decision engine, dashboards, reporting and
-                data warehouse for all airports
-              </div>
-              <div class="arch-chips">
-                <span class="arch-chip arch-chip-blue">Multi-airport</span>
-                <span class="arch-chip arch-chip-blue">Real-time</span>
-                <span class="arch-chip arch-chip-blue">Data warehouse</span>
-              </div>
-            </div>
-            <div class="arch-arrow">↕</div>
-            <div class="arch-layer ail">
-              <div class="arch-layer-label">On-premise — Per Airport</div>
-              <div class="arch-layer-title">
-                Airport Integration Layer (AIL)
-              </div>
-              <div class="arch-layer-desc">
-                Business rules engine, validation, message transformation, local
-                resilience
-              </div>
-              <div class="arch-chips">
-                <span class="arch-chip arch-chip-gold">AIDX</span>
-                <span class="arch-chip arch-chip-gold">SITA XML</span>
-                <span class="arch-chip arch-chip-gold">AMQP / TLS</span>
-              </div>
-            </div>
-            <div class="arch-arrow">↕</div>
-            <div class="arch-layer">
-              <div class="arch-layer-label">Airport Systems</div>
-              <div class="arch-layer-title">External Subsystem Interfaces</div>
-              <div class="arch-layer-desc">
-                Connects to your existing airport infrastructure without
-                rip-and-replace
-              </div>
-              <div class="arch-chips">
-                <span class="arch-chip arch-chip-white">BHS</span>
-                <span class="arch-chip arch-chip-white">FIDS</span>
-                <span class="arch-chip arch-chip-white">PAVA</span>
-                <span class="arch-chip arch-chip-white">ATM</span>
-                <span class="arch-chip arch-chip-white">BRS</span>
-                <span class="arch-chip arch-chip-white">A-CDM</span>
-                <span class="arch-chip arch-chip-white">CUTE</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════ METRICS ══════════════ -->
-    <!-- <section class="section">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="eyebrow">By the numbers</div>
-          <h2 class="section-h2">Results airports actually measure.</h2>
-          <p class="section-sub">
-            Operational outcomes from live Aerios deployments across AAI
-            airports.
-          </p>
-        </div>
-        <div class="metrics-grid">
-          <div class="metric-card reveal">
-            <div class="metric-icon-wrap">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-            </div>
-            <div class="metric-value">14<span>+</span></div>
-            <div class="metric-label">
-              Airports operating on a unified Aerios AODB simultaneously
-            </div>
-            <div class="metric-sub">↑ Scaling to 40+ this year</div>
-          </div>
-          <div class="metric-card reveal" style="transition-delay: 0.1s">
-            <div class="metric-icon-wrap">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-              </svg>
-            </div>
-            <div class="metric-value">99.5<span>%</span></div>
-            <div class="metric-label">
-              Platform uptime SLA across all connected airports, 24/7/365
-            </div>
-            <div class="metric-sub">↑ Measured by automated SLA tool</div>
-          </div>
-          <div class="metric-card reveal" style="transition-delay: 0.2s">
-            <div class="metric-icon-wrap">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-            </div>
-            <div class="metric-value">73<span>%</span></div>
-            <div class="metric-label">
-              Average item return rate via Lost & Found — versus under 40% with
-              manual processes
-            </div>
-            <div class="metric-sub">↑ 30pp above industry baseline</div>
-          </div>
-          <div class="metric-card reveal" style="transition-delay: 0.3s">
-            <div class="metric-icon-wrap">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="2" y="2" width="9" height="9" rx="2" />
-                <rect x="13" y="2" width="9" height="9" rx="2" />
-                <rect x="2" y="13" width="9" height="9" rx="2" />
-                <rect x="13" y="13" width="9" height="9" rx="2" />
-              </svg>
-            </div>
-            <div class="metric-value">20<span>+</span></div>
-            <div class="metric-label">
-              Operational modules deployable independently on a single shared
-              data layer
-            </div>
-            <div class="metric-sub">↑ Modular, no re-implementation</div>
-          </div>
-        </div>
-      </div>
-    </section> -->
-
-    <!-- ══════════════ INTEGRATIONS ══════════════ -->
-    <div class="integrations-strip">
-      <div class="container">
-        <div class="integrations-label reveal">
-          Connects with the systems already running your airport
-        </div>
-        <div class="integrations-row reveal" style="transition-delay: 0.1s">
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            SITA XML / AIDX
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            BHS
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            FIDS / CIDS / GIDS
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            PAVA
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            BRS
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            A-CDM
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            CUTE / CUSS
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            ATM Automation
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            AFTN / AMHS
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            Billing Systems
-          </div>
-          <div class="integration-chip">
-            <div class="integration-chip-dot"></div>
-            IATA SSIM
-          </div>
-        </div>
-      </div>
+      <div class="layer-photo"><img src="assets/img/aocc-rms.jpg" alt="Resource allocation Gantt view on a monitor in an airport operations centre" width="1200" height="800" loading="lazy"></div>
     </div>
 
-    <!-- ══════════════ QUOTE ══════════════ -->
-    <!-- <section class="quote-section">
-      <div class="container">
-        <div class="quote-inner reveal">
-          <div class="quote-mark">"</div>
-          <div class="quote-text">
-            Aerios gave us a <em>single view of every airport</em> in real time.
-            What used to take three separate systems and a phone call now
-            happens automatically — from allocation to handover to audit record.
-          </div>
-          <div class="quote-source">
-            <div class="quote-avatar">RK</div>
-            <div>
-              <div class="quote-source-name">Rajesh Kumar</div>
-              <div class="quote-source-role">
-                Director of Operations, AAI Regional Hub
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="layer">
+      <div class="layer-n">02<small>Ops &amp; maintenance</small></div>
+      <div class="layer-body">
+        <h3>Aerios Orbis</h3>
+        <div class="tag">Digitised operations, maintenance and passenger service workflows.</div>
+        <ul class="layer-mods">
+          <li>Asset management (CMMS)</li>
+          <li>Inspections</li>
+          <li>Operations log</li>
+          <li>Lost &amp; Found</li>
+          <li>Permit management</li>
+          <li>Badge management</li>
+        </ul>
+        <p style="margin-top:18px">Asset registry and lifecycle records, preventive maintenance, configurable inspection checklists with mobile forms, shift and occurrence logging with duty handover, and lost property with chain of custody. Permits and badges use the same stakeholder registry AMS already holds.</p>
+        <a class="layer-more" href="/brochures/aerios-orbis.pdf" target="_blank" rel="noopener">Aerios Orbis brochure</a>
       </div>
-    </section> -->
+      <div class="layer-photo"><img src="assets/img/orbis-inspection.jpg" alt="Airfield inspector recording a check on a tablet beside a fire and rescue vehicle" width="1200" height="800" loading="lazy"></div>
+    </div>
 
-    <!-- ══════════════ CTA ══════════════ -->
-    <section class="cta-section">
-      <div class="container">
-        <div class="reveal">
-          <h2 class="cta-h2">
-            Ready to modernize your<br />airport operations?
-          </h2>
-          <p class="cta-sub">
-            Talk to the Aerios team. We'll map out which modules fit your
-            current operation and show you a live deployment.
-          </p>
-          <div class="cta-actions">
-            <a href="/demo" class="btn btn-gold-lg">Request a Demo →</a>
-            <!-- <a
-              href="#"
-              class="btn btn-outline-navy"
-              style="padding: 14px 26px; font-size: 14px"
-              >Download brochure</a
-            > -->
-          </div>
-          <!-- <p class="cta-note">
-            No commitment required · Deployment scoping included · AAI framework
-            compliant
-          </p> -->
-        </div>
+    <div class="layer">
+      <div class="layer-n">03<small>Airside safety</small></div>
+      <div class="layer-body">
+        <h3>Aerios Vecta</h3>
+        <div class="tag">Airside vehicle tracking and safety. One live picture of the airfield.</div>
+        <ul class="layer-mods">
+          <li>Aircraft and vehicle tracking</li>
+          <li>Safety alerts and event detection</li>
+          <li>Geofencing and custom rules</li>
+          <li>Blipper tracking hardware</li>
+          <li>CCTV, NOTAM and METAR in the same view</li>
+          <li>30-day airside replay</li>
+        </ul>
+        <p style="margin-top:18px">Aircraft via ADS-B and surveillance feeds, vehicles via GNSS, on one airport map. Incursion, speed, dwell-time and boundary alerts with configurable severity, and in-cab warnings from the Blipper retrofit unit at one-second updates and up to 1.5 m accuracy.</p>
+        <a class="layer-more" href="/brochures/aerios-vecta.pdf" target="_blank" rel="noopener">Aerios Vecta brochure</a>
       </div>
-    </section>
+      <div class="layer-photo"><img src="assets/img/vecta-vehicle.jpg" alt="Airport safety vehicle on the apron at dusk with an aircraft behind" width="1200" height="800" loading="lazy"></div>
+    </div>
+  </div>
+</section>
 
-    <!-- ══════════════ FOOTER ══════════════ -->
-    <footer>
-      <div class="container">
-        <div class="footer-grid">
-          <div>
-            <a href="/" class="footer-logo" aria-label="Aerios">
-              <svg
-                class="footer-logo-svg"
-                viewBox="0 0 442 126"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <mask
-                  id="aerios-footer-mask"
-                  style="mask-type: alpha"
-                  maskUnits="userSpaceOnUse"
-                  x="0"
-                  y="0"
-                  width="117"
-                  height="117"
-                >
-                  <circle cx="58.5" cy="58.5" r="58.5" fill="white" />
-                </mask>
-                <g mask="url(#aerios-footer-mask)">
-                  <path
-                    d="M0 106.254V116.999H48.949L61.2857 70.8359L0 106.254Z"
-                    fill="#F13A40"
-                  />
-                  <path
-                    d="M0 42.7148V86.4904L51.7347 56.6434L0 42.7148Z"
-                    fill="#F13A40"
-                  />
-                  <path
-                    d="M0 25.2041V0H117V18.9694L72.6939 44.5714L0 25.2041Z"
-                    fill="#FFFFFF"
-                  />
-                  <path
-                    d="M117 38.6055V117.003H66.5918L82.2449 58.6361L117 38.6055Z"
-                    fill="#FFFFFF"
-                  />
-                </g>
-                <path
-                  d="M279.511 121V95.5455H284.01V105.066H284.196C284.428 104.602 284.756 104.109 285.178 103.587C285.601 103.057 286.173 102.605 286.893 102.232C287.614 101.851 288.534 101.661 289.653 101.661C291.128 101.661 292.458 102.038 293.642 102.792C294.836 103.537 295.78 104.643 296.476 106.11C297.181 107.568 297.533 109.358 297.533 111.479C297.533 113.576 297.189 115.357 296.501 116.824C295.813 118.29 294.877 119.409 293.692 120.18C292.507 120.95 291.165 121.336 289.665 121.336C288.571 121.336 287.664 121.153 286.943 120.789C286.222 120.424 285.642 119.985 285.203 119.471C284.772 118.949 284.437 118.456 284.196 117.992H283.935V121H279.511ZM283.923 111.455C283.923 112.689 284.097 113.77 284.445 114.699C284.801 115.627 285.311 116.352 285.974 116.874C286.645 117.387 287.457 117.644 288.41 117.644C289.404 117.644 290.237 117.379 290.908 116.849C291.579 116.31 292.085 115.577 292.424 114.649C292.772 113.712 292.946 112.648 292.946 111.455C292.946 110.27 292.777 109.217 292.437 108.298C292.097 107.378 291.592 106.657 290.92 106.135C290.249 105.613 289.412 105.352 288.41 105.352C287.449 105.352 286.632 105.605 285.961 106.11C285.29 106.616 284.781 107.324 284.433 108.235C284.093 109.147 283.923 110.22 283.923 111.455ZM303.505 128.159C302.892 128.159 302.324 128.109 301.802 128.01C301.288 127.919 300.878 127.811 300.572 127.687L301.616 124.182C302.27 124.372 302.854 124.464 303.368 124.455C303.882 124.447 304.333 124.285 304.723 123.971C305.121 123.664 305.456 123.15 305.73 122.429L306.115 121.398L299.192 101.909H303.965L308.365 116.327H308.563L312.976 101.909H317.761L310.117 123.312C309.761 124.323 309.288 125.189 308.7 125.909C308.112 126.639 307.391 127.194 306.537 127.575C305.692 127.964 304.681 128.159 303.505 128.159ZM329.755 121V95.5455H334.254V105.066H334.441C334.673 104.602 335 104.109 335.422 103.587C335.845 103.057 336.417 102.605 337.138 102.232C337.858 101.851 338.778 101.661 339.897 101.661C341.372 101.661 342.702 102.038 343.887 102.792C345.08 103.537 346.024 104.643 346.72 106.11C347.425 107.568 347.777 109.358 347.777 111.479C347.777 113.576 347.433 115.357 346.745 116.824C346.057 118.29 345.121 119.409 343.936 120.18C342.751 120.95 341.409 121.336 339.909 121.336C338.816 121.336 337.908 121.153 337.187 120.789C336.466 120.424 335.886 119.985 335.447 119.471C335.016 118.949 334.681 118.456 334.441 117.992H334.18V121H329.755ZM334.167 111.455C334.167 112.689 334.341 113.77 334.689 114.699C335.045 115.627 335.555 116.352 336.218 116.874C336.889 117.387 337.701 117.644 338.654 117.644C339.648 117.644 340.481 117.379 341.152 116.849C341.823 116.31 342.329 115.577 342.669 114.649C343.017 113.712 343.191 112.648 343.191 111.455C343.191 110.27 343.021 109.217 342.681 108.298C342.341 107.378 341.836 106.657 341.165 106.135C340.493 105.613 339.657 105.352 338.654 105.352C337.693 105.352 336.877 105.605 336.205 106.11C335.534 106.616 335.025 107.324 334.677 108.235C334.337 109.147 334.167 110.22 334.167 111.455ZM356.101 95.5455V121H351.602V95.5455H356.101ZM372.896 112.971V101.909H377.395V121H373.032V117.607H372.834C372.403 118.676 371.694 119.55 370.708 120.229C369.731 120.909 368.525 121.249 367.091 121.249C365.84 121.249 364.734 120.971 363.773 120.416C362.82 119.852 362.074 119.036 361.536 117.967C360.997 116.89 360.728 115.589 360.728 114.065V101.909H365.227V113.369C365.227 114.578 365.559 115.54 366.221 116.252C366.884 116.965 367.754 117.321 368.831 117.321C369.494 117.321 370.137 117.159 370.758 116.836C371.379 116.513 371.889 116.033 372.287 115.395C372.693 114.748 372.896 113.94 372.896 112.971ZM386.521 109.814V121H382.022V101.909H386.322V105.153H386.546C386.985 104.084 387.685 103.235 388.646 102.605C389.616 101.975 390.813 101.661 392.238 101.661C393.556 101.661 394.703 101.942 395.681 102.506C396.667 103.069 397.43 103.885 397.968 104.954C398.515 106.023 398.784 107.32 398.776 108.844V121H394.277V109.54C394.277 108.264 393.945 107.266 393.282 106.545C392.628 105.824 391.72 105.464 390.56 105.464C389.773 105.464 389.073 105.638 388.46 105.986C387.855 106.326 387.379 106.819 387.031 107.465C386.691 108.111 386.521 108.894 386.521 109.814ZM408.843 121.385C407.634 121.385 406.544 121.17 405.575 120.739C404.613 120.3 403.851 119.654 403.288 118.8C402.733 117.947 402.455 116.894 402.455 115.643C402.455 114.566 402.654 113.675 403.052 112.971C403.449 112.267 403.992 111.703 404.68 111.281C405.368 110.858 406.142 110.539 407.004 110.324C407.874 110.1 408.773 109.938 409.701 109.839C410.82 109.723 411.727 109.619 412.423 109.528C413.119 109.429 413.624 109.279 413.939 109.081C414.263 108.873 414.424 108.554 414.424 108.124V108.049C414.424 107.113 414.147 106.388 413.591 105.874C413.036 105.36 412.237 105.103 411.193 105.103C410.091 105.103 409.216 105.344 408.57 105.824C407.932 106.305 407.501 106.872 407.277 107.527L403.076 106.93C403.408 105.77 403.955 104.801 404.717 104.022C405.479 103.235 406.412 102.647 407.514 102.257C408.616 101.859 409.834 101.661 411.168 101.661C412.087 101.661 413.003 101.768 413.915 101.984C414.826 102.199 415.659 102.555 416.413 103.053C417.167 103.541 417.772 104.208 418.227 105.054C418.691 105.899 418.923 106.955 418.923 108.223V121H414.598V118.377H414.449C414.176 118.908 413.79 119.405 413.293 119.869C412.804 120.325 412.187 120.693 411.441 120.975C410.704 121.249 409.838 121.385 408.843 121.385ZM410.012 118.079C410.915 118.079 411.698 117.901 412.361 117.545C413.024 117.18 413.533 116.7 413.89 116.103C414.254 115.506 414.437 114.856 414.437 114.152V111.902C414.296 112.018 414.055 112.126 413.716 112.225C413.384 112.325 413.011 112.412 412.597 112.486C412.183 112.561 411.773 112.627 411.367 112.685C410.961 112.743 410.608 112.793 410.31 112.834C409.639 112.925 409.038 113.074 408.508 113.282C407.978 113.489 407.559 113.779 407.253 114.152C406.946 114.516 406.793 114.989 406.793 115.569C406.793 116.397 407.095 117.023 407.7 117.445C408.305 117.868 409.075 118.079 410.012 118.079ZM439.816 101.909L433.018 121H428.046L421.248 101.909H426.045L430.433 116.091H430.631L435.031 101.909H439.816Z"
-                  fill="#FFFFFF"
-                />
-                <path
-                  d="M193.3 71.1969C187.3 71.1969 182.634 69.8635 179.3 67.1969C176.034 64.5302 174.4 60.7635 174.4 55.8969C174.4 50.6969 176.134 46.7302 179.6 43.9969C183.134 41.2635 188.034 39.8969 194.3 39.8969H207C206.6 36.2302 205.567 33.4302 203.9 31.4969C202.234 29.5635 199.767 28.5969 196.5 28.5969C194.1 28.5969 192 29.0969 190.2 30.0969C188.4 31.0969 186.867 32.6635 185.6 34.7969L175.8 31.1969C176.867 28.9969 178.267 26.9635 180 25.0969C181.8 23.1635 184.034 21.6302 186.7 20.4969C189.434 19.3635 192.7 18.7969 196.5 18.7969C201.367 18.7969 205.434 19.7635 208.7 21.6969C211.967 23.5635 214.367 26.2635 215.9 29.7969C217.5 33.3302 218.3 37.5969 218.3 42.5969L218 69.9969H207.7L207.4 63.8969C206.067 66.2302 204.2 68.0302 201.8 69.2969C199.467 70.5635 196.634 71.1969 193.3 71.1969ZM194.7 61.7969C197.167 61.7969 199.334 61.2635 201.2 60.1969C203.134 59.0635 204.6 57.5635 205.6 55.6969C206.667 53.8302 207.2 51.7635 207.2 49.4969V48.4969H197.9C193.434 48.4969 190.3 49.1302 188.5 50.3969C186.7 51.5969 185.8 53.3302 185.8 55.5969C185.8 57.5302 186.567 59.0635 188.1 60.1969C189.7 61.2635 191.9 61.7969 194.7 61.7969Z"
-                  fill="#FFFFFF"
-                />
-                <path
-                  d="M251.942 71.1969C247.075 71.1969 242.742 70.0969 238.942 67.8969C235.208 65.6302 232.242 62.5302 230.042 58.5969C227.908 54.6635 226.842 50.1302 226.842 44.9969C226.842 39.8635 227.942 35.3302 230.142 31.3969C232.342 27.4635 235.342 24.3969 239.142 22.1969C243.008 19.9302 247.408 18.7969 252.342 18.7969C256.808 18.7969 260.842 19.9635 264.442 22.2969C268.042 24.5635 270.875 27.8635 272.942 32.1969C275.075 36.5302 276.142 41.6969 276.142 47.6969H238.442C238.775 51.8969 240.308 55.1969 243.042 57.5969C245.842 59.9969 249.142 61.1969 252.942 61.1969C256.008 61.1969 258.542 60.5302 260.542 59.1969C262.542 57.7969 264.108 55.9969 265.242 53.7969L275.142 57.9969C273.742 60.6635 271.942 62.9969 269.742 64.9969C267.608 66.9969 265.042 68.5302 262.042 69.5969C259.108 70.6635 255.742 71.1969 251.942 71.1969ZM239.142 39.0969H264.042C263.842 36.6969 263.142 34.7302 261.942 33.1969C260.742 31.5969 259.275 30.3969 257.542 29.5969C255.808 28.7969 253.975 28.3969 252.042 28.3969C250.175 28.3969 248.275 28.7969 246.342 29.5969C244.475 30.3302 242.875 31.4969 241.542 33.0969C240.208 34.6969 239.408 36.6969 239.142 39.0969Z"
-                  fill="#FFFFFF"
-                />
-                <path
-                  d="M284.72 69.9969V19.9969H295.92V29.0969C297.92 25.9635 300.52 23.6302 303.72 22.0969C306.92 20.5635 310.22 19.7969 313.62 19.7969V30.4969C310.553 30.4969 307.653 30.9302 304.92 31.7969C302.253 32.5969 300.087 33.9302 298.42 35.7969C296.753 37.6635 295.92 40.1302 295.92 43.1969V69.9969H284.72Z"
-                  fill="#FFFFFF"
-                />
-                <path
-                  d="M321.748 69.9969V19.9969H332.848V69.9969H321.748Z"
-                  fill="#FFFFFF"
-                />
-                <path
-                  d="M369.048 71.1969C364.048 71.1969 359.581 70.0969 355.648 67.8969C351.781 65.6302 348.748 62.5302 346.548 58.5969C344.348 54.6635 343.248 50.1302 343.248 44.9969C343.248 39.8635 344.315 35.3302 346.448 31.3969C348.648 27.4635 351.681 24.3969 355.548 22.1969C359.415 19.9302 363.848 18.7969 368.848 18.7969C373.848 18.7969 378.281 19.9302 382.148 22.1969C386.015 24.3969 389.015 27.4635 391.148 31.3969C393.348 35.3302 394.448 39.8635 394.448 44.9969C394.448 50.1302 393.381 54.6635 391.248 58.5969C389.115 62.5302 386.115 65.6302 382.248 67.8969C378.381 70.0969 373.981 71.1969 369.048 71.1969ZM369.048 60.8969C371.781 60.8969 374.215 60.2302 376.348 58.8969C378.481 57.4969 380.148 55.6302 381.348 53.2969C382.548 50.8969 383.148 48.1302 383.148 44.9969C383.148 41.8635 382.515 39.1302 381.248 36.7969C380.048 34.3969 378.381 32.5302 376.248 31.1969C374.115 29.7969 371.648 29.0969 368.848 29.0969C366.048 29.0969 363.581 29.7635 361.448 31.0969C359.315 32.4302 357.648 34.2969 356.448 36.6969C355.248 39.0969 354.648 41.8635 354.648 44.9969C354.648 48.1302 355.248 50.8969 356.448 53.2969C357.715 55.6302 359.415 57.4969 361.548 58.8969C363.748 60.2302 366.248 60.8969 369.048 60.8969Z"
-                  fill="#FFFFFF"
-                />
-                <path
-                  d="M422.354 71.1969C419.02 71.1969 415.954 70.6969 413.154 69.6969C410.354 68.6969 407.954 67.2969 405.954 65.4969C403.954 63.6302 402.42 61.4635 401.354 58.9969L411.054 54.6969C412.054 56.5635 413.52 58.1302 415.454 59.3969C417.454 60.6635 419.654 61.2969 422.054 61.2969C424.654 61.2969 426.72 60.8635 428.254 59.9969C429.854 59.0635 430.654 57.7969 430.654 56.1969C430.654 54.6635 430.054 53.4969 428.854 52.6969C427.654 51.8302 425.954 51.1302 423.754 50.5969L419.054 49.2969C414.32 48.0969 410.62 46.1969 407.954 43.5969C405.287 40.9302 403.954 37.8969 403.954 34.4969C403.954 29.4969 405.554 25.6302 408.754 22.8969C412.02 20.1635 416.687 18.7969 422.754 18.7969C425.82 18.7969 428.62 19.2635 431.154 20.1969C433.754 21.0635 435.987 22.3302 437.854 23.9969C439.72 25.5969 441.02 27.4969 441.754 29.6969L432.454 33.8969C431.787 32.2302 430.52 30.9635 428.654 30.0969C426.787 29.1635 424.72 28.6969 422.454 28.6969C420.187 28.6969 418.42 29.1969 417.154 30.1969C415.887 31.1302 415.254 32.4635 415.254 34.1969C415.254 35.1969 415.82 36.1302 416.954 36.9969C418.087 37.7969 419.72 38.4635 421.854 38.9969L427.754 40.3969C431.02 41.1969 433.687 42.4635 435.754 44.1969C437.82 45.8635 439.354 47.7635 440.354 49.8969C441.354 51.9635 441.854 54.0635 441.854 56.1969C441.854 59.1969 440.987 61.8302 439.254 64.0969C437.587 66.3635 435.287 68.1302 432.354 69.3969C429.42 70.5969 426.087 71.1969 422.354 71.1969Z"
-                  fill="#FFFFFF"
-                />
-                <path
-                  d="M332.97 14H322L326.488 0H337L332.97 14Z"
-                  fill="#F13A40"
-                />
-              </svg>
-            </a>
-            <p class="footer-desc">
-              The operating system for airports — a cloud-native, modular
-              platform serving airports of all sizes, from regional hubs to
-              major international terminals.
-            </p>
-            <p class="footer-aai">Winner · AAI Startup Initiative</p>
-          </div>
-          <div>
-            <div class="footer-col-title">Products</div>
-            <ul class="footer-links">
-              <li><a href="#">Aerios Flight</a></li>
-              <li><a href="#">Aerios View</a></li>
-              <li><a href="#">Aerios Works</a></li>
-              <li><a href="#">Aerios Ops</a></li>
-              <li><a href="#">Aerios Commercial</a></li>
-              <li><a href="#">Aerios Pax Processing</a></li>
-            </ul>
-          </div>
-          <div>
-            <div class="footer-col-title">Company</div>
-            <ul class="footer-links">
-              <li><a href="/about">About Aerios</a></li>
-              <li><a href="#">Success Stories</a></li>
-              <li><a href="/contact">Contact</a></li>
-              <li><a href="/demo">Request Demo</a></li>
-              <li><a href="privacy-policy.pdf">Privacy Policy</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <div class="footer-copy">© 2026 Aerios. All rights reserved.</div>
-          <div class="footer-socials">
-            <a
-              href="https://in.linkedin.com/company/blunav"
-              class="footer-social"
-              aria-label="LinkedIn"
-              target="_blank"
-            >
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                />
-              </svg>
-            </a>
-            <a
-              href="https://twitter.com/blunav_in"
-              class="footer-social"
-              aria-label="X / Twitter"
-              target="_blank"
-            >
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+<section class="vert">
+  <div class="wrap vert-grid">
+    <div>
+      <div class="eyebrow">Vertically integrated</div>
+      <h2>Every module sits on the same record.</h2>
+      <p style="margin-top:20px">A permit issued in Orbis references the airline and ground handler already registered in the AODB. An inspection defect raised on the apron becomes a work order without leaving the platform. A stand blocked for maintenance disappears from RMS allocation at the same moment.</p>
+      <p>That is what we mean by vertically integrated: one identity model, one mobile client, one automation engine and one audit trail, shared rather than duplicated across layers.</p>
+    </div>
+    <div class="stack" aria-label="How the three layers share one platform">
+      <div class="stack-row"><div class="stack-k">03 · Airside</div><div class="stack-v"><strong>Vecta</strong>Live positions, geofences, alerts <em>· reads stands, runways and NOTAMs from the record below</em></div></div>
+      <div class="stack-row"><div class="stack-k">02 · Ops &amp; maint.</div><div class="stack-v"><strong>Orbis</strong>Assets, inspections, ops log, lost &amp; found, permits, badges <em>· reads stakeholders and resources from the record below</em></div></div>
+      <div class="stack-row"><div class="stack-k">01 · Core</div><div class="stack-v"><strong>AMS</strong>AODB, RMS, FIDS <em>· schedules, resources, stakeholders, reference data</em></div></div>
+      <div class="stack-base"><strong>Common platform</strong><span>Identity · Mobile · Automation · Audit trail · APIs</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Common platform capabilities</div>
+    <h2>Built once. Available in every module.</h2>
+    <ul class="caps">
+      <li>Cloud-native architecture</li>
+      <li>Role-based access control</li>
+      <li>Mobile and tablet support</li>
+      <li>QR and barcode scanning</li>
+      <li>Notifications and escalations</li>
+      <li>Workflow automation</li>
+      <li>Document management</li>
+      <li>Dashboards and analytics</li>
+      <li>Advanced search and filtering</li>
+      <li>Complete audit trails</li>
+      <li>API integration framework</li>
+      <li>Multi-airport deployment</li>
+    </ul>
+  </div>
+</section>
+
+<section class="platform" id="platform">
+  <div class="wrap">
+    <div class="eyebrow">Platform</div>
+    <h2>Cloud where it helps. On-premise where it matters.</h2>
+    <p class="lede">The central database runs in the cloud so several airports can share one view. A small integration layer sits at each airport so operations keep running when the link doesn't.</p>
+    <div class="pgrid">
+      <div class="pcell">
+        <div class="where">Cloud · central AOCC</div>
+        <h3>Airport Operational Database</h3>
+        <p>The system of record. Dashboards, reporting and the data warehouse for every airport on the network.</p>
+        <div class="speaks">Multi-airport · Real time · Long-term storage</div>
       </div>
-    </footer>
+      <div class="pcell">
+        <div class="where">On-premise · per airport</div>
+        <h3>Airport Integration Layer</h3>
+        <p>Business rules, validation and message translation. Keeps working through a connectivity drop and syncs when the link returns.</p>
+        <div class="speaks">AIDX · AMQP over TLS</div>
+      </div>
+      <div class="pcell">
+        <div class="where">Already at your airport</div>
+        <h3>Your existing systems</h3>
+        <p>Baggage handling, displays, public address, ATM automation, reconciliation and A-CDM. We connect to what you have.</p>
+        <div class="speaks">BHS · FIDS · PAVA · ATM · BRS · A-CDM · CUTE / CUSS · AFTN / AMHS · IATA SSIM</div>
+      </div>
+    </div>
+    <div class="pnotes">
+      <div><strong>Standards</strong>IATA and ICAO coding across all modules. AIDX messaging natively.</div>
+      <div><strong>Security</strong>Encryption at rest and in transit, role-based access, full audit logging, CERT-In compliant. Per-airport data segregation.</div>
+      <div><strong>Adding airports</strong>New airports join the same AODB without re-architecture. No migration when a concession term is extended.</div>
+    </div>
+  </div>
+</section>
 
-    <script src="assets/js/shared.js" defer></script>
-    <script src="assets/js/home.js" defer></script>
-  </body>
+<section id="how-we-work">
+  <div class="wrap work-grid">
+    <div>
+      <div class="eyebrow">How we work</div>
+      <h2>Your ops team's software partner, not their vendor.</h2>
+      <div class="work-photo"><img src="assets/img/team-tablet.jpg" alt="Two airside safety officers reviewing a tablet on the airfield" width="1200" height="800" loading="lazy"></div>
+    </div>
+    <div>
+      <div class="work-item">
+        <div class="n">01</div>
+        <div><h3>We start small, on purpose.</h3><p>Most airports begin with a single module and a single terminal. That first deployment tells both of us whether the fit is right. There's no minimum bundle.</p></div>
+      </div>
+      <div class="work-item">
+        <div class="n">02</div>
+        <div><h3>Your people shape the roadmap.</h3><p>When your AOCC or airside team tells us a workflow is wrong, that goes on the board, not into a backlog nobody reads. The modules we build next are the ones airports ask for.</p></div>
+      </div>
+      <div class="work-item">
+        <div class="n">03</div>
+        <div><h3>You get a named engineer, not a ticket queue.</h3><p>Each airport we work with has one person on our side who knows its layout, its subsystems and its people. That person answers the phone during operations.</p></div>
+      </div>
+      <div class="work-item">
+        <div class="n">04</div>
+        <div><h3>Your data is yours.</h3><p>Per-airport data segregation, and your records are exportable at any time. If you leave, you take everything with you in standard formats.</p></div>
+      </div>
+      <div class="work-item">
+        <div class="n">05</div>
+        <div><h3>Built to international regulations. Strict on data privacy and residency.</h3><p>Aerios follows ICAO and IATA operating standards and the DGCA and CERT-In requirements Indian airports answer to. Your data is segregated per airport, encrypted at rest and in transit, and hosted in the jurisdiction you choose so residency rules are met by design.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="people">
+  <div class="wrap">
+    <div class="eyebrow">Company</div>
+    <h2>Who you'll be dealing with.</h2>
+    <p class="lede">Aerios is built by Blunav System Private Ltd, a small team that has spent its careers in airport operations and airport IT.</p>
+    <div class="people">
+      <div class="person">
+        <h3>Close to a quarter century of AODB, RMS and FIDS.</h3>
+        <div class="role">Operational knowledge</div>
+        <p>Between us we have spent most of our working lives inside airport operations: running and integrating the operational database, allocating stands and counters under pressure, and keeping display systems honest across a terminal. Aerios is what we wished we'd had.</p>
+      </div>
+      <div class="person">
+        <h3>Small on purpose.</h3>
+        <div class="role">How we're built</div>
+        <p>Engineers, aviation operations specialists and airport IT people on one team, with no layer between the person who writes the code and the person who stands in the AOCC. When you call, you reach someone who has done the job.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow">Get in touch</div>
+      <h2>Tell us about your airport. We'll tell you what fits and what doesn't.</h2>
+      <p class="lede">A first conversation takes under an hour. We'll ask about your terminal, your subsystems and what's slowing your ops team down today, then show you a live deployment rather than a slide deck.</p>
+    </div>
+    <div class="contact-card">
+      <div class="k">Email</div>
+      <div class="v"><a href="mailto:info@blunav.aero">info@blunav.aero</a></div>
+      <a class="btn btn-primary" href="#contact" data-open-modal>Book a walkthrough</a>
+      <small>A person replies, usually within a working day. Airport staff already using Aerios can <a href="https://aerios.blunav.cloud" rel="noopener">sign in here</a>. <a href="/privacy-policy.pdf">Terms &amp; privacy policy</a>.</small>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img src="assets/img/blunav-logo-white.png" alt="Blunav" width="851" height="150">
+        <p style="margin:0;max-width:28ch">Aerios is the Airport Operating System from Blunav System Private Ltd.</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#suites">Aerios AMS</a></li>
+          <li><a href="#suites">Aerios Orbis</a></li>
+          <li><a href="#suites">Aerios Vecta</a></li>
+          <li><a href="#platform">Platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#people">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact" data-open-modal>Book a walkthrough</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="mailto:info@blunav.aero">info@blunav.aero</a></li>
+          <li><a href="https://in.linkedin.com/company/blunav" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://twitter.com/blunav_in" target="_blank" rel="noopener">X</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Blunav System Private Ltd</div>
+      <div><a href="/privacy-policy.pdf" style="color:rgba(255,255,255,0.7)">Terms &amp; privacy policy</a></div>
+      <div>AODB · RMS · FIDS · Orbis · Vecta</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var t = document.querySelector('.nav-toggle'), l = document.getElementById('nav-links');
+  function setNav(open) {
+    l.classList.toggle('open', open);
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  t.addEventListener('click', function () { setNav(!l.classList.contains('open')); });
+  // Tapping a link inside the mobile menu should dismiss it, not leave the
+  // overlay sitting over the section it just scrolled to.
+  l.addEventListener('click', function (e) { if (e.target.closest('a')) setNav(false); });
+</script>
+
+<div class="modal" id="walkthrough-modal" role="dialog" aria-modal="true" aria-labelledby="wt-title" hidden>
+  <div class="modal-box">
+    <button class="modal-close" type="button" aria-label="Close" data-close-modal>&times;</button>
+    <h3 id="wt-title">Book a walkthrough</h3>
+    <p class="sub">Tell us a little about your airport and we'll come back to you with times. A person reads every one of these.</p>
+    <form id="walkthrough-form" novalidate>
+      <div class="field-row">
+        <div class="field"><label for="wt-name">Name</label><input id="wt-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="wt-role">Role</label><input id="wt-role" name="role" type="text" autocomplete="organization-title" placeholder="e.g. AOCC manager"></div>
+      </div>
+      <div class="field"><label for="wt-org">Airport or organisation</label><input id="wt-org" name="organisation" type="text" autocomplete="organization" required></div>
+      <div class="field-row">
+        <div class="field"><label for="wt-email">Work email</label><input id="wt-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="wt-phone">Phone (optional)</label><input id="wt-phone" name="phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field">
+        <label for="wt-interest">What would you like to see?</label>
+        <select id="wt-interest" name="interest">
+          <option value="Not sure yet">Not sure yet, show me around</option>
+          <option value="Aerios AMS">Aerios AMS (AODB, RMS, FIDS)</option>
+          <option value="Aerios Orbis">Aerios Orbis (operations and maintenance)</option>
+          <option value="Aerios Vecta">Aerios Vecta (airside tracking and safety)</option>
+          <option value="Whole platform">The whole platform</option>
+        </select>
+      </div>
+      <div class="field"><label for="wt-msg">Anything else we should know?</label><textarea id="wt-msg" name="message" placeholder="Terminals, current systems, what's slowing your team down"></textarea></div>
+      <div class="hp" aria-hidden="true"><label>Leave this empty<input name="botcheck" type="text" tabindex="-1" autocomplete="off"></label></div>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Send request</button>
+        <span class="form-note">Goes to the Blunav team. No newsletter, no auto-replies. We handle what you send under our <a href="/privacy-policy.pdf" target="_blank" rel="noopener">terms and privacy policy</a>.</span>
+      </div>
+      <div class="form-msg" id="wt-status" role="status"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Walkthrough requests are delivered by Web3Forms (static-host friendly, no backend).
+  // Create a free access key at https://web3forms.com with the destination inbox and
+  // paste it below. While the placeholder is in place the form falls back to the
+  // visitor's mail client so a submission is never silently dropped.
+  var WEB3FORMS_KEY = 'ee089fa2-8149-4a63-a234-3a2eeebae078';
+  var FORM_ENDPOINT = 'https://api.web3forms.com/submit';
+  var MAIL_TO = 'nishanth@blunav.aero,susee@blunav.aero';
+
+  var modal = document.getElementById('walkthrough-modal');
+  var form = document.getElementById('walkthrough-form');
+  var statusEl = document.getElementById('wt-status');
+  var lastFocus = null;
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    lastFocus = document.activeElement;
+    modal.hidden = false; modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setNav(false);
+    setTimeout(function () { document.getElementById('wt-name').focus(); }, 0);
+  }
+  function closeModal() {
+    modal.classList.remove('open'); modal.hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('[data-open-modal]').forEach(function (el) { el.addEventListener('click', openModal); });
+  document.querySelectorAll('[data-close-modal]').forEach(function (el) { el.addEventListener('click', closeModal); });
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    // The dialog declares aria-modal, so keep Tab inside it.
+    if (e.key !== 'Tab') return;
+    var f = modal.querySelectorAll('button, [href], input, select, textarea');
+    f = Array.prototype.filter.call(f, function (el) {
+      return !el.disabled && el.tabIndex !== -1 && el.offsetParent !== null;
+    });
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  function showMsg(kind, text) { statusEl.className = 'form-msg ' + kind; statusEl.textContent = text; }
+
+  function buildMailto(data) {
+    var body = [
+      'Name: ' + data.name,
+      'Role: ' + data.role,
+      'Airport or organisation: ' + data.organisation,
+      'Work email: ' + data.email,
+      'Phone: ' + data.phone,
+      'Interested in: ' + data.interest,
+      '',
+      data.message
+    ].join('\n');
+    return 'mailto:' + MAIL_TO +
+      '?subject=' + encodeURIComponent('Walkthrough request from ' + (data.organisation || data.name)) +
+      '&body=' + encodeURIComponent(body);
+  }
+
+  // Renders a fallback the visitor can actually act on. We still try to launch
+  // the mail client, but never depend on it: browsers block external-protocol
+  // navigation without a fresh user gesture, and plenty of machines have no mail
+  // client registered at all. The link and the addresses stay on screen either
+  // way, and the form is deliberately NOT reset so nothing typed is lost.
+  function mailtoFallback(data, lead) {
+    var href = buildMailto(data);
+    statusEl.className = 'form-msg err';
+    statusEl.textContent = '';
+
+    var line1 = document.createElement('div');
+    line1.textContent = lead || 'We could not reach the form service from your browser.';
+
+    var line2 = document.createElement('div');
+    line2.style.marginTop = '8px';
+    var open = document.createElement('a');
+    open.href = href;
+    open.textContent = 'Send it by email instead';
+    line2.appendChild(open);
+    line2.appendChild(document.createTextNode(' — or write to '));
+    var direct = document.createElement('a');
+    direct.href = 'mailto:' + MAIL_TO;
+    direct.textContent = MAIL_TO.split(',').join(' or ');
+    line2.appendChild(direct);
+    line2.appendChild(document.createTextNode('. Your details are still in the form above.'));
+
+    statusEl.appendChild(line1);
+    statusEl.appendChild(line2);
+
+    try { window.location.href = href; } catch (err) { /* link above still works */ }
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (form.botcheck.value) return; // honeypot
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    var data = {};
+    ['name', 'role', 'organisation', 'email', 'phone', 'interest', 'message'].forEach(function (k) { data[k] = form[k].value.trim(); });
+    data.page = location.href;
+    var btn = form.querySelector('[type=submit]');
+    btn.disabled = true; btn.textContent = 'Sending';
+    statusEl.className = 'form-msg';
+
+    function done() { btn.disabled = false; btn.textContent = 'Send request'; }
+
+    if (!FORM_ENDPOINT || !WEB3FORMS_KEY || WEB3FORMS_KEY.indexOf('REPLACE_') === 0) {
+      mailtoFallback(data, 'This form is not connected to a mail service yet.');
+      done();
+      return;
+    }
+
+    var payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: 'Walkthrough request from ' + (data.organisation || data.name),
+      from_name: 'Aerios website',
+      replyto: data.email,
+      botcheck: false
+    };
+    Object.keys(data).forEach(function (k) { payload[k] = data[k]; });
+
+    // A JSON content-type makes this a preflighted CORS request, so the browser
+    // sends an OPTIONS first. If that preflight is refused, fetch rejects before
+    // the form is ever delivered — so retry once as multipart, which is a CORS
+    // "simple request" and needs no preflight. Whichever transport the service
+    // accepts, the submission gets through.
+    function postJson() {
+      return fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }
+    function postMultipart() {
+      var fd = new FormData();
+      Object.keys(payload).forEach(function (k) {
+        // botcheck must not be sent here: as form data it would arrive as the
+        // string "false", which the spam check reads as a filled-in honeypot.
+        if (k !== 'botcheck') fd.append(k, payload[k]);
+      });
+      return fetch(FORM_ENDPOINT, { method: 'POST', body: fd });
+    }
+
+    postJson()
+      .catch(function () { return postMultipart(); })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (res) {
+          return { status: r.status, res: res };
+        });
+      })
+      .then(function (out) {
+        if (out.res && out.res.success === true) {
+          showMsg('ok', 'Thanks, ' + data.name.split(' ')[0] + '. We have your request and will reply from a real inbox, usually within a working day.');
+          form.reset();
+        } else {
+          // Reachable but refused (bad key, quota, spam rules). Say why rather
+          // than pretending a mail client opened.
+          var why = (out.res && out.res.message) ? out.res.message : 'HTTP ' + out.status;
+          mailtoFallback(data, 'The form service turned this request down: ' + why);
+        }
+        done();
+      })
+      .catch(function () {
+        mailtoFallback(data, 'We could not reach the form service from your browser.');
+        done();
+      });
+  });
+</script>
+</body>
 </html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web3Forms delivery check</title>
+<style>
+  body { font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; margin: 0; padding: 32px 24px; background: #F4F7FB; color: #0F172A; }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  p.sub { color: #475569; margin: 0 0 24px; }
+  button { font: inherit; font-weight: 600; padding: 11px 18px; background: #071B34; color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  pre { background: #fff; border: 1px solid #CBD5E1; padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; font: 12.5px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; margin: 20px 0 0; }
+  .v { padding: 12px 14px; border: 1px solid; margin-top: 12px; }
+  .v.ok { background: #DCFCE7; border-color: #22C55E; color: #15803D; }
+  .v.no { background: #FFEDD5; border-color: #F97316; color: #C2410C; }
+  code { background: #F1F5F9; padding: 1px 5px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Web3Forms delivery check</h1>
+  <p class="sub">
+    Diagnostic only &mdash; not part of the published site (<code>legacy/</code> is excluded from the
+    GitHub&nbsp;Pages build). Open this from the same machine you browse on, press the button, and it
+    sends one real submission with the access key from <code>index.html</code>, trying both transports
+    and printing exactly what the service returns.
+  </p>
+  <button id="go">Send one real test submission</button>
+  <div id="verdict"></div>
+  <pre id="log">Ready.</pre>
+</main>
+
+<script>
+  var KEY = 'ee089fa2-8149-4a63-a234-3a2eeebae078';
+  var URL_ = 'https://api.web3forms.com/submit';
+  var logEl = document.getElementById('log');
+  var verdictEl = document.getElementById('verdict');
+  var btn = document.getElementById('go');
+
+  function log(s) { logEl.textContent += '\n' + s; }
+  function verdict(ok, text) {
+    var d = document.createElement('div');
+    d.className = 'v ' + (ok ? 'ok' : 'no');
+    d.textContent = text;
+    verdictEl.appendChild(d);
+  }
+
+  function payload(tag) {
+    return {
+      access_key: KEY,
+      subject: 'Delivery check (' + tag + ')',
+      from_name: 'Aerios website check',
+      replyto: 'nishanth@blunav.aero',
+      name: 'Delivery check',
+      organisation: 'TEST — please ignore',
+      email: 'nishanth@blunav.aero',
+      message: 'Transport: ' + tag + '. Sent ' + new Date().toISOString() + ' from ' + location.origin + '. If this reached the inbox, delivery works.'
+    };
+  }
+
+  function report(tag, r, body) {
+    log('');
+    log('[' + tag + '] HTTP ' + r.status + ' ' + r.statusText);
+    log('[' + tag + '] body: ' + body);
+    var ok = false;
+    try { ok = JSON.parse(body).success === true; } catch (e) {}
+    verdict(ok, ok
+      ? tag + ': ACCEPTED — check the inbox registered to this key.'
+      : tag + ': refused — ' + body);
+    return ok;
+  }
+
+  btn.addEventListener('click', function () {
+    btn.disabled = true;
+    verdictEl.innerHTML = '';
+    logEl.textContent = 'Origin: ' + location.origin;
+    log('Endpoint: ' + URL_);
+    log('Key: ' + KEY);
+
+    // 1. JSON — what index.html tries first. Needs a CORS preflight.
+    fetch(URL_, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload('json'))
+    })
+      .then(function (r) { return r.text().then(function (b) { return report('json', r, b); }); })
+      .catch(function (e) {
+        log('');
+        log('[json] fetch rejected: ' + e.message);
+        log('[json] => preflight or network blocked. This is the case index.html retries.');
+        verdict(false, 'json: could not reach the service (' + e.message + ')');
+        return false;
+      })
+      .then(function (jsonOk) {
+        if (jsonOk) { log(''); log('JSON worked; multipart retry not needed.'); return; }
+        // 2. multipart — no preflight. The retry path in index.html.
+        var fd = new FormData();
+        var p = payload('multipart');
+        Object.keys(p).forEach(function (k) { fd.append(k, p[k]); });
+        return fetch(URL_, { method: 'POST', body: fd })
+          .then(function (r) { return r.text().then(function (b) { report('multipart', r, b); }); })
+          .catch(function (e) {
+            log('');
+            log('[multipart] fetch rejected: ' + e.message);
+            verdict(false, 'multipart: could not reach the service either (' + e.message + ')');
+            log('');
+            log('Both transports failed. Either this network cannot reach api.web3forms.com,');
+            log('or the key is not accepted from this origin. Try another network before');
+            log('assuming the key is wrong.');
+          });
+      })
+      .then(function () { btn.disabled = false; });
+  });
+</script>
+</body>
+</html>
