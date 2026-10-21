@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nishanth Ravindran · CTO, Blunav</title>
-<meta name="description" content="">
+<meta name="description" content="Nishanth Ravindran, Chief Technology Officer at Blunav System Private Ltd, Chennai. Building Aerios, the Airport Operating System.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
@@ -46,11 +46,17 @@
   .bio-text { margin-top: 28px; color: var(--secondary-foreground); }
   .bio-text p { margin: 0 0 14px; }
 
-  .bio-links { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .bio-links a { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: var(--card); color: var(--brand-900); font-weight: 500; }
-  .bio-links a:hover { background: #E8F0FF; }
-  .bio-links svg { width: 20px; height: 20px; flex-shrink: 0; fill: currentColor; }
-  .bio-links span { font-family: var(--mono); font-size: 12px; color: var(--muted-foreground); margin-left: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bio-links-label { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-foreground); }
+  .bio-links { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .bio-links li { min-width: 0; }
+  .bio-links li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .bio-links a { display: flex; align-items: center; gap: 14px; min-width: 0; padding: 16px 18px; background: var(--card); color: var(--brand-900); transition: background-color .15s ease; }
+  .bio-links a:hover { background: #EEF4FF; }
+  .bio-links a:focus-visible { outline: 2px solid var(--brand-500); outline-offset: -2px; }
+  .bio-links svg { width: 20px; height: 20px; flex-shrink: 0; fill: currentColor; color: var(--brand-500); }
+  .bio-links .bl-text { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .bio-links .bl-k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-foreground); line-height: 1.2; }
+  .bio-links .bl-v { font-size: 15px; font-weight: 500; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
   .bio-foot { margin-top: 28px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-foreground); }
 
@@ -75,33 +81,33 @@
       <div>
         <div class="bio-role">Chief Technology Officer</div>
         <h1 class="bio-name">Nishanth Ravindran</h1>
-        <div class="bio-org">Blunav System Private Ltd · {{LOCATION}}</div>
+        <div class="bio-org">Blunav System Private Ltd · Chennai</div>
       </div>
     </div>
 
     <div class="bio-text">
-      <p>Hi, I'm Nishanth 👋 <br> I'm the CTO at Blunav, based in Chennai. We build an operating system for airports. Most of my week goes into deciding what we build next, <br> 
-        how the pieces fit together, and whether any of it will hold up on an apron at 5am when three flights are running late.<br>I 
-        also try to be the customer's voice inside the company. If an airport team is annoyed with something we built, I want to hear it before anyone else does.<br>If you work at an airport, 
-        build software or hardware that lives near one, or just have strong opinions about AODBs, I'd like to talk. We would much rather work alongside partners than around them.<br>I also like to have disparate hobbies including things like brewing beer, automating my home and vector databases.</p>
-      <p>Before Blunav I spent about three years at Annalise.ai (part of Harrison.ai) as a technical lead. I worked on their AI marketplace and on getting clinical AI models to plug into hospital infrastructure. Hospitals and airports have more in common than you'd expect.<br> Both run on old systems that can't go down, and both are careful about anything new.
-        <br>Before that I was at PayPal for almost five years. I worked on an internal ledger that tracked who owned which code assets, and on an internal vector database that helped discover deep rooted issues which we were then to get investment to fix.
-        <br>Earlier on I was a machine learning engineer at TCS working on text, image and video problems, co-founded a small startup called Tethr.IT where I ran operations, and started my career as a software engineer at iGATE. My degree is in Instrumentation and Control from SRM University.</p>
+      <p>Hi, I'm Nishanth 👋 I'm the CTO at Blunav, based in Chennai. We build an operating system for airports. Most of my week goes into deciding what we build next, how the pieces fit together, and whether any of it will hold up on an apron at 5am when three flights are running late.</p>
+      <p>I also try to be the customer's voice inside the company. If an airport team is annoyed with something we built, I want to hear it before anyone else does. If you work at an airport, build software or hardware that lives near one, or just have strong opinions about AODBs, I'd like to talk. We would much rather work alongside partners than around them.</p>
+      <p>Before Blunav I spent about three years at Annalise.ai (part of Harrison.ai) as a technical lead. I worked on their AI marketplace and on getting clinical AI models to plug into hospital infrastructure. Hospitals and airports have more in common than you'd expect. Both run on old systems that can't go down, and both are careful about anything new.</p>
+      <p>Before that I was at PayPal for almost five years. I worked on an internal ledger that tracked who owned which code assets, and on an internal vector database that helped discover deep-rooted issues, which we then used to get investment to fix them.</p>
+      <p>Earlier on I was a machine learning engineer at TCS working on text, image and video problems, co-founded a small startup called Tethr.IT where I ran operations, and started my career as a software engineer at iGATE. My degree is in Instrumentation and Control from SRM University.</p>
+      <p>Outside work I keep a few disparate hobbies going: brewing beer, automating my home and tinkering with vector databases.</p>
     </div>
 
+    <div class="bio-links-label">Contact</div>
     <ul class="bio-links">
       <li><a href="https://www.linkedin.com/in/nishanth-ravindran/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-        LinkedIn<span>Nishanth's Linkedin Profile</span></a></li>
+        <span class="bl-text"><span class="bl-k">LinkedIn</span><span class="bl-v">nishanth-ravindran</span></span></a></li>
       <li><a href="https://github.com/Nishanth-R" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .3z"/></svg>
-        GitHub<span>Nishanth's Gihub Page</span></a></li>
+        <span class="bl-text"><span class="bl-k">GitHub</span><span class="bl-v">Nishanth-R</span></span></a></li>
       <li><a href="mailto:nishanth@blunav.aero">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.51l10 6.25 10-6.25V6H2zm20 2.87-10 6.25-10-6.25V18h20V8.87z"/></svg>
-        Email<span>nishanth@blunav.aero</span></a></li>
+        <span class="bl-text"><span class="bl-k">Email</span><span class="bl-v">nishanth@blunav.aero</span></span></a></li>
       <li><a href="https://blunav.aero/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm7.93 7h-3.2a18.6 18.6 0 0 0-1.43-4.6A10.04 10.04 0 0 1 19.93 7zM12 2.04c.9 1.3 1.62 2.97 2.06 4.96H9.94C10.38 5 11.1 3.34 12 2.04zM2.26 14a9.9 9.9 0 0 1 0-4h3.56a20.7 20.7 0 0 0 0 4H2.26zm.81 3h3.2c.33 1.67.82 3.22 1.43 4.6A10.04 10.04 0 0 1 3.07 17zm3.2-10h-3.2a10.04 10.04 0 0 1 4.63-4.6C7.09 3.78 6.6 5.33 6.27 7zM12 21.96c-.9-1.3-1.62-2.97-2.06-4.96h4.12c-.44 2-1.16 3.66-2.06 4.96zM14.4 14H9.6a18.5 18.5 0 0 1 0-4h4.8a18.5 18.5 0 0 1 0 4zm.9 7.6c.61-1.38 1.1-2.93 1.43-4.6h3.2a10.04 10.04 0 0 1-4.63 4.6zM18.18 14a20.7 20.7 0 0 0 0-4h3.56a9.9 9.9 0 0 1 0 4h-3.56z"/></svg>
-        Website<span>blunav.aero</span></a></li>
+        <span class="bl-text"><span class="bl-k">Website</span><span class="bl-v">blunav.aero</span></span></a></li>
     </ul>
   </article>
 
